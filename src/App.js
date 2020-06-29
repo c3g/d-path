@@ -1,4 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
+
+import SiteHeader from "./SiteHeader";
+import SiteFooter from "./SiteFooter";
+import Landing from "./Landing";
 
 class App extends Component {
     constructor(props) {
@@ -8,23 +12,11 @@ class App extends Component {
 
     render() {
         return(
-            <Layout style={{minHeight: "100vh"}}>
+              <div>
                 <SiteHeader />
-                <Layout.Content style={{margin: "50px"}}>
-                    <Suspense fallback={<SitePageLoading />}>
-                        <Switch>
-                            <Route path={"/inicio"} component={LandingPage} />
-                            <Route path={"/nosotros"} component={AboutUs} />
-                            <Route path={"/catalogos"} component={Catalogs} />
-                            <Route path={"/sucursales"} component={Stores} />
-                            <Route path={"/contacto"} component={Contact} />
-                            <Redirect from={"/"} to={"/inicio"} />
-                        </Switch>
-                    </Suspense>
-                </Layout.Content>
-                <SiteFooter />
-            </Layout>
-          )
+                <Landing />
+              </div>
+          );
     }
 }
 

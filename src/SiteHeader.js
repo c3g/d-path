@@ -9,7 +9,7 @@ class SiteHeader extends Component {
             <Navbar.Brand>
               <img
                 alt=""
-                src={require("./public/logo.png")}
+                src={require("./media/logo.png")}
                 width="170"
                 height="60"
                 className="d-inline-block align-top"

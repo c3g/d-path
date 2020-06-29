@@ -15,6 +15,7 @@ class App extends Component {
               <div>
                 <SiteHeader />
                 <Landing />
+                <SiteFooter />
               </div>
           );
     }

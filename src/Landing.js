@@ -5,7 +5,7 @@ import {Jumbotron, Button, Container} from "react-bootstrap";
 class Landing extends Component {
     render() {
         return (
-          <Container>
+          <Container >
           <Jumbotron>
             <h1>Welcome to the D-Path Tool</h1>
               <p>

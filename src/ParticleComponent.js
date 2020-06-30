@@ -13,6 +13,7 @@ export default () => (
     }}
   >
   <Particles
+      height={window.outerHeight}
       params={{
         "particles": {
             "number": {

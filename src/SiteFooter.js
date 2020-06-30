@@ -21,12 +21,22 @@ class SiteFooter extends Component {
                 <div>
                   <img
                     style={{
-                      width:150,
+                      width:120,
                       height:60,
                       float:'left',
                       'padding-left': 25
                     }}
                     src={require('./media/epishare.svg')}/>
+                </div>
+                <div>
+                  <img
+                    style={{
+                      width:420,
+                      height:100,
+                      float:'left',
+                      'padding-left': 25,
+                    }}
+                    src={require('./media/mcgill.png')}/>
                 </div>
               </footer>
             </div>

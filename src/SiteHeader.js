@@ -5,7 +5,7 @@ import {Navbar} from "react-bootstrap";
 class SiteHeader extends Component {
     render() {
         return (
-          <Navbar bg="dark" variant="white" >
+          <Navbar variant="white" >
             <Navbar.Brand>
               <img
                 alt=""

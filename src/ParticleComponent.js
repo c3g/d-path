@@ -9,7 +9,8 @@ export default () => (
       left: 0,
       width: "100%",
       height: "100%",
-      backgroundColor: 'rgb(10, 91, 117)'
+      backgroundColor: 'rgb(10, 91, 117)',
+      'background-size': "cover"
     }}
   >
   <Particles

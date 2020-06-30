@@ -13,7 +13,15 @@ class App extends Component {
 
     render() {
         return(
-              <div>
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  'background-size': "cover",
+                }}>
                   <ParticleComponent/>
                   <div
                     style={{
@@ -21,7 +29,8 @@ class App extends Component {
                       top: 0,
                       left: 0,
                       width: "100%",
-                      height: "100%"
+                      height: "100%",
+                      'background-size': "cover",
                     }}
                   >
                     <SiteHeader />

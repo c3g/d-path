@@ -10,7 +10,8 @@ export default () => (
       width: "100%",
       height: "100%",
       backgroundColor: 'rgb(10, 91, 117)',
-      'background-size': "cover"
+      'background-size': "cover",
+      overflow: 'auto'
     }}
   >
   <Particles

@@ -8,9 +8,9 @@ class SiteFooter extends Component {
             <div
               className='container'
               style={{
-                position:"absolute",
+                position:"float-left",
                 left:0,
-                bottom:30,
+                bottom:"0%",
                 right:0
               }} >
               <footer className='footer mt-auto py-3 text-white'>

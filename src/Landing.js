@@ -6,7 +6,7 @@ class Landing extends Component {
     render() {
         return (
           <Container>
-          <div style={{'padding-top':20}}>
+          <div style={{'padding-top':0}}>
               <Jumbotron>
                 <h1>Welcome to the D-Path Tool</h1>
                   <p>

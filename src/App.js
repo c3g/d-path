@@ -13,16 +13,8 @@ class App extends Component {
 
     render() {
         return(
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                  'background-size': "cover",
-                }}>
-                  <ParticleComponent/>
+              <div>
+                  <ParticleComponent />
                   <div
                     style={{
                       position: "absolute",
@@ -31,10 +23,13 @@ class App extends Component {
                       width: "100%",
                       height: "100%",
                       'background-size': "cover",
+                      overflow:'overlay'
                     }}
                   >
                     <SiteHeader />
-                    <Landing />
+                    <div>
+                      <Landing />
+                    </div>
                     <SiteFooter />
                   </div>
               </div>

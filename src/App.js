@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 
+import {withRouter, Redirect, Route, Switch} from "react-router-dom";
+
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import Landing from "./Landing";
+import Start from "./Start";
 import ParticleComponent from "./ParticleComponent";
 
 class App extends Component {
@@ -13,7 +16,7 @@ class App extends Component {
 
     render() {
         return(
-              <div>
+              <>
                   <ParticleComponent />
                   <div
                     style={{
@@ -27,12 +30,13 @@ class App extends Component {
                     }}
                   >
                     <SiteHeader />
-                    <div>
-                      <Landing />
-                    </div>
+                    <Switch>
+                      <Route exact path={("/")} component={Landing} />
+                      <Route path={("/start")} component={Start} />
+                    </Switch>
                     <SiteFooter />
                   </div>
-              </div>
+              </>
           );
     }
 }

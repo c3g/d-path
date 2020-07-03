@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {Link} from 'react-router-dom';
 
 import {Jumbotron, Button, Container} from "react-bootstrap";
 
@@ -15,7 +16,9 @@ class Landing extends Component {
                     of the human health-related datasets they process in a manner that is in agreement with the applicable legal, professional and ethical norms.
                   </p>
                   <p>
-                    <Button variant="primary">Start</Button>
+                      <Link to="/start">
+                        <Button variant="primary"> Start  </Button>
+                      </Link>
                   </p>
               </Jumbotron>
             </div>

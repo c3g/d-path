@@ -11,7 +11,8 @@ class SiteFooter extends Component {
                 position:"float-left",
                 left:0,
                 bottom:"0%",
-                right:0
+                right:0,
+                'border-top': " 2px solid black",
               }} >
               <footer className='footer mt-auto py-3 text-white'>
                 <Row>
@@ -43,7 +44,7 @@ class SiteFooter extends Component {
                       <div>
                         <img
                           style={{
-                            width:420,
+                            width:400,
                             height:100,
                             float:'left',
                           }}

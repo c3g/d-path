@@ -7,7 +7,7 @@ class Start extends Component {
           <Container>
           <div>
               <Jumbotron>
-                <h1>Ready to Start</h1>
+                
               </Jumbotron>
             </div>
           </Container>

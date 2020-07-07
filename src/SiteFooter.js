@@ -12,7 +12,7 @@ class SiteFooter extends Component {
                 left:0,
                 bottom:"0%",
                 right:0,
-                'border-top': " 2px solid black",
+                borderTop: " 2px solid black",
               }} >
               <footer className='footer mt-auto py-3 text-white'>
                 <Row>
@@ -20,7 +20,7 @@ class SiteFooter extends Component {
                     <div style={{float:'left', display:'flex'}}>
                     <p
                         style={{
-                          'font-size':12
+                          fontSize:12
                         }}
                       > For information you can contact us at admin@c3g.ca <br/>
                         740 Dr. Penfield Avenue, Room 6103 <br/>

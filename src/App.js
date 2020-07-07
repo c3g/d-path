@@ -5,7 +5,7 @@ import {withRouter, Redirect, Route, Switch} from "react-router-dom";
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import Landing from "./Landing";
-import Start from "./Start";
+import MainForm from "./forms/MainForm";
 import ParticleComponent from "./ParticleComponent";
 
 class App extends Component {
@@ -25,14 +25,14 @@ class App extends Component {
                       left: 0,
                       width: "100%",
                       height: "100%",
-                      'background-size': "cover",
+                      backgroundSize: "cover",
                       overflow:'overlay'
                     }}
                   >
                     <SiteHeader />
                     <Switch>
                       <Route exact path={("/")} component={Landing} />
-                      <Route path={("/start")} component={Start} />
+                      <Route path={("/start")} component={MainForm} />
                     </Switch>
                     <SiteFooter />
                   </div>

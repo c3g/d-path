@@ -10,7 +10,7 @@ export default () => (
       width: "100%",
       height: "100%",
       backgroundColor: 'rgb(10, 91, 117)',
-      'background-size': "cover",
+      backgroundSize: "cover",
       overflow: 'auto'
     }}
   >

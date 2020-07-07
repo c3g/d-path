@@ -43,9 +43,9 @@ class DataUsersForm extends Component{
           <div>
             <h1 style={{paddingBottom: '2%'}}> Where are the data recipients/users? </h1>
             <ButtonGroup style={{width:'100%'}} size="lg" vertical>
-              <Button onClick={(e) => this.saveAndContinue(e, this.createType('Canada') )}>Canada</Button>
-              <Button onClick={(e) => this.saveAndContinue(e, this.createType('Europe'))}>Europe</Button>
-              <Button onClick={(e) => this.saveAndContinue(e, this.createType('United States'))}>United States</Button>
+              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createType('Canada') )}>Canada</Button>
+              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createType('Europe'))}>Europe</Button>
+              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createType('United States'))}>United States</Button>
             </ButtonGroup>
             <div style={{paddingTop: '3%'}}>
               <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>

@@ -35,7 +35,7 @@ class CanadaFlow extends Component{
           <Popover id="popover-basic">
             <Popover.Title as="h3">Directly Identifiable</Popover.Title>
             <Popover.Content>
-              Information that <strong>identifies a specific individual</strong>
+              Information that <strong>identifies a specific individual </strong>
               using direct identifiers (name, social insurance number, etc.)
             </Popover.Content>
           </Popover>

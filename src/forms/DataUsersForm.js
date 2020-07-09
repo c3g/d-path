@@ -11,15 +11,12 @@ class DataUsersForm extends Component{
      location: '',
      isPerfonalInfo: false
    }
-
-   // This binding is necessary to make `this` work in the callback
-   this.saveAndContinue = this.saveAndContinue.bind(this);
   }
 
-    saveAndContinue = (e, value) => {
+    saveLocation = (e, value) => {
         e.preventDefault();
         this.props.nextStep();
-        this.props.handleChange(value);
+        this.props.handleLocChange(value);
     }
 
     back  = (e) => {
@@ -43,9 +40,9 @@ class DataUsersForm extends Component{
           <div>
             <h1 style={{paddingBottom: '2%'}}> Where are the data recipients/users? </h1>
             <ButtonGroup style={{width:'100%'}} size="lg" vertical>
-              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createType('Canada') )}>Canada</Button>
-              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createType('Europe'))}>Europe</Button>
-              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createType('United States'))}>United States</Button>
+              <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Canada') )}>Canada</Button>
+              <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Europe'))}>Europe</Button>
+              <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('United States'))}>United States</Button>
             </ButtonGroup>
             <div style={{paddingTop: '3%'}}>
               <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>

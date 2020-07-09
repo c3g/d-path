@@ -27,7 +27,7 @@ class InfoTable extends Component{
                   <tr>
                     <td> {item.type} </td>
                     <td> {item.location} </td>
-                    <td> {item.isPerfonalInfo} </td>
+                    <td> {item.isPerfonalInfo ? 'true' : 'false'} </td>
                   </tr>
                 );
               })}

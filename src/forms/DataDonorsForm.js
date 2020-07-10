@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, ButtonGroup, Button } from 'react-bootstrap';
+import { Form, ButtonGroup, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class DataDonorsForm extends Component{
@@ -15,8 +15,9 @@ class DataDonorsForm extends Component{
 
     saveLocation = (e, value) => {
         e.preventDefault();
-        this.props.nextStep();
         this.props.handleLocChange(value);
+        this.props.createArray();
+        this.props.nextStep();
     }
 
     back  = (e) => {
@@ -25,20 +26,19 @@ class DataDonorsForm extends Component{
     }
 
     createType = (location) => {
-
       return ({
         type : 'dataDonors',
         location: location,
-        isPerfonalInfo: this.state.isPersonalInfo
-
-      })
+        print: 'Where are the data users?'
+      });
     }
 
     render(){
         const { values } = this.props;
         return(
           <div>
-            <h1 style={{paddingBottom: '2%'}}> Where are the data subjects/data donors? </h1>
+            <h1> Where are the data subjects/data donors? </h1>
+            <Alert variant='info' style={{paddingBottom: '1%'}}> Type of user: {this.props.userType}</Alert>
             <ButtonGroup style={{width:'100%'}} size="lg" vertical>
               <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Europe'))}>Europe</Button>
               <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Non-Europe'))}>Non-Europe</Button>

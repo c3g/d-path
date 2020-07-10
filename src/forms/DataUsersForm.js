@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, ButtonGroup, Button } from 'react-bootstrap';
+import { Form, ButtonGroup, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class DataUsersForm extends Component{
@@ -29,16 +29,16 @@ class DataUsersForm extends Component{
       return ({
         type : 'dataUsers',
         location: location,
-        isPerfonalInfo: this.state.isPersonalInfo
-
-      })
+        print: 'Where are the data users?'
+      });
     }
 
     render(){
         const { values } = this.props;
         return(
           <div>
-            <h1 style={{paddingBottom: '2%'}}> Where are the data recipients/users? </h1>
+            <h1> Where are the data recipients/users? </h1>
+            <Alert variant='info' style={{paddingBottom: '1%'}}> Type of user: {this.props.userType}</Alert>
             <ButtonGroup style={{width:'100%'}} size="lg" vertical>
               <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Canada') )}>Canada</Button>
               <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Europe'))}>Europe</Button>

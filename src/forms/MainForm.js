@@ -7,10 +7,8 @@ import DataUsersForm from './DataUsersForm';
 import DataDonorsForm from './DataDonorsForm';
 import Success from './Success';
 import InfoTable from './InfoTable';
-import CanadaFlow from './CanadaFlow';
-import EuropeFlow from './EuropeFlow';
-import USFlow from './USFlow';
-
+import PersonalInfo from './PersonalInfo';
+import UserInfo from './UserInfo';
 
 class MainForm extends Component {
 
@@ -18,27 +16,30 @@ class MainForm extends Component {
         super(props);
 
         this.state = {
-            step: 1,
-            isLocationKnown: false,
-            currentLocation: '',
+            step: 0,
+            isUserKnown: false,
+            userType: '',
+            isInfoKnown: false,
+            isPersonalInfo: false,
+            locations: [],
             currentForm: 'organization',
             data: [
               { type: 'organization',
+                print: 'Where is the organization?',
                 location: '',
-                isPerfonalInfo: null
                },
               { type: 'dataProcessed',
+                print: 'Where is the data processed?',
                 location: '',
-                isPerfonalInfo: null
               },
               { type: 'dataUsers',
+                print: 'Where are the data users?',
                 location: '',
-                isPerfonalInfo: null
               },
               {
                 type: 'dataDonors',
+                print: 'Where are the data donors?',
                 location: '',
-                isPerfonalInfo: null
               },
             ]
         }
@@ -48,36 +49,28 @@ class MainForm extends Component {
         const { step } = this.state;
         this.setState({
             step : step + 1
-        })
+        });
     }
 
     prevStep = () => {
-      const { step, isLocationKnown } = this.state;
-      if(isLocationKnown){
-        this.setState({
-          isLocationKnown: false
-        });
-      } else {
+      const { step } = this.state;
         this.setState({
             step : step - 1
         });
-      }
     }
 
     handleLocChange = (input) => {
-      var { data } = this.state;
-      console.log(data);
+      var { data, locations, step } = this.state;
       for (var i in data) {
          if (data[i].type == input.type) {
            data[i] = {
                 type:input.type,
                 location: input.location,
-                isPerfonalInfo:input.isPerfonalInfo,
+                print:input.print,
             }
             this.setState({
               data : data,
               isLocationKnown: true,
-              currentLocation: input.location,
               currentForm: input.type
             });
          }
@@ -85,28 +78,38 @@ class MainForm extends Component {
     }
 
     handleInfoChange  = (input) => {
-      var { data } = this.state;
-      console.log(data);
-      for (var i in data) {
-         if (data[i].type == input.type) {
-           data[i] = {
-                type:input.type,
-                location: input.location,
-                isPerfonalInfo:input.isPerfonalInfo,
-            }
-            this.setState({
-              data : data,
-              isLocationKnown: false,
-              currentLocation: input.location
-            });
-         }
-      }
+      this.setState({
+        isPersonalInfo: input,
+        isInfoKnown: true
+      });
+    }
+
+    handleUserChange  = (input) => {
+      this.setState({
+        userType: input,
+        isUserKnown: true
+      });
+    }
+
+    createLocationArray = () => {
+      const { data } = this.state;
+      var locations = [];
+      data.forEach(item => {
+        const loc = item.location;
+        if((!locations.includes(loc)) && loc != 'Non-Europe') locations.push(loc);
+      });
+      this.setState({ locations: locations });
+      console.log(locations);
     }
 
     getLocationComponent = () => {
       const { step } = this.state;
       var Form, currentForm;
       switch(step) {
+      case 0:
+          Form = UserInfo;
+          currentForm = 'userType';
+          break;
       case 1:
           Form = OrganizationForm;
           currentForm = 'organization';
@@ -124,6 +127,10 @@ class MainForm extends Component {
           currentForm = 'dataDonors';
           break;
       case 5:
+          Form = PersonalInfo;
+          currentForm = 'personalInfo';
+          break;
+      case 6:
           Form = Success;
           currentForm = 'sucess';
           break;
@@ -131,27 +138,9 @@ class MainForm extends Component {
       return Form;
     }
 
-    getInformationComponent = () => {
-      const { currentLocation } = this.state;
-      switch(currentLocation) {
-      case 'Canada':
-          return CanadaFlow;
-          break;
-      case 'Europe':
-          return EuropeFlow;
-          break;
-      case 'United States':
-          return USFlow;
-          break;
-      default:
-          return CanadaFlow;
-          break;
-      }
-    }
-
     render(){
-        const {step, isLocationKnown, data, currentLocation, currentForm} = this.state;
-        const Component = isLocationKnown ? this.getInformationComponent() : this.getLocationComponent();
+        const {step, isUserKnown, userType, data, locations, currentForm} = this.state;
+        const Component = this.getLocationComponent();
         return(
         <Container>
           <div>
@@ -161,8 +150,11 @@ class MainForm extends Component {
                 prevStep={this.prevStep}
                 handleLocChange={this.handleLocChange}
                 handleInfoChange={this.handleInfoChange}
-                location= {currentLocation}
+                handleUserChange={this.handleUserChange}
+                createArray={this.createLocationArray}
+                locations= {locations}
                 currentForm={currentForm}
+                userType={userType}
               />
             </Jumbotron>
             <InfoTable values={data}/>

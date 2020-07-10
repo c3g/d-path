@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, ButtonGroup, Button } from 'react-bootstrap';
+import { Form, ButtonGroup, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class DataProcessingForm extends Component{
@@ -29,7 +29,7 @@ class DataProcessingForm extends Component{
       return ({
         type : 'dataProcessed',
         location: location,
-        isPerfonalInfo: this.state.isPersonalInfo
+        print: 'Where is the data processed?',
 
       })
     }
@@ -38,7 +38,8 @@ class DataProcessingForm extends Component{
         const { values } = this.props;
         return(
           <div>
-            <h1 style={{paddingBottom: '2%'}}> Where is the data stored/processed? </h1>
+            <h1> Where is the data stored/processed? </h1>
+            <Alert variant='info' style={{paddingBottom: '1%'}}> Type of user: {this.props.userType}</Alert>
             <ButtonGroup style={{width:'100%'}} size="lg" vertical>
               <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Canada') )}>Canada</Button>
               <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Europe'))}>Europe</Button>

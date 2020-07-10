@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Form, ButtonGroup, Button, Popover, OverlayTrigger, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-class CanadaFlow extends Component{
+class PersonalInfo extends Component{
 
   constructor(props) {
    super(props);
@@ -13,6 +13,7 @@ class CanadaFlow extends Component{
 
     saveAndContinue = (e, value) => {
         e.preventDefault();
+        this.props.nextStep();
         this.props.handleInfoChange(value);
     }
 
@@ -53,7 +54,8 @@ class CanadaFlow extends Component{
         const { values } = this.props;
         return(
           <div>
-            <h1 style={{paddingBottom: '2%'}}> Canada - Is it personal information? </h1>
+            <h1> Is it personal information? </h1>
+            <Alert variant='info' style={{paddingBottom: '1%'}}> Locations selected: {this.props.locations.toString()}</Alert>
             <h4 style={{paddingBottom: '1%'}}> Is the information
              <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                 <Alert.Link> Directly</Alert.Link>
@@ -77,4 +79,4 @@ class CanadaFlow extends Component{
     }
 }
 
-export default CanadaFlow;
+export default PersonalInfo;

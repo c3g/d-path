@@ -18,16 +18,14 @@ class InfoTable extends Component{
               <tr>
                 <th >Type</th>
                 <th>Location</th>
-                <th>Personal Information</th>
               </tr>
             </thead>
             <tbody>
             {this.state.data.map(( item ) => {
                 return (
                   <tr>
-                    <td> {item.type} </td>
+                    <td> {item.print} </td>
                     <td> {item.location} </td>
-                    <td> {item.isPerfonalInfo ? 'true' : 'false'} </td>
                   </tr>
                 );
               })}

@@ -9,6 +9,7 @@ import Success from './Success';
 import InfoTable from './InfoTable';
 import PersonalInfo from './PersonalInfo';
 import UserInfo from './UserInfo';
+import OtherUser from './OtherUser';
 
 class MainForm extends Component {
 
@@ -86,8 +87,8 @@ class MainForm extends Component {
 
     handleUserChange  = (input) => {
       this.setState({
-        userType: input,
-        isUserKnown: true
+        userType: input.type,
+        isUserKnown: input.known
       });
     }
 
@@ -140,7 +141,7 @@ class MainForm extends Component {
 
     render(){
         const {step, isUserKnown, userType, data, locations, currentForm} = this.state;
-        const Component = this.getLocationComponent();
+        const Component = (isUserKnown && userType != 'processor') ? OtherUser :this.getLocationComponent() ;
         return(
         <Container>
           <div>

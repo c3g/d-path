@@ -22,15 +22,22 @@ class UserInfo extends Component{
       this.props.prevStep();
     }
 
+    createUser = (user) => {
+      return ({
+        type : user,
+        known: true,
+      });
+    }
+
     render(){
         const { values } = this.props;
         return(
           <div>
             <h1 style={{paddingBottom: '2%'}}> What type of user are you? </h1>
             <ButtonGroup style={{width:'100%'}} size="lg" vertical>
-              <Button variant="light" onClick={(e) => this.saveAndContinue(e, 'processor')}>Are you a processor of data?</Button>
-              <Button variant="light" onClick={(e) => this.saveAndContinue(e, 'recipient')}>Are you a data recipient?</Button>
-              <Button variant="light" onClick={(e) => this.saveAndContinue(e, 'donor')}>Are you a data donor?</Button>
+              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createUser('processor'))}>Are you a processor of data?</Button>
+              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createUser('recipient'))}>Are you a data recipient?</Button>
+              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createUser('donor'))}>Are you a data donor?</Button>
             </ButtonGroup>
             <div style={{paddingTop: '3%'}}>
               <Link to="/">

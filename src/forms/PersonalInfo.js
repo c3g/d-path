@@ -7,8 +7,16 @@ class PersonalInfo extends Component{
   constructor(props) {
    super(props);
 
+   this.state = {
+     directly:null,
+     indirectly: null
+   }
    // This binding is necessary to make `this` work in the callback
    this.saveAndContinue = this.saveAndContinue.bind(this);
+  }
+
+  componentWillMount(){
+     this.initializePopovers();
   }
 
     saveAndContinue = (e, value) => {
@@ -31,36 +39,44 @@ class PersonalInfo extends Component{
       })
     }
 
-    render(){
-        const popover = (
+    initializePopovers = () => {
+      const directly = (
+        <Popover id="popover-basic">
+          <Popover.Title as="h3">Directly Identifiable</Popover.Title>
+          <Popover.Content>
+            Information that <strong>identifies a specific individual </strong>
+            using direct identifiers (name, social insurance number, etc.)
+          </Popover.Content>
+        </Popover>);
+
+        const indirectly = (
           <Popover id="popover-basic">
-            <Popover.Title as="h3">Directly Identifiable</Popover.Title>
+            <Popover.Title as="h3">Indirectly Identifiable</Popover.Title>
             <Popover.Content>
-              Information that <strong>identifies a specific individual </strong>
-              using direct identifiers (name, social insurance number, etc.)
+              Information that <strong>in combination with indirect identifiers</strong>
+              (date of birth or place of residence) can be reasonable expected to identify
+              a specific human being.
             </Popover.Content>
-          </Popover>
-        );
-        const popover2 = (
-            <Popover id="popover-basic">
-              <Popover.Title as="h3">Indirectly Identifiable</Popover.Title>
-              <Popover.Content>
-                Information that <strong>in combination with indirect identifiers</strong>
-                (date of birth or place of residence) can be reasonable expected to identify
-                a specific human being.
-              </Popover.Content>
-            </Popover>
-          );
+          </Popover>);
+
+      this.setState({
+        directly:directly,
+        indirectly: indirectly
+      });
+    }
+
+    render(){
+        const { directly, indirectly } = this.state;
         const { values } = this.props;
         return(
           <div>
             <h1> Is it personal information? </h1>
             <Alert variant='info' style={{paddingBottom: '1%'}}> Locations selected: {this.props.locations.toString()}</Alert>
             <h4 style={{paddingBottom: '1%'}}> Is the information
-             <OverlayTrigger trigger="click" placement="right" overlay={popover}>
-                <Alert.Link> Directly</Alert.Link>
+             <OverlayTrigger trigger="hover" placement="right" overlay={directly}>
+                <Alert.Link> Directly </Alert.Link>
               </OverlayTrigger> or
-               <OverlayTrigger trigger="click" placement="right" overlay={popover2}>
+               <OverlayTrigger trigger="hover" placement="right" overlay={indirectly}>
                 <Alert.Link> Indirectly </Alert.Link>
                </OverlayTrigger>
               Identifiable? </h4>

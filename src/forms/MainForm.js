@@ -100,7 +100,6 @@ class MainForm extends Component {
         if((!locations.includes(loc)) && loc != 'Non-Europe') locations.push(loc);
       });
       this.setState({ locations: locations });
-      console.log(locations);
     }
 
     getLocationComponent = () => {
@@ -109,38 +108,32 @@ class MainForm extends Component {
       switch(step) {
       case 0:
           Form = UserInfo;
-          currentForm = 'userType';
           break;
       case 1:
           Form = OrganizationForm;
-          currentForm = 'organization';
           break;
       case 2:
           Form = DataProcessingForm;
-          currentForm = 'dataProcessed';
           break;
       case 3:
           Form = DataUsersForm;
-          currentForm = 'dataUsers';
           break;
       case 4:
           Form = DataDonorsForm;
-          currentForm = 'dataDonors';
           break;
       case 5:
           Form = PersonalInfo;
-          currentForm = 'personalInfo';
           break;
       case 6:
           Form = Success;
-          currentForm = 'sucess';
           break;
       }
       return Form;
     }
 
     render(){
-        const {step, isUserKnown, userType, data, locations, currentForm} = this.state;
+        const {step, isUserKnown, userType, data, locations, isPersonalInfo} = this.state;
+        const {handleChange} = this.props;
         const Component = (isUserKnown && userType != 'processor') ? OtherUser :this.getLocationComponent() ;
         return(
         <Container>
@@ -152,10 +145,12 @@ class MainForm extends Component {
                 handleLocChange={this.handleLocChange}
                 handleInfoChange={this.handleInfoChange}
                 handleUserChange={this.handleUserChange}
+                handleChange={handleChange}
                 createArray={this.createLocationArray}
                 locations= {locations}
-                currentForm={currentForm}
                 userType={userType}
+                isPersonalInfo={isPersonalInfo}
+                data={data}
               />
             </Jumbotron>
             <InfoTable values={data}/>

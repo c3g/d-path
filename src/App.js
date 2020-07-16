@@ -1,20 +1,34 @@
 import React, {Component} from 'react';
-
 import {withRouter, Redirect, Route, Switch} from "react-router-dom";
 
 import SiteHeader from "./SiteHeader";
 import SiteFooter from "./SiteFooter";
 import Landing from "./Landing";
 import MainForm from "./forms/MainForm";
+import Info from "./Info";
 import ParticleComponent from "./ParticleComponent";
 
 class App extends Component {
     constructor(props) {
         super(props);
 
+      this.state = {
+        locations:[],
+        isPersonalInfo: null,
+      }
+
+      this.handleChange = this.handleChange.bind(this)
+    }
+
+    handleChange = (locations, isPersonalInfo) => {
+      this.setState({
+        locations: locations,
+        isPersonalInfo: isPersonalInfo
+      })
     }
 
     render() {
+        const { locations, isPersonalInfo } = this.state;
         return(
               <>
                   <ParticleComponent />
@@ -32,7 +46,18 @@ class App extends Component {
                     <SiteHeader />
                     <Switch>
                       <Route exact path={("/")} component={Landing} />
-                      <Route path={("/start")} component={MainForm} />
+                      <Route
+                        path={("/start")}
+                        render={(props) => (
+                          <MainForm {...props} handleChange={this.handleChange} />
+                        )}
+                      />
+                      <Route
+                        path={("/info")}
+                        render={(props) => (
+                          <Info {...props} locations={locations} isPersonalInfo={isPersonalInfo}/>
+                        )}
+                      />
                     </Switch>
                     <SiteFooter />
                   </div>

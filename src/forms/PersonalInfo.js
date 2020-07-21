@@ -8,8 +8,10 @@ class PersonalInfo extends Component{
    super(props);
 
    this.state = {
+     identifiable: null,
      directly:null,
-     indirectly: null
+     indirectly: null,
+     publicInfo: null
    }
    // This binding is necessary to make `this` work in the callback
    this.saveAndContinue = this.saveAndContinue.bind(this);
@@ -25,18 +27,68 @@ class PersonalInfo extends Component{
         this.props.handleInfoChange(value);
     }
 
+    saveIdentifiable = (info) => {
+      this.setState({
+        identifiable: info
+      });
+    }
+
     back  = (e) => {
       e.preventDefault();
       this.props.prevStep();
     }
 
-    createType = (isPersonalInfo) => {
-      return ({
-        type : this.props.currentForm,
-        location: 'Canada',
-        isPerfonalInfo: isPersonalInfo
+    getIdentifiableForm = () => {
+      const { directly, indirectly } = this.state;
+      return (
+        <div>
+          <h1> Is it personal information? </h1>
+          <Alert variant='info' style={{paddingBottom: '1%'}}> Locations selected: {this.props.locations.toString()}</Alert>
+          <h4 style={{paddingBottom: '1%'}}> Is the information
+           <OverlayTrigger trigger="hover" placement="right" overlay={directly}>
+              <Alert.Link> Directly </Alert.Link>
+            </OverlayTrigger> or
+             <OverlayTrigger trigger="hover" placement="right" overlay={indirectly}>
+              <Alert.Link> Indirectly </Alert.Link>
+             </OverlayTrigger>
+            Identifiable? </h4>
+          <ButtonGroup style={{width:'100%'}} size="lg" vertical>
+            <Button variant="light" onClick={(e) => this.saveIdentifiable(true)}>Yes</Button>
+            <Button variant="light" onClick={(e) => this.saveAndContinue(e, false) }>No</Button>
+          </ButtonGroup>
+          <div style={{paddingTop: '3%'}}>
+            <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
+            <Link to="/">
+              <Button variant="danger"> Restart  </Button>
+            </Link>
+          </div>
+        </div>
+      );
+    }
 
-      })
+    getPublicForm = () => {
+      const { publicInfo } = this.state;
+      return (
+        <div>
+          <h1> Is it personal information? </h1>
+          <Alert variant='info' style={{paddingBottom: '1%'}}> Locations selected: {this.props.locations.toString()}</Alert>
+          <h4 style={{paddingBottom: '1%'}}> Is the information
+           <OverlayTrigger trigger="hover" placement="right" overlay={publicInfo}>
+           <Alert.Link> Public </Alert.Link>
+           </OverlayTrigger> ?
+          </h4>
+          <ButtonGroup style={{width:'100%'}} size="lg" vertical>
+            <Button variant="light" onClick={(e) => this.saveAndContinue(e, false )}>Yes</Button>
+            <Button variant="light" onClick={(e) => this.saveAndContinue(e, true )}>No</Button>
+          </ButtonGroup>
+          <div style={{paddingTop: '3%'}}>
+            <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
+            <Link to="/">
+              <Button variant="danger"> Restart  </Button>
+            </Link>
+          </div>
+        </div>
+      );
     }
 
     initializePopovers = () => {
@@ -59,39 +111,27 @@ class PersonalInfo extends Component{
             </Popover.Content>
           </Popover>);
 
+          const publicInfo = (
+            <Popover id="popover-basic">
+              <Popover.Title as="h3">Public Information</Popover.Title>
+              <Popover.Content>
+                Personal information that has been legally made public has no reasonable
+                expectation of privacy. Public personal information is not protected
+                to the same degree as that one that has reasonable expectation of privacy.
+              </Popover.Content>
+            </Popover>);
+
       this.setState({
         directly:directly,
-        indirectly: indirectly
+        indirectly: indirectly,
+        publicInfo: publicInfo
       });
     }
 
     render(){
-        const { directly, indirectly } = this.state;
+        const { identifiable, directly, indirectly } = this.state;
         const { values } = this.props;
-        return(
-          <div>
-            <h1> Is it personal information? </h1>
-            <Alert variant='info' style={{paddingBottom: '1%'}}> Locations selected: {this.props.locations.toString()}</Alert>
-            <h4 style={{paddingBottom: '1%'}}> Is the information
-             <OverlayTrigger trigger="hover" placement="right" overlay={directly}>
-                <Alert.Link> Directly </Alert.Link>
-              </OverlayTrigger> or
-               <OverlayTrigger trigger="hover" placement="right" overlay={indirectly}>
-                <Alert.Link> Indirectly </Alert.Link>
-               </OverlayTrigger>
-              Identifiable? </h4>
-            <ButtonGroup style={{width:'100%'}} size="lg" vertical>
-              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createType(true) )}>Yes</Button>
-              <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createType(false))}>No</Button>
-            </ButtonGroup>
-            <div style={{paddingTop: '3%'}}>
-              <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
-              <Link to="/">
-                <Button variant="danger"> Restart  </Button>
-              </Link>
-            </div>
-          </div>
-        )
+        return (identifiable) ? this.getPublicForm() : this.getIdentifiableForm();
     }
 }
 

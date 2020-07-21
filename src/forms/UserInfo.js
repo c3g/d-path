@@ -86,13 +86,13 @@ class UserInfo extends Component{
           <div>
             <h1 style={{paddingBottom: '2%'}}> What type of user are you? </h1>
             <ButtonGroup style={{width:'100%'}} size="lg" vertical>
-              <OverlayTrigger trigger="hover" placement="right" overlay={processor}>
+              <OverlayTrigger trigger="hover" placement="bottom" overlay={processor}>
                    <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createUser('processor'))}>Are you a processor of data?</Button>
                </OverlayTrigger>
-               <OverlayTrigger trigger="hover" placement="right" overlay={recipient}>
+               <OverlayTrigger trigger="hover" placement="bottom" overlay={recipient}>
                   <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createUser('recipient'))}>Are you a data recipient?</Button>
                </OverlayTrigger>
-              <OverlayTrigger trigger="hover" placement="right" overlay={donor}>
+              <OverlayTrigger trigger="hover" placement="bottom" overlay={donor}>
                 <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createUser('donor'))}>Are you a data donor?</Button>
               </OverlayTrigger>
             </ButtonGroup>

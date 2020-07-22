@@ -85,15 +85,15 @@ class UserInfo extends Component{
         return(
           <div>
             <h1 style={{paddingBottom: '2%'}}> What type of user are you? </h1>
-            <ButtonGroup style={{width:'100%'}} size="lg" vertical>
-              <OverlayTrigger trigger="hover" placement="bottom" overlay={processor}>
-                   <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createUser('processor'))}>Are you a processor of data?</Button>
+            <ButtonGroup style={{width:'50%'}} size="lg" vertical>
+              <OverlayTrigger trigger="hover" placement="right" overlay={processor}>
+                   <Button variant="light" className="text-left" onClick={(e) => this.saveAndContinue(e, this.createUser('processor'))}>Are you a processor of data?</Button>
                </OverlayTrigger>
-               <OverlayTrigger trigger="hover" placement="bottom" overlay={recipient}>
-                  <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createUser('recipient'))}>Are you a data recipient?</Button>
+               <OverlayTrigger trigger="hover" placement="right" overlay={recipient}>
+                  <Button variant="light" className="text-left" onClick={(e) => this.saveAndContinue(e, this.createUser('recipient'))}>Are you a data recipient?</Button>
                </OverlayTrigger>
-              <OverlayTrigger trigger="hover" placement="bottom" overlay={donor}>
-                <Button variant="light" onClick={(e) => this.saveAndContinue(e, this.createUser('donor'))}>Are you a data donor?</Button>
+              <OverlayTrigger trigger="hover" placement="right" overlay={donor}>
+                <Button variant="light" className="text-left" onClick={(e) => this.saveAndContinue(e, this.createUser('donor'))}>Are you a data donor?</Button>
               </OverlayTrigger>
             </ButtonGroup>
             <div style={{paddingTop: '3%'}}>

@@ -41,14 +41,15 @@ class SiteFooter extends Component {
                       </div>
                   </Col>
                   <Col  md={4} xs={12} s={12}>
-                      <div>
+                      <div >
                         <img
                           style={{
-                            width:400,
-                            height:100,
+                            width:600,
+                            height:200,
                             float:'left',
+                            paddingTop: '2%'
                           }}
-                          src={require('./media/mcgill.png')}/>
+                          src={require('./media/cgpLOGO.svg')}/>
                       </div>
                   </Col>
                 </Row>

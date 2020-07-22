@@ -153,7 +153,7 @@ class MainForm extends Component {
                 data={data}
               />
             </Jumbotron>
-            <InfoTable values={data}/>
+            {(isUserKnown) ? <InfoTable values={data}/> : null }
           </div>
         </Container>)
     }

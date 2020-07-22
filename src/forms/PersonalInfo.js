@@ -45,10 +45,10 @@ class PersonalInfo extends Component{
           <h1> Is it personal information? </h1>
           <Alert variant='info' style={{paddingBottom: '1%'}}> Locations selected: {this.props.locations.toString()}</Alert>
           <h4 style={{paddingBottom: '1%'}}> Is the information
-           <OverlayTrigger trigger="hover" placement="right" overlay={directly}>
+           <OverlayTrigger trigger="hover" placement="top" overlay={directly}>
               <Alert.Link> Directly </Alert.Link>
             </OverlayTrigger> or
-             <OverlayTrigger trigger="hover" placement="right" overlay={indirectly}>
+             <OverlayTrigger trigger="hover" placement="top" overlay={indirectly}>
               <Alert.Link> Indirectly </Alert.Link>
              </OverlayTrigger>
             Identifiable? </h4>
@@ -73,7 +73,7 @@ class PersonalInfo extends Component{
           <h1> Is it personal information? </h1>
           <Alert variant='info' style={{paddingBottom: '1%'}}> Locations selected: {this.props.locations.toString()}</Alert>
           <h4 style={{paddingBottom: '1%'}}> Is the information
-           <OverlayTrigger trigger="hover" placement="right" overlay={publicInfo}>
+           <OverlayTrigger trigger="hover" placement="top" overlay={publicInfo}>
            <Alert.Link> Public </Alert.Link>
            </OverlayTrigger> ?
           </h4>

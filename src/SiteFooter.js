@@ -44,10 +44,10 @@ class SiteFooter extends Component {
                       <div >
                         <img
                           style={{
-                            width:600,
-                            height:200,
+                            width:320,
+                            height:105,
                             float:'left',
-                            paddingTop: '2%'
+                            paddingTop: '2%',
                           }}
                           src={require('./media/cgpLOGO.svg')}/>
                       </div>

@@ -19,7 +19,7 @@ class UserInfo extends Component{
   }
 
   componentWillMount(){
-     this.initializePopovers();
+    this.initializePopovers();
   }
 
     saveAndContinue = (e, value) => {
@@ -85,15 +85,15 @@ class UserInfo extends Component{
         return(
           <div>
             <h1 style={{paddingBottom: '2%'}}> What type of user are you? </h1>
-            <ButtonGroup style={{width:'50%'}} size="lg" vertical>
+            <ButtonGroup className='userButtons' style={{width:'60%'}} size="lg" vertical>
               <OverlayTrigger trigger="hover" placement="right" overlay={processor}>
-                   <Button variant="light" className="text-left" onClick={(e) => this.saveAndContinue(e, this.createUser('processor'))}>Are you a processor of data?</Button>
+                <Button variant="light" className="text-left" onClick={(e) => this.saveAndContinue(e, this.createUser('processor'))}>Processor of data</Button>
                </OverlayTrigger>
                <OverlayTrigger trigger="hover" placement="right" overlay={recipient}>
-                  <Button variant="light" className="text-left" onClick={(e) => this.saveAndContinue(e, this.createUser('recipient'))}>Are you a data recipient?</Button>
+                <Button variant="light" className="text-left" onClick={(e) => this.saveAndContinue(e, this.createUser('recipient'))}>Data recipient</Button>
                </OverlayTrigger>
               <OverlayTrigger trigger="hover" placement="right" overlay={donor}>
-                <Button variant="light" className="text-left" onClick={(e) => this.saveAndContinue(e, this.createUser('donor'))}>Are you a data donor?</Button>
+                <Button variant="light" className="text-left" onClick={(e) => this.saveAndContinue(e, this.createUser('donor'))}>Data donor</Button>
               </OverlayTrigger>
             </ButtonGroup>
             <div style={{paddingTop: '3%'}}>

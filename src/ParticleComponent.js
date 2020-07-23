@@ -14,12 +14,13 @@ export default () => (
       overflow: 'auto'
     }}
   >
+
   <Particles
       height={window.outerHeight}
       params={{
         "particles": {
             "number": {
-                "value": 200
+                "value": (window.innerWidth > 600) ? 100  : 20
             },
             "size": {
                 "value": 5

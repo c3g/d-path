@@ -11,6 +11,16 @@ import PersonalInfo from './PersonalInfo';
 import UserInfo from './UserInfo';
 import OtherUser from './OtherUser';
 
+const STEPS = [
+  UserInfo,
+  OrganizationForm,
+  DataProcessingForm,
+  DataUsersForm,
+  DataDonorsForm,
+  PersonalInfo,
+  Success,
+]
+
 class MainForm extends Component {
 
     constructor(props) {
@@ -103,32 +113,7 @@ class MainForm extends Component {
     }
 
     getLocationComponent = () => {
-      const { step } = this.state;
-      var Form, currentForm;
-      switch(step) {
-      case 0:
-          Form = UserInfo;
-          break;
-      case 1:
-          Form = OrganizationForm;
-          break;
-      case 2:
-          Form = DataProcessingForm;
-          break;
-      case 3:
-          Form = DataUsersForm;
-          break;
-      case 4:
-          Form = DataDonorsForm;
-          break;
-      case 5:
-          Form = PersonalInfo;
-          break;
-      case 6:
-          Form = Success;
-          break;
-      }
-      return Form;
+      return STEPS[this.state.step];
     }
 
     render(){

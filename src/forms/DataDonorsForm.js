@@ -16,7 +16,7 @@ class DataDonorsForm extends Component{
     saveLocation = (e, value) => {
         e.preventDefault();
         this.props.handleLocChange(value);
-        this.props.createArray();
+        this.props.updateLocations();
         this.props.nextStep();
     }
 

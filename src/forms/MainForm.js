@@ -88,17 +88,14 @@ class MainForm extends Component {
     });
   }
 
-  createLocationArray = () => {
-    const { data } = this.state;
-    const locations = [];
+  updateLocations = () => {
+    const { answers } = this.state;
 
-    data.forEach(item => {
-      const loc = item.location;
-      if ((!locations.includes(loc)) && loc !== 'Non-Europe')
-        locations.push(loc);
-    });
+    const locations = Object.values(answers)
+      .filter(Boolean)
+      .filter(l => l !== 'Non-Europe');
 
-    this.setState({ locations: locations });
+    this.setState({ locations });
   }
 
   getLocationComponent = () => {
@@ -132,7 +129,7 @@ class MainForm extends Component {
             handleInfoChange={this.handleInfoChange}
             handleUserChange={this.handleUserChange}
             handleChange={handleChange}
-            createArray={this.createLocationArray}
+            updateLocations={this.updateLocations}
             locations= {locations}
             userType={userType}
             isPersonalInfo={isPersonalInfo}

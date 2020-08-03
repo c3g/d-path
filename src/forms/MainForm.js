@@ -35,30 +35,15 @@ class MainForm extends Component {
 
     this.state = {
       step: 0,
-      isUserKnown: false,
-      userType: '',
+      userType: undefined,
       isInfoKnown: false,
       isPersonalInfo: false,
-      locations: [],
-      data: [
-        { type: 'organization',
-          print: 'Where is the organization?',
-          location: '',
-          },
-        { type: 'dataProcessed',
-          print: 'Where is the data processed?',
-          location: '',
-        },
-        { type: 'dataUsers',
-          print: 'Where are the data users?',
-          location: '',
-        },
-        {
-          type: 'dataDonors',
-          print: 'Where are the data donors?',
-          location: '',
-        },
-      ]
+      answers: {
+        organisation: undefined,
+        dataProcessed: undefined,
+        dataUsers: undefined,
+        dataDonors: undefined,
+      }
     }
   }
 
@@ -71,12 +56,12 @@ class MainForm extends Component {
   }
 
   handleLocChange = (input) => {
-    const { data } = this.state;
+    const { answers } = this.state;
 
-    const newData = data.map(d => d.type !== input.type ? d : input)
+    const newAnswers = { ...answers, [input.type]: input.location }
 
     this.setState({
-      data: newData,
+      answers: newAnswers,
       isLocationKnown: true,
     });
   }
@@ -88,25 +73,12 @@ class MainForm extends Component {
     });
   }
 
-  handleUserChange  = (input) => {
-    this.setState({
-      userType: input.type,
-      isUserKnown: input.known
-    });
-  }
-
-  updateLocations = () => {
-    const { answers } = this.state;
-
-    const locations = Object.values(answers)
-      .filter(Boolean)
-      .filter(l => l !== 'Non-Europe');
-
-    this.setState({ locations });
+  handleUserChange  = (userType) => {
+    this.setState({ userType });
   }
 
   getLocationComponent = () => {
-    const { step, isUserKnown, userType } = this.state;
+    const { step, userType } = this.state;
 
     if (userType && userType !== USER_TYPE.PROCESSOR)
       return OtherUser;
@@ -116,10 +88,8 @@ class MainForm extends Component {
 
   render(){
     const {
-      isUserKnown,
       userType,
-      data,
-      locations,
+      answers,
       isPersonalInfo
     } = this.state;
     const { handleChange } = this.props;
@@ -136,14 +106,15 @@ class MainForm extends Component {
             handleInfoChange={this.handleInfoChange}
             handleUserChange={this.handleUserChange}
             handleChange={handleChange}
-            updateLocations={this.updateLocations}
-            locations= {locations}
+            locations= {getLocations(answers)}
             userType={userType}
             isPersonalInfo={isPersonalInfo}
-            data={data}
+            answers={answers}
           />
         </Jumbotron>
-        {(isUserKnown) ? <InfoTable values={data}/> : null }
+        {userType !== undefined &&
+          <InfoTable answers={answers} />
+        }
       </Container>
     )
   }

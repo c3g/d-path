@@ -36,7 +36,6 @@ class MainForm extends Component {
     this.state = {
       step: 0,
       userType: undefined,
-      isInfoKnown: false,
       isPersonalInfo: false,
       answers: {
         organisation: undefined,
@@ -58,18 +57,14 @@ class MainForm extends Component {
   handleLocChange = (input) => {
     const { answers } = this.state;
 
-    const newAnswers = { ...answers, [input.type]: input.location }
-
     this.setState({
-      answers: newAnswers,
-      isLocationKnown: true,
+      answers: { ...answers, [input.type]: input.location },
     });
   }
 
   handleInfoChange  = (input) => {
     this.setState({
       isPersonalInfo: input,
-      isInfoKnown: true
     });
   }
 

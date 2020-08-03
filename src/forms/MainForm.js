@@ -70,20 +70,14 @@ class MainForm extends Component {
     }
 
     handleLocChange = (input) => {
-      var { data, locations, step } = this.state;
-      for (var i in data) {
-         if (data[i].type == input.type) {
-           data[i] = {
-                type:input.type,
-                location: input.location,
-                print:input.print,
-            }
-            this.setState({
-              data : data,
-              isLocationKnown: true,
-            });
-         }
-      }
+      const { data } = this.state;
+
+      const newData = data.map(d => d.type !== input.type ? d : input)
+
+      this.setState({
+        data: newData,
+        isLocationKnown: true,
+      });
     }
 
     handleInfoChange  = (input) => {

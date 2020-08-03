@@ -10,6 +10,7 @@ import InfoTable from './InfoTable';
 import PersonalInfo from './PersonalInfo';
 import UserInfo from './UserInfo';
 import OtherUser from './OtherUser';
+import { USER_TYPE, LOCATION } from '../constants';
 
 const STEPS = [
   UserInfo,
@@ -20,6 +21,12 @@ const STEPS = [
   PersonalInfo,
   Success,
 ]
+
+function getLocations(answers) {
+  return Object.values(answers)
+    .filter(Boolean)
+    .filter(l => l !== LOCATION.NON_EU);
+}
 
 class MainForm extends Component {
 
@@ -101,7 +108,7 @@ class MainForm extends Component {
   getLocationComponent = () => {
     const { step, isUserKnown, userType } = this.state;
 
-    if (isUserKnown && userType !== 'processor')
+    if (userType && userType !== USER_TYPE.PROCESSOR)
       return OtherUser;
 
     return STEPS[step];

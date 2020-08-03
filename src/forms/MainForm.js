@@ -113,16 +113,28 @@ class MainForm extends Component {
     }
 
     getLocationComponent = () => {
-      return STEPS[this.state.step];
+      const { step, isUserKnown, userType } = this.state;
+
+      if (isUserKnown && userType != 'processor')
+        return OtherUser;
+
+      return STEPS[step];
     }
 
     render(){
-        const {step, isUserKnown, userType, data, locations, isPersonalInfo} = this.state;
-        const {handleChange} = this.props;
-        const Component = (isUserKnown && userType != 'processor') ? OtherUser :this.getLocationComponent() ;
+        const {
+          isUserKnown,
+          userType,
+          data,
+          locations,
+          isPersonalInfo
+        } = this.state;
+        const { handleChange } = this.props;
+
+        const Component = this.getLocationComponent() ;
+
         return(
-        <Container>
-          <div>
+          <Container>
             <Jumbotron>
               <Component
                 nextStep={this.nextStep}
@@ -139,8 +151,8 @@ class MainForm extends Component {
               />
             </Jumbotron>
             {(isUserKnown) ? <InfoTable values={data}/> : null }
-          </div>
-        </Container>)
+          </Container>
+        )
     }
 }
 

@@ -33,7 +33,6 @@ class MainForm extends Component {
             isInfoKnown: false,
             isPersonalInfo: false,
             locations: [],
-            currentForm: 'organization',
             data: [
               { type: 'organization',
                 print: 'Where is the organization?',
@@ -82,7 +81,6 @@ class MainForm extends Component {
             this.setState({
               data : data,
               isLocationKnown: true,
-              currentForm: input.type
             });
          }
       }

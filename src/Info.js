@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import {Container, Jumbotron, Button} from 'react-bootstrap';
+import {Container, Jumbotron, Button, Card, Row, Col} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import { PDFDownloadLink, Document, Page, Text, Font} from '@react-pdf/renderer'
 import {styles} from './utils/PDFStyles';
 import {getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
-import {getLaws, getBestPractices} from './utils/ObligationsUtils';
+import {getLaws, getBestPractices, getLawCards, getBestPracticesCards} from './utils/ObligationsUtils';
 
 class Info extends Component {
 
@@ -51,7 +51,9 @@ class Info extends Component {
           <div>
             <Jumbotron>
               <h1> Obligations and requirements </h1>
+                { isPersonalInfo ? getLawCards() : null }
                 <p> { isPersonalInfo ? getLaws(locations) : null } </p>
+                { getBestPracticesCards() }
                 <p> { getBestPractices() } </p>
                     <Link to="/">
                       <Button variant="danger"> Restart  </Button>

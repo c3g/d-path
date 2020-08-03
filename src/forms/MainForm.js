@@ -23,129 +23,126 @@ const STEPS = [
 
 class MainForm extends Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            step: 0,
-            isUserKnown: false,
-            userType: '',
-            isInfoKnown: false,
-            isPersonalInfo: false,
-            locations: [],
-            data: [
-              { type: 'organization',
-                print: 'Where is the organization?',
-                location: '',
-               },
-              { type: 'dataProcessed',
-                print: 'Where is the data processed?',
-                location: '',
-              },
-              { type: 'dataUsers',
-                print: 'Where are the data users?',
-                location: '',
-              },
-              {
-                type: 'dataDonors',
-                print: 'Where are the data donors?',
-                location: '',
-              },
-            ]
-        }
+    this.state = {
+      step: 0,
+      isUserKnown: false,
+      userType: '',
+      isInfoKnown: false,
+      isPersonalInfo: false,
+      locations: [],
+      data: [
+        { type: 'organization',
+          print: 'Where is the organization?',
+          location: '',
+          },
+        { type: 'dataProcessed',
+          print: 'Where is the data processed?',
+          location: '',
+        },
+        { type: 'dataUsers',
+          print: 'Where are the data users?',
+          location: '',
+        },
+        {
+          type: 'dataDonors',
+          print: 'Where are the data donors?',
+          location: '',
+        },
+      ]
     }
+  }
 
-    nextStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step : step + 1
-        });
-    }
+  nextStep = () => {
+    this.setState({ step: this.state.step + 1 });
+  }
 
-    prevStep = () => {
-      const { step } = this.state;
-        this.setState({
-            step : step - 1
-        });
-    }
+  prevStep = () => {
+    this.setState({ step: this.state.step - 1 });
+  }
 
-    handleLocChange = (input) => {
-      const { data } = this.state;
+  handleLocChange = (input) => {
+    const { data } = this.state;
 
-      const newData = data.map(d => d.type !== input.type ? d : input)
+    const newData = data.map(d => d.type !== input.type ? d : input)
 
-      this.setState({
-        data: newData,
-        isLocationKnown: true,
-      });
-    }
+    this.setState({
+      data: newData,
+      isLocationKnown: true,
+    });
+  }
 
-    handleInfoChange  = (input) => {
-      this.setState({
-        isPersonalInfo: input,
-        isInfoKnown: true
-      });
-    }
+  handleInfoChange  = (input) => {
+    this.setState({
+      isPersonalInfo: input,
+      isInfoKnown: true
+    });
+  }
 
-    handleUserChange  = (input) => {
-      this.setState({
-        userType: input.type,
-        isUserKnown: input.known
-      });
-    }
+  handleUserChange  = (input) => {
+    this.setState({
+      userType: input.type,
+      isUserKnown: input.known
+    });
+  }
 
-    createLocationArray = () => {
-      const { data } = this.state;
-      var locations = [];
-      data.forEach(item => {
-        const loc = item.location;
-        if((!locations.includes(loc)) && loc != 'Non-Europe') locations.push(loc);
-      });
-      this.setState({ locations: locations });
-    }
+  createLocationArray = () => {
+    const { data } = this.state;
+    const locations = [];
 
-    getLocationComponent = () => {
-      const { step, isUserKnown, userType } = this.state;
+    data.forEach(item => {
+      const loc = item.location;
+      if ((!locations.includes(loc)) && loc !== 'Non-Europe')
+        locations.push(loc);
+    });
 
-      if (isUserKnown && userType != 'processor')
-        return OtherUser;
+    this.setState({ locations: locations });
+  }
 
-      return STEPS[step];
-    }
+  getLocationComponent = () => {
+    const { step, isUserKnown, userType } = this.state;
 
-    render(){
-        const {
-          isUserKnown,
-          userType,
-          data,
-          locations,
-          isPersonalInfo
-        } = this.state;
-        const { handleChange } = this.props;
+    if (isUserKnown && userType !== 'processor')
+      return OtherUser;
 
-        const Component = this.getLocationComponent() ;
+    return STEPS[step];
+  }
 
-        return(
-          <Container>
-            <Jumbotron>
-              <Component
-                nextStep={this.nextStep}
-                prevStep={this.prevStep}
-                handleLocChange={this.handleLocChange}
-                handleInfoChange={this.handleInfoChange}
-                handleUserChange={this.handleUserChange}
-                handleChange={handleChange}
-                createArray={this.createLocationArray}
-                locations= {locations}
-                userType={userType}
-                isPersonalInfo={isPersonalInfo}
-                data={data}
-              />
-            </Jumbotron>
-            {(isUserKnown) ? <InfoTable values={data}/> : null }
-          </Container>
-        )
-    }
+  render(){
+    const {
+      isUserKnown,
+      userType,
+      data,
+      locations,
+      isPersonalInfo
+    } = this.state;
+    const { handleChange } = this.props;
+
+    const Component = this.getLocationComponent() ;
+
+    return(
+      <Container>
+        <Jumbotron>
+          <Component
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleLocChange={this.handleLocChange}
+            handleInfoChange={this.handleInfoChange}
+            handleUserChange={this.handleUserChange}
+            handleChange={handleChange}
+            createArray={this.createLocationArray}
+            locations= {locations}
+            userType={userType}
+            isPersonalInfo={isPersonalInfo}
+            data={data}
+          />
+        </Jumbotron>
+        {(isUserKnown) ? <InfoTable values={data}/> : null }
+      </Container>
+    )
+  }
 }
 
 export default MainForm;

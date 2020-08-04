@@ -1,25 +1,25 @@
-import React, {Component} from "react";
+import React, {Component} from 'react';
 
-import {Navbar} from "react-bootstrap";
+import {Navbar} from 'react-bootstrap';
 
 class SiteHeader extends Component {
     render() {
         return (
-          <Navbar variant="white" >
+          <Navbar variant='white'>
             <Navbar.Brand>
               <img
-                alt=""
-                src={require("./media/logo.png")}
-                width="170"
-                height="60"
-                className="d-inline-block align-top"
+                alt=''
+                src={require('./media/logo.png')}
+                width='170'
+                height='60'
+                className='d-inline-block align-top'
               />{' '}
             </Navbar.Brand>
 
-            <Navbar.Collapse className="justify-content-end ">
+            <Navbar.Collapse className='justify-content-end'>
               <Navbar.Text
-                style={{color:'white', padding:20}}
-                className="blockquote mb-0 ">
+                style={{color: 'white', padding: 20}}
+                className='blockquote mb-0'>
                   D-Path
               </Navbar.Text>
             </Navbar.Collapse>

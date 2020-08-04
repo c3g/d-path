@@ -1,9 +1,9 @@
-import React from "react";
-import { Popover} from "react-bootstrap";
+import React from 'react';
+import { Popover} from 'react-bootstrap';
 
 export const processor = (
-  <Popover id="popover-basic">
-    <Popover.Title as="h3">Data Processor</Popover.Title>
+  <Popover id='popover-basic'>
+    <Popover.Title as='h3'>Data Processor</Popover.Title>
     <Popover.Content>
       Individual, entity or organization that either personally or through
       a project collects, records, organizes, structures, stores, adapts
@@ -15,8 +15,8 @@ export const processor = (
 );
 
 export const recipient = (
-  <Popover id="popover-basic">
-    <Popover.Title as="h3">Data Recipient</Popover.Title>
+  <Popover id='popover-basic'>
+    <Popover.Title as='h3'>Data Recipient</Popover.Title>
     <Popover.Content>
       Any person to whom the data is disclosed in accordance with a data access
       agreement either open, controlled or registered.
@@ -27,8 +27,8 @@ export const recipient = (
 );
 
 export const donor = (
-    <Popover id="popover-basic">
-      <Popover.Title as="h3">Data Donor</Popover.Title>
+    <Popover id='popover-basic'>
+      <Popover.Title as='h3'>Data Donor</Popover.Title>
       <Popover.Content>
         Refers to the individual whom the data is about.
       </Popover.Content>
@@ -36,8 +36,8 @@ export const donor = (
 );
 
 export const directly = (
-  <Popover id="popover-basic">
-    <Popover.Title as="h3">Directly Identifiable</Popover.Title>
+  <Popover id='popover-basic'>
+    <Popover.Title as='h3'>Directly Identifiable</Popover.Title>
     <Popover.Content>
       Information that <strong>identifies a specific individual </strong>
       using direct identifiers (name, social insurance number, etc.)
@@ -46,8 +46,8 @@ export const directly = (
 );
 
 export const indirectly = (
-    <Popover id="popover-basic">
-      <Popover.Title as="h3">Indirectly Identifiable</Popover.Title>
+    <Popover id='popover-basic'>
+      <Popover.Title as='h3'>Indirectly Identifiable</Popover.Title>
       <Popover.Content>
         Information that <strong>in combination with indirect identifiers</strong>
         (date of birth or place of residence) can be reasonable expected to identify
@@ -57,8 +57,8 @@ export const indirectly = (
 );
 
 export const publicInfo = (
-      <Popover id="popover-basic">
-        <Popover.Title as="h3">Public Information</Popover.Title>
+      <Popover id='popover-basic'>
+        <Popover.Title as='h3'>Public Information</Popover.Title>
         <Popover.Content>
           Personal information that has been legally made public has no reasonable
           expectation of privacy. Public personal information is not protected

@@ -14,7 +14,7 @@ class Success extends Component{
         const {answers, userType, isPersonalInfo, handleChange } = this.props;
         return(
             <div>
-                <h1 className="ui centered">Details Successfully Saved</h1>
+                <h1 className='ui centered'>Details Successfully Saved</h1>
                 <div style={{paddingTop: '3%'}}>
                 <h4> Type of User: </h4>
                 <p> { userType } </p>
@@ -40,11 +40,11 @@ class Success extends Component{
                 <p> { isPersonalInfo ? 'True' : 'False'}</p>
                 </div>
                 <div style={{paddingTop: '3%'}}>
-                  <Link to="/">
-                    <Button variant="danger"> Restart  </Button>
+                  <Link to='/'>
+                    <Button variant='danger'> Restart  </Button>
                   </Link>
-                    <Button variant="success" onClick={(e) => this.saveInformation(e) }>
-                        <Link to="/info" style={{color:'white'}}> Display Laws and Regulations </Link>
+                    <Button variant='success' onClick={(e) => this.saveInformation(e) }>
+                        <Link to='/info' style={{color: 'white'}}> Display Laws and Regulations </Link>
                     </Button>
                 </div>
             </div>

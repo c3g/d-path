@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import { Container, Row, Col} from "react-bootstrap";
+import React, {Component} from 'react';
+import { Container, Row, Col} from 'react-bootstrap';
 
 class SiteFooter extends Component {
     render() {
@@ -8,16 +8,16 @@ class SiteFooter extends Component {
             <div
               className='container'
               style={{
-                position:"float-left",
-                left:0,
-                bottom:"0%",
-                right:0,
-                borderTop: " 2px solid black",
+                position: 'float-left',
+                left: 0,
+                bottom: '0%',
+                right: 0,
+                borderTop: '2px solid black',
               }} >
               <footer className='footer mt-auto py-3 text-white'>
                 <Row>
                   <Col md={4} xs={12} s={12}>
-                    <div style={{float:'left', display:'flex'}}>
+                    <div style={{float: 'left', display: 'flex'}}>
                     <p
                         style={{
                           fontSize:12
@@ -33,9 +33,9 @@ class SiteFooter extends Component {
                     <div>
                         <img
                           style={{
-                            width:120,
-                            height:60,
-                            float:'left',
+                            width: 120,
+                            height: 60,
+                            float: 'left',
                           }}
                           src={require('./media/epishare.svg')}/>
                       </div>
@@ -44,9 +44,9 @@ class SiteFooter extends Component {
                       <div >
                         <img
                           style={{
-                            width:320,
-                            height:105,
-                            float:'left',
+                            width: 320,
+                            height: 105,
+                            float: 'left',
                             paddingTop: '2%',
                           }}
                           src={require('./media/cgpLOGO.svg')}/>

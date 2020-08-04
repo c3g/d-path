@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
-import {withRouter, Redirect, Route, Switch} from "react-router-dom";
+import {withRouter, Redirect, Route, Switch} from 'react-router-dom';
 
-import SiteHeader from "./SiteHeader";
-import SiteFooter from "./SiteFooter";
-import Landing from "./Landing";
-import MainForm from "./forms/MainForm";
-import Info from "./Info";
-import ParticleComponent from "./ParticleComponent";
+import SiteHeader from './SiteHeader';
+import SiteFooter from './SiteFooter';
+import Landing from './Landing';
+import MainForm from './forms/MainForm';
+import Info from './Info';
+import ParticleComponent from './ParticleComponent';
 
 class App extends Component {
     constructor(props) {
@@ -17,10 +17,10 @@ class App extends Component {
         isPersonalInfo: null,
       }
 
-      this.handleChange = this.handleChange.bind(this)
+      this.onLocationChange = this.onLocationChange.bind(this)
     }
 
-    handleChange = (locations, isPersonalInfo) => {
+    onLocationChange = (locations, isPersonalInfo) => {
       this.setState({
         locations: locations,
         isPersonalInfo: isPersonalInfo
@@ -34,26 +34,26 @@ class App extends Component {
                   <ParticleComponent />
                   <div
                     style={{
-                      position: "absolute",
+                      position: 'absolute',
                       top: 0,
                       left: 0,
-                      width: "100%",
-                      height: "100%",
+                      width: '100%',
+                      height: '100%',
                       backgroundSize: "cover",
-                      overflow:'overlay'
+                      overflow: 'overlay'
                     }}
                   >
                     <SiteHeader />
                     <Switch>
-                      <Route exact path={("/")} component={Landing} />
+                      <Route exact path={('/')} component={Landing} />
                       <Route
-                        path={("/start")}
+                        path={('/start')}
                         render={(props) => (
-                          <MainForm {...props} handleChange={this.handleChange} />
+                          <MainForm {...props} handleChange={this.onLocationChange} />
                         )}
                       />
                       <Route
-                        path={("/info")}
+                        path={('/info')}
                         render={(props) => (
                           <Info {...props} locations={locations} isPersonalInfo={isPersonalInfo}/>
                         )}

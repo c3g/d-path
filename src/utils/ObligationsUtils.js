@@ -11,7 +11,7 @@ export const createCard = (text) => {
 
 export const createText = (text) => {
   return (
-    <Card.Header className="text-center">
+    <Card.Header className='text-center'>
       <h5> {text} </h5>
     </Card.Header>
   );
@@ -19,7 +19,7 @@ export const createText = (text) => {
 
 export const getLaws = (locations) => {
   return(<Card>
-    <Card.Header as="h5">Laws and Policies </Card.Header>
+    <Card.Header as='h5'>Laws and Policies </Card.Header>
      { (locations.includes('Canada')) ? createCard(getCanadiandLaws()) : null }
      { (locations.includes('Europe')) ?  createText('Please refer to the Obligations and Requirements of the GDPR') : null }
      { (locations.includes('United States')) ? createText('Please refer to the US Legislation (HIPAA)') : null }
@@ -28,12 +28,12 @@ export const getLaws = (locations) => {
 
 export const getBestPractices = () => {
   return(<Card>
-    <Card.Header as="h5">Best Practices</Card.Header>
+    <Card.Header as='5'>Best Practices</Card.Header>
     <Card.Body>
-     <Tabs defaultActiveKey="accountability" id="uncontrolled-tab-example">
-     <Tab eventKey="accountability" title="Accountability">
+     <Tabs defaultActiveKey='accountability' id='uncontrolled-tab-example'>
+     <Tab eventKey='accountability' title='Accountability'>
       <Card.Text style={{ paddingTop: '1%'}}>
-        <ListGroup variant="flush">
+        <ListGroup variant='flush'>
           <ListGroup.Item>
           Appoint a security officer responsible for
           implementing and enforcing security policies/practice, monitoring
@@ -55,9 +55,9 @@ export const getBestPractices = () => {
         </ListGroup>
        </Card.Text>
       </Tab>
-      <Tab eventKey="law" title="Lawfulness of Use, Storage, Transfer and Protection">
+      <Tab eventKey='law' title='Lawfulness of Use, Storage, Transfer and Protection'>
        <Card.Text style={{ paddingTop: '1%'}}>
-         <ListGroup variant="flush">
+         <ListGroup variant='flush'>
            <ListGroup.Item>
            Policies and practices regarding privacy and security should be
            publicly available with plain language summaries. For data subjects/
@@ -78,9 +78,9 @@ export const getBestPractices = () => {
          </ListGroup>
         </Card.Text>
        </Tab>
-       <Tab eventKey="security" title="Security and Safeguards">
+       <Tab eventKey='security' title='Security and Safeguards'>
         <Card.Text style={{ paddingTop: '1%'}}>
-          <ListGroup variant="flush">
+          <ListGroup variant='flush'>
             <ListGroup.Item>
             Have a process for testing, monitoring and evaluating those measures.
             Additionally, mechanism to maximize the likelihood of detecting data breaches
@@ -148,10 +148,10 @@ export const getBestPractices = () => {
 
 export const getCanadiandLaws = () => {
   return(
-  <Tabs defaultActiveKey="accountability" id="uncontrolled-tab-example">
-  <Tab eventKey="accountability" title="Accountability">
+  <Tabs defaultActiveKey='accountability' id='uncontrolled-tab-example'>
+  <Tab eventKey='accountability' title='Accountability'>
    <Card.Text style={{ paddingTop: '1%'}}>
-     <ListGroup variant="flush">
+     <ListGroup variant='flush'>
        <ListGroup.Item>
         ID Person with highest authority in public body or designate a person
         so they are accountable for the compliance of the organization with
@@ -168,9 +168,9 @@ export const getCanadiandLaws = () => {
      </ListGroup>
     </Card.Text>
    </Tab>
-   <Tab eventKey="law" title="Lawfulness of Use, Storage, Transfer and Protection">
+   <Tab eventKey='law' title='Lawfulness of Use, Storage, Transfer and Protection'>
     <Card.Text style={{ paddingTop: '1%'}}>
-      <ListGroup variant="flush">
+      <ListGroup variant='flush'>
         <ListGroup.Item>
          Contractual or other means should be used to provide comparable levels of
          protection while information is processed by a third party.
@@ -206,9 +206,9 @@ export const getCanadiandLaws = () => {
       </ListGroup>
      </Card.Text>
     </Tab>
-    <Tab eventKey="security" title="Security and Safeguards">
+    <Tab eventKey='security' title='Security and Safeguards'>
      <Card.Text style={{ paddingTop: '1%'}}>
-       <ListGroup variant="flush">
+       <ListGroup variant='flush'>
          <ListGroup.Item>
            Reasonable security measures to ensure the protection of personal information
            shall be implemented based on the sensitivity of the information, the purposes
@@ -266,7 +266,7 @@ export const getLawCards = () => {
     <div style={{ paddingBottom: '2%'}}>
     <Row>
       <Col xs={6} sm={6} md={3} lg={2}>
-        <Card border="success" style={{ width: '100%' }}>
+        <Card border='success'  style={{ width: '100%' }}>
           <Card.Header>(1)</Card.Header>
             <Card.Body>
               <Card.Text>
@@ -276,7 +276,7 @@ export const getLawCards = () => {
           </Card>
         </Col>
         <Col xs={6} sm={6} md={3} lg={2}>
-          <Card border="success" style={{ width: '100%' }}>
+          <Card border='success' style={{ width: '100%' }}>
             <Card.Header>(2)</Card.Header>
               <Card.Body>
                 <Card.Text>
@@ -286,7 +286,7 @@ export const getLawCards = () => {
             </Card>
         </Col>
         <Col xs={6} sm={6} md={3} lg={2}>
-          <Card border="success" style={{ width: '100%' }}>
+          <Card border='success'  style={{ width: '100%' }}>
             <Card.Header>(3)</Card.Header>
               <Card.Body>
                 <Card.Text>
@@ -296,7 +296,7 @@ export const getLawCards = () => {
             </Card>
         </Col>
         <Col xs={6} sm={6} md={3} lg={2}>
-          <Card border="success" style={{ width: '100%' }}>
+          <Card border='success' style={{ width: '100%' }}>
             <Card.Header>(4)</Card.Header>
               <Card.Body>
                 <Card.Text>
@@ -306,7 +306,7 @@ export const getLawCards = () => {
             </Card>
         </Col>
         <Col xs={6} sm={6} md={3} lg={2}>
-          <Card border="success" style={{ width: '100%' }}>
+          <Card border='success' style={{ width: '100%' }}>
             <Card.Header>(5)</Card.Header>
               <Card.Body>
                 <Card.Text>
@@ -325,7 +325,7 @@ export const getBestPracticesCards = () => {
     <div style={{ paddingBottom: '2%'}}>
     <Row>
       <Col xs={6} sm={6} md={3} lg={2} style={{ paddingBottom: '2%' }}>
-        <Card border="warning" style={{ width: '100%' }}>
+        <Card border='warning' style={{ width: '100%' }}>
           <Card.Header>(1)</Card.Header>
             <Card.Body>
               <Card.Text>
@@ -335,7 +335,7 @@ export const getBestPracticesCards = () => {
           </Card>
         </Col>
         <Col xs={6} sm={6} md={3} lg={2} style={{ paddingBottom: '2%' }}>
-          <Card border="warning" style={{ width: '100%' }}>
+          <Card border='warning' style={{ width: '100%' }}>
             <Card.Header>(2)</Card.Header>
               <Card.Body>
                 <Card.Text>
@@ -345,7 +345,7 @@ export const getBestPracticesCards = () => {
             </Card>
         </Col>
         <Col xs={6} sm={6} md={3} lg={2} style={{ paddingBottom: '2%' }}>
-          <Card border="warning" style={{ width: '100%' }}>
+          <Card border='warning' style={{ width: '100%' }}>
             <Card.Header>(3)</Card.Header>
               <Card.Body>
                 <Card.Text>
@@ -355,7 +355,7 @@ export const getBestPracticesCards = () => {
             </Card>
         </Col>
         <Col xs={6} sm={6} md={3} lg={2} style={{ paddingBottom: '2%' }}>
-          <Card border="warning" style={{ width: '100%' }}>
+          <Card border='warning' style={{ width: '100%' }}>
             <Card.Header>(4)</Card.Header>
               <Card.Body>
                 <Card.Text>
@@ -365,7 +365,7 @@ export const getBestPracticesCards = () => {
             </Card>
         </Col>
         <Col xs={6} sm={6} md={3} lg={2} style={{ paddingBottom: '2%' }}>
-          <Card border="warning" style={{ width: '100%' }}>
+          <Card border='warning' style={{ width: '100%' }}>
             <Card.Header>(5)</Card.Header>
               <Card.Body>
                 <Card.Text>

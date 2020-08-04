@@ -2,35 +2,18 @@ import React, { Component } from 'react';
 import { Form, ButtonGroup, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import { LOCATION } from '../constants';
+
 class DataDonorsForm extends Component{
 
-  constructor(props) {
-   super(props);
-
-   this.state = {
-     location: '',
-     isPerfonalInfo: false
-   }
-  }
-
-    saveLocation = (e, value) => {
-        e.preventDefault();
-        this.props.handleLocChange(value);
-        this.props.createArray();
+    saveLocation = (location) => {
+        this.props.handleLocChange({ type: 'dataDonors', location });
         this.props.nextStep();
     }
 
     back  = (e) => {
       e.preventDefault();
       this.props.prevStep();
-    }
-
-    createType = (location) => {
-      return ({
-        type : 'dataDonors',
-        location: location,
-        print: 'Where are the data users?'
-      });
     }
 
     render(){
@@ -40,8 +23,8 @@ class DataDonorsForm extends Component{
             <h1> Where are the data subjects/data donors? </h1>
             <Alert variant='info' style={{paddingBottom: '1%'}}> Type of user: {this.props.userType}</Alert>
             <ButtonGroup style={{width:'100%'}} size="lg" vertical>
-              <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Europe'))}>Europe</Button>
-              <Button variant="light" onClick={(e) => this.saveLocation(e, this.createType('Non-Europe'))}>Non-Europe</Button>
+              <Button variant="light" onClick={() => this.saveLocation(LOCATION.EU)}>Europe</Button>
+              <Button variant="light" onClick={() => this.saveLocation(LOCATION.NON_EU)}>Non-Europe</Button>
             </ButtonGroup>
             <div style={{paddingTop: '3%'}}>
               <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>

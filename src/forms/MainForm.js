@@ -10,153 +10,109 @@ import InfoTable from './InfoTable';
 import PersonalInfo from './PersonalInfo';
 import UserInfo from './UserInfo';
 import OtherUser from './OtherUser';
+import { USER_TYPE, LOCATION } from '../constants';
+
+const STEPS = [
+  UserInfo,
+  OrganizationForm,
+  DataProcessingForm,
+  DataUsersForm,
+  DataDonorsForm,
+  PersonalInfo,
+  Success,
+]
+
+function getLocations(answers) {
+  return Object.values(answers)
+    .filter(Boolean)
+    .filter(l => l !== LOCATION.NON_EU);
+}
 
 class MainForm extends Component {
 
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            step: 0,
-            isUserKnown: false,
-            userType: '',
-            isInfoKnown: false,
-            isPersonalInfo: false,
-            locations: [],
-            currentForm: 'organization',
-            data: [
-              { type: 'organization',
-                print: 'Where is the organization?',
-                location: '',
-               },
-              { type: 'dataProcessed',
-                print: 'Where is the data processed?',
-                location: '',
-              },
-              { type: 'dataUsers',
-                print: 'Where are the data users?',
-                location: '',
-              },
-              {
-                type: 'dataDonors',
-                print: 'Where are the data donors?',
-                location: '',
-              },
-            ]
+    this.state = {
+      step: 0,
+      userType: undefined,
+      isPersonalInfo: false,
+      answers: {
+        organisation: undefined,
+        dataProcessed: undefined,
+        dataUsers: undefined,
+        dataDonors: undefined,
+      }
+    }
+  }
+
+  nextStep = () => {
+    this.setState({ step: this.state.step + 1 });
+  }
+
+  prevStep = () => {
+    this.setState({ step: this.state.step - 1 });
+  }
+
+  handleLocChange = (input) => {
+    const { answers } = this.state;
+
+    this.setState({
+      answers: { ...answers, [input.type]: input.location },
+    });
+  }
+
+  handleInfoChange  = (input) => {
+    this.setState({
+      isPersonalInfo: input,
+    });
+  }
+
+  handleUserChange  = (userType) => {
+    this.setState({ userType });
+  }
+
+  getLocationComponent = () => {
+    const { step, userType } = this.state;
+
+    if (userType && userType !== USER_TYPE.PROCESSOR)
+      return OtherUser;
+
+    return STEPS[step];
+  }
+
+  render(){
+    const {
+      userType,
+      answers,
+      isPersonalInfo
+    } = this.state;
+    const { handleChange } = this.props;
+
+    const Component = this.getLocationComponent() ;
+
+    return(
+      <Container>
+        <Jumbotron>
+          <Component
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleLocChange={this.handleLocChange}
+            handleInfoChange={this.handleInfoChange}
+            handleUserChange={this.handleUserChange}
+            handleChange={handleChange}
+            locations= {getLocations(answers)}
+            userType={userType}
+            isPersonalInfo={isPersonalInfo}
+            answers={answers}
+          />
+        </Jumbotron>
+        {userType !== undefined &&
+          <InfoTable answers={answers} />
         }
-    }
-
-    nextStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step : step + 1
-        });
-    }
-
-    prevStep = () => {
-      const { step } = this.state;
-        this.setState({
-            step : step - 1
-        });
-    }
-
-    handleLocChange = (input) => {
-      var { data, locations, step } = this.state;
-      for (var i in data) {
-         if (data[i].type == input.type) {
-           data[i] = {
-                type:input.type,
-                location: input.location,
-                print:input.print,
-            }
-            this.setState({
-              data : data,
-              isLocationKnown: true,
-              currentForm: input.type
-            });
-         }
-      }
-    }
-
-    handleInfoChange  = (input) => {
-      this.setState({
-        isPersonalInfo: input,
-        isInfoKnown: true
-      });
-    }
-
-    handleUserChange  = (input) => {
-      this.setState({
-        userType: input.type,
-        isUserKnown: input.known
-      });
-    }
-
-    createLocationArray = () => {
-      const { data } = this.state;
-      var locations = [];
-      data.forEach(item => {
-        const loc = item.location;
-        if((!locations.includes(loc)) && loc != 'Non-Europe') locations.push(loc);
-      });
-      this.setState({ locations: locations });
-    }
-
-    getLocationComponent = () => {
-      const { step } = this.state;
-      var Form, currentForm;
-      switch(step) {
-      case 0:
-          Form = UserInfo;
-          break;
-      case 1:
-          Form = OrganizationForm;
-          break;
-      case 2:
-          Form = DataProcessingForm;
-          break;
-      case 3:
-          Form = DataUsersForm;
-          break;
-      case 4:
-          Form = DataDonorsForm;
-          break;
-      case 5:
-          Form = PersonalInfo;
-          break;
-      case 6:
-          Form = Success;
-          break;
-      }
-      return Form;
-    }
-
-    render(){
-        const {step, isUserKnown, userType, data, locations, isPersonalInfo} = this.state;
-        const {handleChange} = this.props;
-        const Component = (isUserKnown && userType != 'processor') ? OtherUser :this.getLocationComponent() ;
-        return(
-        <Container>
-          <div>
-            <Jumbotron>
-              <Component
-                nextStep={this.nextStep}
-                prevStep={this.prevStep}
-                handleLocChange={this.handleLocChange}
-                handleInfoChange={this.handleInfoChange}
-                handleUserChange={this.handleUserChange}
-                handleChange={handleChange}
-                createArray={this.createLocationArray}
-                locations= {locations}
-                userType={userType}
-                isPersonalInfo={isPersonalInfo}
-                data={data}
-              />
-            </Jumbotron>
-            {(isUserKnown) ? <InfoTable values={data}/> : null }
-          </div>
-        </Container>)
-    }
+      </Container>
+    )
+  }
 }
 
 export default MainForm;

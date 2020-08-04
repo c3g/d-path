@@ -4,13 +4,9 @@ import { Link } from 'react-router-dom';
 
 class Success extends Component{
 
-    back  = (e) => {
-      e.preventDefault();
+    back = () => {
       this.props.prevStep();
-      this.props.handleUserChange({
-        type : '',
-        known: false,
-      });
+      this.props.handleUserChange(undefined);
     }
 
     render(){
@@ -23,10 +19,9 @@ class Success extends Component{
                 with your data producer for your obligations.
                 </h5>
                 <div style={{paddingTop: '2%'}}>
-                  <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
-                  <Link to="/">
-                    <Button variant="danger"> Restart  </Button>
-                  </Link>
+                    <Button variant={'warning'} onClick={this.back}>
+                        Back
+                    </Button>
                 </div>
             </div>
         )

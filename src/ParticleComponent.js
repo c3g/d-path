@@ -9,7 +9,7 @@ export default () => (
       left: 0,
       width: '100%',
       height: '100%',
-      backgroundColor: 'rgb(10, 91, 117)',
+      backgroundColor: 'rgb(10, 91, 100)',
       backgroundSize: 'cover',
       overflow: 'auto'
     }}
@@ -24,7 +24,7 @@ export default () => (
             },
             'size': {
                 'value': 5
-            }
+            },
         },
         'interactivity': {
             'events': {

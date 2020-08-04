@@ -41,7 +41,7 @@ class Success extends Component{
                 </div>
                 <div style={{paddingTop: '3%'}}>
                   <Link to='/'>
-                    <Button variant='danger'> Restart  </Button>
+                    <Button style={{ marginRight: '1%'}} variant='danger'> Restart  </Button>
                   </Link>
                     <Button variant='success' onClick={(e) => this.saveInformation(e) }>
                         <Link to='/info' style={{color: 'white'}}> Display Laws and Regulations </Link>

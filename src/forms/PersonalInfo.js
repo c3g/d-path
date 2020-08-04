@@ -34,7 +34,7 @@ class PersonalInfo extends Component{
       return (
         <div>
           <h1> Is it personal information? </h1>
-          <Alert variant='info' style={{paddingBottom: '1%'}}> Locations selected: {this.props.locations.toString()}</Alert>
+          <Alert variant='info' style={{paddingBottom: '1%'}}> Locations selected: {this.props.locations.join(', ')}</Alert>
           <h4 style={{paddingBottom: '1%'}}> Is the information
            <OverlayTrigger trigger='hover' placement='top' overlay={directly}>
               <Alert.Link> Directly </Alert.Link>
@@ -50,7 +50,7 @@ class PersonalInfo extends Component{
           <div style={{paddingTop: '3%'}}>
             <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
             <Link to="/">
-              <Button variant="danger"> Restart  </Button>
+              <Button style={{ marginLeft: '1%'}} variant="danger"> Restart  </Button>
             </Link>
           </div>
         </div>
@@ -74,7 +74,7 @@ class PersonalInfo extends Component{
           <div style={{paddingTop: '3%'}}>
             <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
             <Link to='/'>
-              <Button variant='danger'> Restart  </Button>
+              <Button style={{ marginLeft: '1%'}} variant='danger'> Restart  </Button>
             </Link>
           </div>
         </div>

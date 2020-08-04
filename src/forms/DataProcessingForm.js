@@ -43,7 +43,7 @@ class DataProcessingForm extends Component{
             <div style={{paddingTop: '3%'}}>
               <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
               <Link to='/'>
-                <Button variant='danger'> Restart  </Button>
+                <Button style={{ marginLeft: '1%'}} variant='danger'> Restart  </Button>
               </Link>
             </div>
           </div>

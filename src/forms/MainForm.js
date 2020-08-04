@@ -38,7 +38,7 @@ class MainForm extends Component {
       userType: undefined,
       isPersonalInfo: false,
       answers: {
-        organisation: undefined,
+        organization: undefined,
         dataProcessed: undefined,
         dataUsers: undefined,
         dataDonors: undefined,

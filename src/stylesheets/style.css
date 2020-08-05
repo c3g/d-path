@@ -19,3 +19,41 @@
   padding-left: 5px !important;
   padding-right: 5px !important;
 }
+
+.restartButton {
+  background-color: grey;
+  border: 1px solid ;
+  border-radius: 5px;
+  color: white;
+  padding: 6px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+.restartButton:hover {
+  background-color: #575757; /* Green */
+  color: white;
+}
+
+.displayButton {
+  background-color: #0080FF;
+  border: 1px solid ;
+  border-radius: 5px;
+  color: white;
+  padding: 6px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 1%;
+  margin-left: 1%;
+}
+
+.displayButton:hover {
+  background-color: #0060CC; /* Green */
+  color: white;
+}

@@ -50,7 +50,7 @@ class PersonalInfo extends Component{
           <div style={{paddingTop: '3%'}}>
             <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
             <Link to="/">
-              <Button style={{ marginLeft: '1%'}} variant="danger"> Restart  </Button>
+              <span className='restartButton'> Restart </span>
             </Link>
           </div>
         </div>
@@ -74,7 +74,7 @@ class PersonalInfo extends Component{
           <div style={{paddingTop: '3%'}}>
             <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
             <Link to='/'>
-              <Button style={{ marginLeft: '1%'}} variant='danger'> Restart  </Button>
+              <span className='restartButton'> Restart </span>
             </Link>
           </div>
         </div>

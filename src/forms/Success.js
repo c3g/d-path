@@ -6,7 +6,6 @@ class Success extends Component{
 
     saveInformation = (e) => {
         const { locations, isPersonalInfo, handleChange } = this.props;
-        e.preventDefault();
         handleChange(locations, isPersonalInfo);
     }
 
@@ -40,12 +39,12 @@ class Success extends Component{
                 <p> { isPersonalInfo ? 'True' : 'False'}</p>
                 </div>
                 <div style={{paddingTop: '3%'}}>
-                  <Link to='/'>
-                    <Button style={{ marginRight: '1%'}} variant='danger'> Restart  </Button>
+                  <Link className='restartButton' to='/'>
+                    Restart
                   </Link>
-                    <Button variant='success' onClick={(e) => this.saveInformation(e) }>
-                        <Link to='/info' style={{color: 'white'}}> Display Laws and Regulations </Link>
-                    </Button>
+                  <Link className='displayButton' onClick={(e) => this.saveInformation(e)} to='/info'>
+                    Display Laws and Regulations
+                  </Link>
                 </div>
             </div>
         )

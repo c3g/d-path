@@ -45,7 +45,7 @@ class UserInfo extends Component{
             </ButtonGroup>
             <div style={{paddingTop: '3%'}}>
               <Link to='/'>
-                <Button variant='danger'> Restart  </Button>
+                <span className='restartButton'> Restart </span>
               </Link>
             </div>
           </div>

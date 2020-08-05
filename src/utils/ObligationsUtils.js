@@ -322,7 +322,7 @@ export const getLawCards = () => {
 
 export const getBestPracticesCards = () => {
   return(
-    <div style={{ float: 'left', display: 'flex', paddingBottom: '2%'}}>
+    <div style={{ float: 'left', display: 'flex', paddingBottom: '2%', marginTop:'2%'}}>
     <Row>
       <Col lg={4} style={{ paddingBottom: '1%' }}>
         <Card border='warning' style={{ width: '100%' }}>

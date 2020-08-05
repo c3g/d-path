@@ -45,15 +45,15 @@ class App extends Component {
                   >
                     <SiteHeader />
                     <Switch>
-                      <Route exact path={('/')} component={Landing} />
+                      <Route exact path='/' component={Landing} />
                       <Route
-                        path={('/start')}
+                        path='/start'
                         render={(props) => (
-                          <MainForm {...props} handleChange={this.onLocationChange} />
+                          <MainForm {...props} onLocationChange={this.onLocationChange} />
                         )}
                       />
                       <Route
-                        path={('/info')}
+                        path='/info'
                         render={(props) => (
                           <Info {...props} locations={locations} isPersonalInfo={isPersonalInfo}/>
                         )}

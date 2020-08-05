@@ -45,22 +45,22 @@ class Info extends Component {
 
     render(){
         const {locations, isPersonalInfo} = this.props;
-        const MyDoc = () => this.createDocument();
+        const MyDoc = this.createDocument;
         return(
         <Container>
           <div>
             <Jumbotron>
               <h1 style={{marginBottom: '2%'}}> Obligations and requirements </h1>
                 { isPersonalInfo && getLawCards() }
-                <p> { isPersonalInfo && getLaws(locations) } </p>
+                { isPersonalInfo && getLaws(locations) }
                 { getBestPracticesCards() }
-                <p> { getBestPractices() } </p>
-                    <Link to="/">
-                      <Button variant="danger"> Restart  </Button>
+                { getBestPractices() }
+                    <Link to="/" className='restartButton' style={{ marginTop: '2%'}}>
+                      Restart
                     </Link>
                     <div style={{paddingTop: '1%'}}>
                      <PDFDownloadLink document={<MyDoc />} fileName="ObligationsAndRequirements.pdf">
-                      <Button variant="info"> Download PDF  </Button>
+                      <Button variant="primary"> Download PDF  </Button>
                      </PDFDownloadLink>
                    </div>
             </Jumbotron>

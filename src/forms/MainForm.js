@@ -87,7 +87,7 @@ class MainForm extends Component {
       answers,
       isPersonalInfo
     } = this.state;
-    const { handleChange } = this.props;
+    const { onLocationChange } = this.props;
 
     const Component = this.getLocationComponent() ;
 
@@ -100,7 +100,7 @@ class MainForm extends Component {
             handleLocChange={this.handleLocChange}
             handleInfoChange={this.handleInfoChange}
             handleUserChange={this.handleUserChange}
-            handleChange={handleChange}
+            handleChange={onLocationChange}
             locations= {getLocations(answers)}
             userType={userType}
             isPersonalInfo={isPersonalInfo}

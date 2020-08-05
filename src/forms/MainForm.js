@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Container, Jumbotron} from 'react-bootstrap';
+import cx from 'classnames';
 
 import OrganizationForm from './OrganizationForm';
 import DataProcessingForm from './DataProcessingForm';
@@ -27,6 +28,7 @@ function getLocations(answers) {
     .filter(Boolean)
     .filter(l => l !== LOCATION.NON_EU);
 }
+
 
 class MainForm extends Component {
 
@@ -83,6 +85,7 @@ class MainForm extends Component {
 
   render(){
     const {
+      step,
       userType,
       answers,
       isPersonalInfo
@@ -92,8 +95,19 @@ class MainForm extends Component {
     const Component = this.getLocationComponent() ;
 
     return(
-      <Container>
-        <Jumbotron>
+      <Container className='MainForm'>
+        <Jumbotron className='MainForm__content'>
+          <div className='MainForm__steps'>
+            {STEPS.map((_, i) =>
+              <div
+                key={i}
+                className={cx('MainForm__step', { 'MainForm__step--active': i <= step })}
+              >
+                {i + 1}
+              </div>
+            )}
+          </div>
+
           <Component
             nextStep={this.nextStep}
             prevStep={this.prevStep}

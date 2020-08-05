@@ -15,6 +15,7 @@ const Field = styled.div`
   }
   p {
     flex: 1;
+    margin-bottom: 0;
   }
 `
 
@@ -42,32 +43,40 @@ class SiteFooter extends Component {
                 />
               </Col>
               <Col md={7} xs={12} s={12} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-                <Field>
-                  <div>
-                    <Icon name='envelope' />
-                  </div>
-                  <p>
-                    admin@c3g.ca
-                  </p>
-                </Field>
-                <Field>
-                  <div>
-                    <Icon name='address-card' />
-                  </div>
-                  <p className='text-nowrap'>
-                    740 Dr. Penfield Avenue, Room 6103 <br/>
-                    Montréal, QC, Canada
-                    H3A 0G1
-                  </p>
-                </Field>
-                <Field>
-                  <div>
-                    <Icon name='copyright' />
-                  </div>
-                  <p className='text-nowrap'>
-                    2020 EpiShare
-                  </p>
-                </Field>
+                <Row>
+                  <Col md={4} s={12}>
+                    <Field>
+                      <div>
+                        <Icon name='envelope' />
+                      </div>
+                      <p>
+                        admin@c3g.ca
+                      </p>
+                    </Field>
+                  </Col>
+                  <Col md={4} s={12}>
+                    <Field>
+                      <div>
+                        <Icon name='address-card' />
+                      </div>
+                      <p className='text-nowrap'>
+                        740 Dr. Penfield Avenue, Room 6103 <br/>
+                        Montréal, QC, Canada
+                        H3A 0G1
+                      </p>
+                    </Field>
+                  </Col>
+                  <Col md={4} s={12}>
+                    <Field>
+                      <div>
+                        <Icon name='copyright' />
+                      </div>
+                      <p className='text-nowrap'>
+                        2020 EpiShare
+                      </p>
+                    </Field>
+                  </Col>
+                </Row>
               </Col>
             </Row>
           </footer>

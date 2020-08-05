@@ -19,13 +19,7 @@ class OrganizationForm extends Component{
       });
     }
 
-    back  = (e) => {
-      e.preventDefault();
-      this.props.prevStep();
-    }
-
     render(){
-        const { values } = this.props;
         return(
           <div>
             <h1> Where is the project/organization established?</h1>
@@ -35,12 +29,6 @@ class OrganizationForm extends Component{
               <Button variant='light' onClick={() => this.saveAndContinue(LOCATION.EU)}>Europe</Button>
               <Button variant='light' onClick={() => this.saveAndContinue(LOCATION.USA)}>United States</Button>
             </ButtonGroup>
-            <div style={{paddingTop: '3%'}}>
-              <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
-              <Link to='/'>
-                <span className='restartButton'> Restart </span>
-              </Link>
-            </div>
           </div>
         )
     }

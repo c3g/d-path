@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import {Container, Jumbotron} from 'react-bootstrap';
+import {Container, Jumbotron, Button, ButtonToolbar} from 'react-bootstrap';
+import {withRouter} from 'react-router-dom';
 import cx from 'classnames';
+import Icon from 'react-fontawesome';
 
 import OrganizationForm from './OrganizationForm';
 import DataProcessingForm from './DataProcessingForm';
@@ -29,23 +31,23 @@ function getLocations(answers) {
     .filter(l => l !== LOCATION.NON_EU);
 }
 
+const INITIAL_STATE = {
+  step: 0,
+  userType: undefined,
+  isPersonalInfo: false,
+  answers: {
+    organization: undefined,
+    dataProcessed: undefined,
+    dataUsers: undefined,
+    dataDonors: undefined,
+  }
+}
 
 class MainForm extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      step: 0,
-      userType: undefined,
-      isPersonalInfo: false,
-      answers: {
-        organization: undefined,
-        dataProcessed: undefined,
-        dataUsers: undefined,
-        dataDonors: undefined,
-      }
-    }
+    this.state = INITIAL_STATE;
   }
 
   nextStep = () => {
@@ -53,12 +55,18 @@ class MainForm extends Component {
   }
 
   prevStep = () => {
-    this.setState({ step: this.state.step - 1 });
+    if (this.state.step === 0)
+      this.props.history.push('/')
+    else
+      this.setState({ step: this.state.step - 1 });
+  }
+
+  reset = () => {
+    this.setState(INITIAL_STATE)
   }
 
   handleLocChange = (input) => {
     const { answers } = this.state;
-
     this.setState({
       answers: { ...answers, [input.type]: input.location },
     });
@@ -108,19 +116,32 @@ class MainForm extends Component {
             )}
           </div>
 
-          <Component
-            nextStep={this.nextStep}
-            prevStep={this.prevStep}
-            handleLocChange={this.handleLocChange}
-            handleInfoChange={this.handleInfoChange}
-            handleUserChange={this.handleUserChange}
-            handleChange={onLocationChange}
-            locations= {getLocations(answers)}
-            userType={userType}
-            isPersonalInfo={isPersonalInfo}
-            answers={answers}
-          />
+          <div className='MainForm__component'>
+            <Component
+              nextStep={this.nextStep}
+              prevStep={this.prevStep}
+              handleLocChange={this.handleLocChange}
+              handleInfoChange={this.handleInfoChange}
+              handleUserChange={this.handleUserChange}
+              handleChange={onLocationChange}
+              locations= {getLocations(answers)}
+              userType={userType}
+              isPersonalInfo={isPersonalInfo}
+              answers={answers}
+            />
+          </div>
+
+          <div className='MainForm__buttons'>
+            <Button variant='light' onClick={this.prevStep}>
+              <Icon name='arrow-left' /> Previous
+            </Button>
+            <div className='fill' />
+            <Button variant='light' onClick={this.reset}>
+              <Icon name='refresh' /> Reset
+            </Button>
+          </div>
         </Jumbotron>
+
         {userType !== undefined &&
           <InfoTable answers={answers} />
         }
@@ -129,4 +150,4 @@ class MainForm extends Component {
   }
 }
 
-export default MainForm;
+export default withRouter(MainForm);

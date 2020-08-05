@@ -16,18 +16,6 @@ class UserInfo extends Component{
         this.props.handleUserChange(type);
     }
 
-    back  = (e) => {
-      e.preventDefault();
-      this.props.prevStep();
-    }
-
-    createUser = (user) => {
-      return ({
-        type : user,
-        known: true,
-      });
-    }
-
     render(){
         return(
           <div>
@@ -43,11 +31,6 @@ class UserInfo extends Component{
                 <Button variant='light' className='text-left' onClick={() => this.saveAndContinue(USER_TYPE.DONOR)}>Data donor</Button>
               </OverlayTrigger>
             </ButtonGroup>
-            <div style={{paddingTop: '3%'}}>
-              <Link to='/'>
-                <span className='restartButton'> Restart </span>
-              </Link>
-            </div>
           </div>
         )
     }

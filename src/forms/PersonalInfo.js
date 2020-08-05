@@ -25,11 +25,6 @@ class PersonalInfo extends Component{
       });
     }
 
-    back  = (e) => {
-      e.preventDefault();
-      this.props.prevStep();
-    }
-
     getIdentifiableForm = () => {
       return (
         <div>
@@ -44,15 +39,9 @@ class PersonalInfo extends Component{
              </OverlayTrigger>
             Identifiable? </h4>
           <ButtonGroup style={{width:'100%'}} size='lg' vertical>
-            <Button variant='light'onClick={(e) => this.saveIdentifiable(true)}>Yes</Button>
+            <Button variant='light' onClick={(e) => this.saveIdentifiable(true)}>Yes</Button>
             <Button variant='light' onClick={(e) => this.saveAndContinue(e, false) }>No</Button>
           </ButtonGroup>
-          <div style={{paddingTop: '3%'}}>
-            <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
-            <Link to="/">
-              <span className='restartButton'> Restart </span>
-            </Link>
-          </div>
         </div>
       );
     }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 import {Navbar} from 'react-bootstrap';
 
@@ -7,13 +8,15 @@ class SiteHeader extends Component {
         return (
           <Navbar variant='white' style={{ marginBottom: '1em' }}>
             <Navbar.Brand>
-              <img
-                alt=''
-                src={require('./media/logo.png')}
-                width='170'
-                height='60'
-                className='d-inline-block align-top'
-              />{' '}
+                <Link to='/'>
+                    <img
+                        alt=''
+                        src={require('./media/logo.png')}
+                        width='170'
+                        height='60'
+                        className='d-inline-block align-top'
+                    />
+                </Link>
             </Navbar.Brand>
 
             <Navbar.Collapse className='justify-content-end'>

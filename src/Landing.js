@@ -9,10 +9,10 @@ class Landing extends Component {
       <Container>
         <div>
           <Jumbotron>
-            <h1 className='text-center' style={{ fontSize: '45px', marginBottom: '1em' }}>
+            <h1 className='text-center' style={{ fontSize: '45px', fontWeight: '300', marginBottom: '1em' }}>
               Welcome to the D-Path Tool
             </h1>
-            <p style={{ fontSize: '20px', margin: '0 auto 3em', width: '80ch', maxWidth: '100%' }}>
+            <p style={{ fontSize: '20px', fontWeight: '300', margin: '0 auto 3em', width: '80ch', maxWidth: '100%' }}>
               D-PATH (Data Privacy Assessment Tool for Health) is a privacy assessment tool for the sharing of health-related data
               that aims to guide researchers, data hosts, and service providers such as cloud computing companies, in protecting the privacy and confidentiality
               of the human health-related datasets they process in a manner that is in agreement with the applicable legal, professional and ethical norms.

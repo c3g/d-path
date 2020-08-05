@@ -9,7 +9,6 @@ import DataProcessingForm from './DataProcessingForm';
 import DataUsersForm from './DataUsersForm';
 import DataDonorsForm from './DataDonorsForm';
 import Success from './Success';
-import InfoTable from './InfoTable';
 import PersonalInfo from './PersonalInfo';
 import UserInfo from './UserInfo';
 import OtherUser from './OtherUser';
@@ -141,10 +140,6 @@ class MainForm extends Component {
             </Button>
           </div>
         </Jumbotron>
-
-        {userType !== undefined &&
-          <InfoTable answers={answers} />
-        }
       </Container>
     )
   }

@@ -7,7 +7,6 @@ const Field = styled.div`
   font-size: 12px;
   display: flex;
   flex-direction: row;
-  margin-left: 2em;
 
   div {
     flex: 0 0 auto;
@@ -44,7 +43,7 @@ class SiteFooter extends Component {
               </Col>
               <Col md={7} xs={12} s={12} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
                 <Row>
-                  <Col md={4} s={12}>
+                  <Col md={3} s={12}>
                     <Field>
                       <div>
                         <Icon name='envelope' />
@@ -54,7 +53,7 @@ class SiteFooter extends Component {
                       </p>
                     </Field>
                   </Col>
-                  <Col md={4} s={12}>
+                  <Col md={6} s={12}>
                     <Field>
                       <div>
                         <Icon name='address-card' />
@@ -66,7 +65,7 @@ class SiteFooter extends Component {
                       </p>
                     </Field>
                   </Col>
-                  <Col md={4} s={12}>
+                  <Col md={3} s={12}>
                     <Field>
                       <div>
                         <Icon name='copyright' />

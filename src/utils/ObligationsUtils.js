@@ -20,9 +20,9 @@ export const createText = (text) => {
 export const getLaws = (locations) => {
   return(<Card>
     <Card.Header as='h5'>Laws and Policies </Card.Header>
-     { (locations.includes('Canada')) ? createCard(getCanadiandLaws()) : null }
-     { (locations.includes('Europe')) ?  createText('Please refer to the Obligations and Requirements of the GDPR') : null }
-     { (locations.includes('United States')) ? createText('Please refer to the US Legislation (HIPAA)') : null }
+     { (locations.includes('Canada')) && createCard(getCanadiandLaws()) }
+     { (locations.includes('Europe')) &&  createText('Please refer to the Obligations and Requirements of the GDPR') }
+     { (locations.includes('United States')) && createText('Please refer to the US Legislation (HIPAA)')  }
   </Card>);
 }
 
@@ -265,7 +265,7 @@ export const getLawCards = () => {
   return(
     <div style={{ float: 'left', display: 'flex', paddingBottom: '2%'}}>
     <Row>
-      <Col className='obligationCards'>
+      <Col lg={4} style={{ paddingBottom: '1%' }} >
         <Card border='success'  style={{ width: '100%' }}>
           <Card.Header>(1)</Card.Header>
             <Card.Body>
@@ -275,7 +275,7 @@ export const getLawCards = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col className='obligationCards'>
+        <Col lg={4} style={{ paddingBottom: '1%' }} >
           <Card border='success' style={{ width: '100%' }}>
             <Card.Header>(2)</Card.Header>
               <Card.Body>
@@ -285,7 +285,7 @@ export const getLawCards = () => {
               </Card.Body>
             </Card>
         </Col>
-        <Col className='obligationCards' >
+        <Col lg={4} style={{ paddingBottom: '1%' }} >
           <Card border='success'  style={{ width: '100%' }}>
             <Card.Header>(3)</Card.Header>
               <Card.Body>
@@ -295,7 +295,7 @@ export const getLawCards = () => {
               </Card.Body>
             </Card>
         </Col>
-        <Col className='obligationCards' >
+        <Col lg={4} style={{ paddingBottom: '1%' }} >
           <Card border='success' style={{ width: '100%' }}>
             <Card.Header>(4)</Card.Header>
               <Card.Body>
@@ -305,7 +305,7 @@ export const getLawCards = () => {
               </Card.Body>
             </Card>
         </Col>
-        <Col className='obligationCards' >
+        <Col lg={4} style={{ paddingBottom: '1%' }} >
           <Card border='success' style={{ width: '100%' }}>
             <Card.Header>(5)</Card.Header>
               <Card.Body>
@@ -324,7 +324,7 @@ export const getBestPracticesCards = () => {
   return(
     <div style={{ float: 'left', display: 'flex', paddingBottom: '2%'}}>
     <Row>
-      <Col className='obligationCards' style={{ paddingBottom: '2%' }}>
+      <Col lg={4} style={{ paddingBottom: '1%' }}>
         <Card border='warning' style={{ width: '100%' }}>
           <Card.Header>(1)</Card.Header>
             <Card.Body>
@@ -334,7 +334,7 @@ export const getBestPracticesCards = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col className='obligationCards' style={{ paddingBottom: '2%' }}>
+        <Col lg={4} style={{ paddingBottom: '1%' }}>
           <Card border='warning' style={{ width: '100%' }}>
             <Card.Header>(2)</Card.Header>
               <Card.Body>
@@ -344,7 +344,7 @@ export const getBestPracticesCards = () => {
               </Card.Body>
             </Card>
         </Col>
-        <Col className='obligationCards' style={{ paddingBottom: '2%' }}>
+        <Col lg={4} style={{ paddingBottom: '1%' }}>
           <Card border='warning' style={{ width: '100%' }}>
             <Card.Header>(3)</Card.Header>
               <Card.Body>
@@ -354,7 +354,7 @@ export const getBestPracticesCards = () => {
               </Card.Body>
             </Card>
         </Col>
-        <Col className='obligationCards' style={{ paddingBottom: '2%' }}>
+        <Col lg={4} style={{ paddingBottom: '1%' }}>
           <Card border='warning' style={{ width: '100%' }}>
             <Card.Header>(4)</Card.Header>
               <Card.Body>
@@ -364,7 +364,7 @@ export const getBestPracticesCards = () => {
               </Card.Body>
             </Card>
         </Col>
-        <Col className='obligationCards' style={{ paddingBottom: '2%' }}>
+        <Col lg={4} style={{ paddingBottom: '1%' }}>
           <Card border='warning' style={{ width: '100%' }}>
             <Card.Header>(5)</Card.Header>
               <Card.Body>

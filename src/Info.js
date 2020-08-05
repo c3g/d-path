@@ -34,7 +34,7 @@ class Info extends Component {
           </Text>
           <Text style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
           <Text style={styles.author}>Epishare</Text>
-            { (isPersonalInfo) ? getLawsPDF(locations) : null }
+            { (isPersonalInfo) && getLawsPDF(locations) }
             { getBestPracticesPDF() }
           <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
             `${pageNumber} / ${totalPages}`
@@ -50,9 +50,9 @@ class Info extends Component {
         <Container>
           <div>
             <Jumbotron>
-              <h1> Obligations and requirements </h1>
-                { isPersonalInfo ? getLawCards() : null }
-                <p> { isPersonalInfo ? getLaws(locations) : null } </p>
+              <h1 style={{marginBottom: '2%'}}> Obligations and requirements </h1>
+                { isPersonalInfo && getLawCards() }
+                <p> { isPersonalInfo && getLaws(locations) } </p>
                 { getBestPracticesCards() }
                 <p> { getBestPractices() } </p>
                     <Link to="/">

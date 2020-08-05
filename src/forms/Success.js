@@ -14,7 +14,7 @@ class Success extends Component{
         const {answers, userType, isPersonalInfo, handleChange } = this.props;
         return(
             <div>
-                <h1 className='ui centered'>Details Successfully Saved</h1>
+                <h1 className='ui centered'> Summary </h1>
                 <div style={{paddingTop: '3%'}}>
                 <h4> Type of User: </h4>
                 <p> { userType } </p>

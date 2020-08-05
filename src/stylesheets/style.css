@@ -1,5 +1,15 @@
 
 /*
+ * HTML Elements
+ */
+
+abbr {
+  border-bottom: 3px dotted #888;
+  color: #888;
+}
+
+
+/*
  * General utility classes
  */
 

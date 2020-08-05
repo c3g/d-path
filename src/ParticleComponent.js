@@ -11,7 +11,7 @@ export default () => (
       height: '100%',
       backgroundColor: 'rgb(10, 91, 100)',
       backgroundSize: 'cover',
-      overflow: 'auto'
+      overflow: 'hidden'
     }}
   >
 

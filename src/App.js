@@ -39,26 +39,30 @@ class App extends Component {
             left: 0,
             width: '100%',
             height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
             backgroundSize: 'cover',
             overflow: 'overlay'
           }}
         >
           <SiteHeader />
-          <Switch>
-            <Route exact path='/' component={Landing} />
-            <Route
-              path='/start'
-              render={(props) => (
-                <MainForm {...props} onLocationChange={this.onLocationChange} />
-              )}
-            />
-            <Route
-              path='/info'
-              render={(props) => (
-                <Info {...props} locations={locations} isPersonalInfo={isPersonalInfo}/>
-              )}
-            />
-          </Switch>
+          <div style={{ flex: '1' }}>
+            <Switch>
+              <Route exact path='/' component={Landing} />
+              <Route
+                path='/start'
+                render={(props) => (
+                  <MainForm {...props} onLocationChange={this.onLocationChange} />
+                )}
+              />
+              <Route
+                path='/info'
+                render={(props) => (
+                  <Info {...props} locations={locations} isPersonalInfo={isPersonalInfo}/>
+                )}
+              />
+            </Switch>
+          </div>
           <SiteFooter />
         </div>
       </>

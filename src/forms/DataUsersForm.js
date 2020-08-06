@@ -1,19 +1,9 @@
 import React, { Component } from 'react';
-import { Form, ButtonGroup, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { ButtonGroup, Button, Alert } from 'react-bootstrap';
 
 import { LOCATION } from '../constants';
 
 class DataUsersForm extends Component{
-
-  constructor(props) {
-   super(props);
-
-   this.state = {
-     location: '',
-     isPerfonalInfo: false
-   }
-  }
 
     saveLocation = (location) => {
       this.props.nextStep();
@@ -30,7 +20,6 @@ class DataUsersForm extends Component{
     }
 
     render(){
-        const { values } = this.props;
         return(
           <div>
             <h1> Where are the data recipients/users? </h1>

@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import { Form, ButtonGroup, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { ButtonGroup, Button, Alert } from 'react-bootstrap';
 
 import { LOCATION } from '../constants';
 
 class OrganizationForm extends Component{
-
-  constructor(props) {
-   super(props);
-
-  }
 
     saveAndContinue = (location) => {
       this.props.nextStep();

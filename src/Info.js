@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container, Jumbotron, Button, Card, Row, Col} from 'react-bootstrap';
+import { Container, Jumbotron, Button } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import { PDFDownloadLink, Document, Page, Text, Font} from '@react-pdf/renderer'
 import {styles} from './utils/PDFStyles';
@@ -7,10 +7,6 @@ import {getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
 import {getLaws, getBestPractices, getLawCards, getBestPracticesCards} from './utils/ObligationsUtils';
 
 class Info extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     saveInformation = (e, value) => {
         e.preventDefault();

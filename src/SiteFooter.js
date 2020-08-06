@@ -27,6 +27,7 @@ class SiteFooter extends Component {
             <Row>
               <Col md={5} xs={12} s={12} style={{ display: 'flex', flexDirection: 'row' }}>
                 <img
+                  alt='epishare'
                   src={require('./media/epishare.svg')}
                   style={{
                     width: 100,
@@ -35,6 +36,7 @@ class SiteFooter extends Component {
                   }}
                 />
                 <img
+                  alt='cgp'
                   src={require('./media/cgpLOGO.svg')}
                   style={{
                     height: 38,

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class Success extends Component{
@@ -10,7 +9,7 @@ class Success extends Component{
     }
 
     render(){
-        const {answers, userType, isPersonalInfo, handleChange } = this.props;
+        const {answers, userType, isPersonalInfo } = this.props;
         return(
             <div>
                 <h1 className='ui centered'> Summary </h1>

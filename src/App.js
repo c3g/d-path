@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {withRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';

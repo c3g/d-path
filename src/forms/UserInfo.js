@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import { Form, ButtonGroup, Button, Popover, OverlayTrigger } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { ButtonGroup, Button, OverlayTrigger } from 'react-bootstrap';
 import { processor, recipient, donor } from '../utils/Popovers';
 
 import { USER_TYPE } from '../constants';
 
 class UserInfo extends Component{
-
-  constructor(props) {
-   super(props);
-  }
 
     saveAndContinue = (type) => {
         this.props.nextStep();

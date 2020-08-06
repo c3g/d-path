@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Form, ButtonGroup, Button, Popover, OverlayTrigger, Alert } from 'react-bootstrap';
+import { ButtonGroup, Button, OverlayTrigger, Alert } from 'react-bootstrap';
 import { directly, indirectly, publicInfo } from '../utils/Popovers';
-import { Link } from 'react-router-dom';
 
 class PersonalInfo extends Component{
 

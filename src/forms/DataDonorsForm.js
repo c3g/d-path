@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Form, ButtonGroup, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { ButtonGroup, Button, Alert } from 'react-bootstrap';
 
 import { LOCATION } from '../constants';
 
@@ -12,7 +11,6 @@ class DataDonorsForm extends Component{
     }
 
     render(){
-        const { values } = this.props;
         return(
           <div>
             <h1> Where are the data subjects/data donors? </h1>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container, Jumbotron, Button, ButtonToolbar} from 'react-bootstrap';
+import {Container, Jumbotron, Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
 import cx from 'classnames';
 import Icon from 'react-fontawesome';
@@ -54,6 +54,8 @@ class MainForm extends Component {
   }
 
   prevStep = () => {
+    if (this.state.step === 1)
+      this.handleUserChange(undefined);
     if (this.state.step === 0)
       this.props.history.push('/')
     else

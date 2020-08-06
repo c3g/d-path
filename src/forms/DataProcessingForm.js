@@ -24,11 +24,6 @@ class DataProcessingForm extends Component{
         });
     }
 
-    back  = (e) => {
-      e.preventDefault();
-      this.props.prevStep();
-    }
-
     render(){
         const { values } = this.props;
         return(
@@ -40,12 +35,6 @@ class DataProcessingForm extends Component{
               <Button variant='light' onClick={(e) => this.saveLocation(e, LOCATION.EU)}>Europe</Button>
               <Button variant='light' onClick={(e) => this.saveLocation(e, LOCATION.USA)}>United States</Button>
             </ButtonGroup>
-            <div style={{paddingTop: '3%'}}>
-              <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
-              <Link to='/'>
-                <span className='restartButton'> Restart </span>
-              </Link>
-            </div>
           </div>
         )
     }

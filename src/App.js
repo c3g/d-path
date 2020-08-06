@@ -9,61 +9,65 @@ import Info from './Info';
 import ParticleComponent from './ParticleComponent';
 
 class App extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-      this.state = {
-        locations:[],
-        isPersonalInfo: null,
-      }
-
-      this.onLocationChange = this.onLocationChange.bind(this)
+    this.state = {
+      locations: [],
+      isPersonalInfo: null,
     }
 
-    onLocationChange = (locations, isPersonalInfo) => {
-      this.setState({
-        locations: locations,
-        isPersonalInfo: isPersonalInfo
-      })
-    }
+    this.onLocationChange = this.onLocationChange.bind(this)
+  }
 
-    render() {
-        const { locations, isPersonalInfo } = this.state;
-        return(
-              <>
-                  <ParticleComponent />
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      backgroundSize: "cover",
-                      overflow: 'overlay'
-                    }}
-                  >
-                    <SiteHeader />
-                    <Switch>
-                      <Route exact path='/' component={Landing} />
-                      <Route
-                        path='/start'
-                        render={(props) => (
-                          <MainForm {...props} onLocationChange={this.onLocationChange} />
-                        )}
-                      />
-                      <Route
-                        path='/info'
-                        render={(props) => (
-                          <Info {...props} locations={locations} isPersonalInfo={isPersonalInfo}/>
-                        )}
-                      />
-                    </Switch>
-                    <SiteFooter />
-                  </div>
-              </>
-          );
-    }
+  onLocationChange = (locations, isPersonalInfo) => {
+    this.setState({
+      locations: locations,
+      isPersonalInfo: isPersonalInfo
+    })
+  }
+
+  render() {
+    const { locations, isPersonalInfo } = this.state;
+    return(
+      <>
+        <ParticleComponent />
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            backgroundSize: 'cover',
+            overflow: 'overlay'
+          }}
+        >
+          <SiteHeader />
+          <div style={{ flex: '1' }}>
+            <Switch>
+              <Route exact path='/' component={Landing} />
+              <Route
+                path='/start'
+                render={(props) => (
+                  <MainForm {...props} onLocationChange={this.onLocationChange} />
+                )}
+              />
+              <Route
+                path='/info'
+                render={(props) => (
+                  <Info {...props} locations={locations} isPersonalInfo={isPersonalInfo}/>
+                )}
+              />
+            </Switch>
+          </div>
+          <SiteFooter />
+        </div>
+      </>
+    );
+  }
 }
 
 export default App;

@@ -11,11 +11,6 @@ class DataDonorsForm extends Component{
         this.props.nextStep();
     }
 
-    back  = (e) => {
-      e.preventDefault();
-      this.props.prevStep();
-    }
-
     render(){
         const { values } = this.props;
         return(
@@ -26,12 +21,6 @@ class DataDonorsForm extends Component{
               <Button variant='light' onClick={() => this.saveLocation(LOCATION.EU)}>Europe</Button>
               <Button variant='light' onClick={() => this.saveLocation(LOCATION.NON_EU)}>Non-Europe</Button>
             </ButtonGroup>
-            <div style={{paddingTop: '3%'}}>
-              <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
-              <Link to="/">
-                <span className='restartButton'> Restart </span>
-              </Link>
-            </div>
           </div>
         )
     }

@@ -39,9 +39,6 @@ class Success extends Component{
                 <p> { isPersonalInfo ? 'True' : 'False'}</p>
                 </div>
                 <div style={{paddingTop: '3%'}}>
-                  <Link className='restartButton' to='/'>
-                    Restart
-                  </Link>
                   <Link className='displayButton' onClick={(e) => this.saveInformation(e)} to='/info'>
                     Display Laws and Regulations
                   </Link>

@@ -20,11 +20,6 @@ class DataUsersForm extends Component{
       this.props.handleLocChange({ type: 'dataUsers', location });
     }
 
-    back  = (e) => {
-      e.preventDefault();
-      this.props.prevStep();
-    }
-
     createType = (location) => {
 
       return ({
@@ -45,12 +40,6 @@ class DataUsersForm extends Component{
               <Button variant='light' onClick={() => this.saveLocation(LOCATION.EU)}>Europe</Button>
               <Button variant='light' onClick={() => this.saveLocation(LOCATION.USA)}>United States</Button>
             </ButtonGroup>
-            <div style={{paddingTop: '3%'}}>
-              <Button variant={'warning'} onClick={(e) => this.back(e)}> Back </Button>
-              <Link to='/'>
-                <span className='restartButton'> Restart </span>
-              </Link>
-            </div>
           </div>
         )
     }

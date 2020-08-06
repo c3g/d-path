@@ -48,6 +48,13 @@ abbr {
   padding-bottom: 10px;
 }
 
+.summaryInfo {
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0px !important;
+}
+
 .resetButton {
   background-color: white;
   border-radius: 5px;

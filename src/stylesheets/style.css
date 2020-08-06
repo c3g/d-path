@@ -44,23 +44,22 @@ abbr {
   padding-right: 5px !important;
 }
 
-.restartButton {
-  background-color: grey;
-  border: 1px solid ;
-  border-radius: 5px;
-  color: white;
-  padding: 6px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin-right: 1%;
-  margin-left: 1%;
+.obligationTitle {
+  padding-bottom: 10px;
 }
 
-.restartButton:hover {
-  background-color: #575757; /* Green */
-  color: white;
+.resetButton {
+  background-color: white;
+  border-radius: 5px;
+  color: black;
+  padding: 6px 15px;
+  text-decoration: none;
+}
+
+.resetButton:hover {
+  background-color: rgb(240,240,240);  /* Green */
+  color: black;
+  text-decoration: none;
 }
 
 .displayButton {
@@ -74,12 +73,12 @@ abbr {
   display: inline-block;
   font-size: 16px;
   margin-right: 1%;
-  margin-left: 1%;
 }
 
 .displayButton:hover {
   background-color: #0060CC; /* Green */
   color: white;
+  text-decoration: none;
 }
 
 
@@ -144,3 +143,8 @@ abbr {
   flex-direction: row;
 }
 
+.Info__buttons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}

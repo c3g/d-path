@@ -18,17 +18,20 @@ export const createText = (text) => {
 }
 
 export const getLaws = (locations) => {
-  return(<Card>
-    <Card.Header as='h5'>Laws and Policies </Card.Header>
-     { (locations.includes('Canada')) && createCard(getCanadiandLaws()) }
-     { (locations.includes('Europe')) &&  createText('Please refer to the Obligations and Requirements of the GDPR') }
-     { (locations.includes('United States')) && createText('Please refer to the US Legislation (HIPAA)')  }
-  </Card>);
+  return(
+  <>
+    <Card>
+       { (locations.includes('Canada')) && createCard(getCanadiandLaws()) }
+       { (locations.includes('Europe')) &&  createText('Please refer to the Obligations and Requirements of the GDPR') }
+       { (locations.includes('United States')) && createText('Please refer to the US Legislation (HIPAA)')  }
+    </Card>
+    <hr/>
+  </>
+  );
 }
 
 export const getBestPractices = () => {
   return(<Card>
-    <Card.Header as='h5'>Best Practices</Card.Header>
     <Card.Body>
      <Tabs defaultActiveKey='accountability' id='uncontrolled-tab-example'>
      <Tab eventKey='accountability' title='Accountability'>
@@ -263,66 +266,69 @@ export const getCanadiandLaws = () => {
 
 export const getLawCards = () => {
   return(
-    <div style={{ float: 'left', display: 'flex', paddingBottom: '2%'}}>
-    <Row>
-      <Col lg={4} style={{ paddingBottom: '1%' }} >
-        <Card border='success'  style={{ width: '100%' }}>
-          <Card.Header>(1)</Card.Header>
-            <Card.Body>
-              <Card.Text>
-                Act Respecting Access to Documents held by Public Bodies
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col lg={4} style={{ paddingBottom: '1%' }} >
-          <Card border='success' style={{ width: '100%' }}>
-            <Card.Header>(2)</Card.Header>
-              <Card.Body>
-                <Card.Text>
-                  Act Respecting the Sharing of Certain Health Information
-                </Card.Text>
-              </Card.Body>
-            </Card>
-        </Col>
+    <>
+      <h3 className='obligationTitle'> Laws and Policies </h3>
+      <div style={{ float: 'left', display: 'flex', paddingBottom: '2%'}}>
+      <Row>
         <Col lg={4} style={{ paddingBottom: '1%' }} >
           <Card border='success'  style={{ width: '100%' }}>
-            <Card.Header>(3)</Card.Header>
+            <Card.Header>(1)</Card.Header>
               <Card.Body>
                 <Card.Text>
-                  Act to Establish a Legal Framework for Information Technology
+                  Act Respecting Access to Documents held by Public Bodies
                 </Card.Text>
               </Card.Body>
             </Card>
-        </Col>
-        <Col lg={4} style={{ paddingBottom: '1%' }} >
-          <Card border='success' style={{ width: '100%' }}>
-            <Card.Header>(4)</Card.Header>
-              <Card.Body>
-                <Card.Text>
-                  Act Respecting Healthcare Services and Social Services
-                </Card.Text>
-              </Card.Body>
-            </Card>
-        </Col>
-        <Col lg={4} style={{ paddingBottom: '1%' }} >
-          <Card border='success' style={{ width: '100%' }}>
-            <Card.Header>(5)</Card.Header>
-              <Card.Body>
-                <Card.Text>
-                  PIPEDA Principles
-                </Card.Text>
-              </Card.Body>
-            </Card>
-        </Col>
-      </Row>
-    </div>
+          </Col>
+          <Col lg={4} style={{ paddingBottom: '1%' }} >
+            <Card border='success' style={{ width: '100%' }}>
+              <Card.Header>(2)</Card.Header>
+                <Card.Body>
+                  <Card.Text>
+                    Act Respecting the Sharing of Certain Health Information
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+          </Col>
+          <Col lg={4} style={{ paddingBottom: '1%' }} >
+            <Card border='success'  style={{ width: '100%' }}>
+              <Card.Header>(3)</Card.Header>
+                <Card.Body>
+                  <Card.Text>
+                    Act to Establish a Legal Framework for Information Technology
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+          </Col>
+          <Col lg={4} style={{ paddingBottom: '1%' }} >
+            <Card border='success' style={{ width: '100%' }}>
+              <Card.Header>(4)</Card.Header>
+                <Card.Body>
+                  <Card.Text>
+                    Act Respecting Healthcare Services and Social Services
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+          </Col>
+          <Col lg={4} style={{ paddingBottom: '1%' }} >
+            <Card border='success' style={{ width: '100%' }}>
+              <Card.Header>(5)</Card.Header>
+                <Card.Body>
+                  <Card.Text>
+                    PIPEDA Principles
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+          </Col>
+        </Row>
+      </div>
+    </>
   )
 }
 
 export const getBestPracticesCards = () => {
   return(
-    <div style={{ float: 'left', display: 'flex', paddingBottom: '2%', marginTop:'2%'}}>
+    <div className='bestPracticesCards'>
     <Row>
       <Col lg={4} style={{ paddingBottom: '1%' }}>
         <Card border='warning' style={{ width: '100%' }}>

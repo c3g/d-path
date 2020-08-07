@@ -8,7 +8,6 @@ abbr {
   color: #888;
 }
 
-
 /*
  * General utility classes
  */
@@ -16,7 +15,6 @@ abbr {
 .fill {
   flex: 1;
 }
-
 
 /*
  * Other
@@ -97,6 +95,7 @@ abbr {
   display: flex;
   flex-direction: column;
 }
+
 .MainForm__steps {
   display: flex;
   flex-direction: row;

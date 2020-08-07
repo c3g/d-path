@@ -69,7 +69,7 @@ class PersonalInfo extends Component{
         return (
           <div>
             <h1>Personal information</h1>
-            <Alert variant='info' style={{paddingBottom: '1%'}}>
+            <Alert variant='obligations' style={{paddingBottom: '1%'}}>
               Locations selected: {this.props.locations.join(', ')}
             </Alert>
             {identifiable ?

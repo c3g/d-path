@@ -40,7 +40,7 @@ class Success extends Component{
                     <h4> Is it personal Information? </h4>
                     <p> { isPersonalInfo ? 'Yes' : 'No'}</p>
                     <div style={{paddingTop: '3%'}}>
-                      <Link className='displayButton' onClick={(e) => this.saveInformation(e)} to='/info'>
+                      <Link className='displayButton' onClick={(e) => this.saveInformation(e)} to='/obligations'>
                         Display Laws and Regulations
                       </Link>
                     </div>

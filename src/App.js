@@ -50,13 +50,13 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={Landing} />
               <Route
-                path='/start'
+                path='/assessment'
                 render={(props) => (
                   <MainForm {...props} onLocationChange={this.onLocationChange} />
                 )}
               />
               <Route
-                path='/info'
+                path='/obligations'
                 render={(props) => (
                   <Info {...props} locations={locations} isPersonalInfo={isPersonalInfo}/>
                 )}

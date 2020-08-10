@@ -7,67 +7,101 @@ import {styles} from './utils/PDFStyles';
 import {getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
 import {getLaws, getBestPractices, getLawCards, getBestPracticesCards} from './utils/ObligationsUtils';
 
+function InfoDocument({locations, isPersonalInfo}) {
+  // Create styles
+  Font.register({
+    family: 'Oswald',
+    src: 'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf'
+  });
+
+  return (
+    <Document>
+    <Page style={styles.body}>
+      <Text style={styles.header} fixed>
+        ~ D-Path Tool ~
+      </Text>
+      <Text style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
+      <Text style={styles.author}>Epishare</Text>
+        { (isPersonalInfo) && getLawsPDF(locations) }
+        { getBestPracticesPDF() }
+      <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
+        `${pageNumber} / ${totalPages}`
+      )} fixed />
+    </Page>
+    </Document>)
+}
+
 class Info extends Component {
 
-    saveInformation = (e, value) => {
-        e.preventDefault();
-        this.props.handleChange(value);
-    }
+  state = {
+    activeLaws: [],
+    activeBestPractices: [],
+  }
 
-    createDocument = () => {
-      const {locations, isPersonalInfo} = this.props;
+  onMouseEnterLaw = activeLaws => {
+    this.setState({ activeLaws })
+  }
 
-      // Create styles
-      Font.register({
-        family: 'Oswald',
-        src: 'https://fonts.gstatic.com/s/oswald/v13/Y_TKV6o8WovbUd3m_X9aAA.ttf'
-      });
+  onMouseLeaveLaw = () => {
+    this.setState({ activeLaws: [] })
+  }
 
-      return (
-        <Document>
-        <Page style={styles.body}>
-          <Text style={styles.header} fixed>
-            ~ D-Path Tool ~
-          </Text>
-          <Text style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
-          <Text style={styles.author}>Epishare</Text>
-            { (isPersonalInfo) && getLawsPDF(locations) }
-            { getBestPracticesPDF() }
-          <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
-            `${pageNumber} / ${totalPages}`
-          )} fixed />
-        </Page>
-        </Document>)
-    }
+  onMouseEnterBestPractice = activeBestPractices => {
+    this.setState({ activeBestPractices })
+  }
 
-    render(){
-        const {locations, isPersonalInfo} = this.props;
-        const MyDoc = this.createDocument;
-        return(
-        <Container>
-          <div>
-            <Jumbotron>
-              <h1 style={{marginBottom: '2%'}}> Obligations and requirements </h1>
-                <hr />
-                { isPersonalInfo && getLawCards() }
-                { isPersonalInfo && getLaws(locations) }
-                <h3 className='obligationTitle'> Best Practices </h3>
-                { getBestPracticesCards() }
-                { getBestPractices() }
+  onMouseLeaveBestPractice = () => {
+    this.setState({ activeBestPractices: [] })
+  }
 
-                <div className='Info__buttons'>
-                  <PDFDownloadLink document={<MyDoc />} fileName="ObligationsAndRequirements.pdf">
-                    <Button variant="primary"> Download PDF  </Button>
-                  </PDFDownloadLink>
-                  <div className='fill' />
-                  <Link to="/" className='resetButton' onClick={this.reset}>
-                    <Icon name='refresh' />  Reset
-                  </Link>
-                </div>
-            </Jumbotron>
+
+  render(){
+    const { activeLaws, activeBestPractices } = this.state;
+    const {locations, isPersonalInfo} = this.props;
+
+    return(
+      <Container>
+        <Jumbotron>
+          <h1 style={{marginBottom: '2%'}}> Obligations and requirements </h1>
+
+          <hr />
+          { isPersonalInfo &&
+            <>
+              {getLawCards({
+                locations,
+                activeLaws,
+              })}
+              {getLaws({
+                locations,
+                onMouseEnter: this.onMouseEnterLaw,
+                onMouseLeave: this.onMouseLeaveLaw,
+              })}
+            </>
+          }
+
+          <h3 className='obligationTitle'>Best Practices</h3>
+          { getBestPracticesCards({ activeBestPractices }) }
+          { getBestPractices({
+            onMouseEnter: this.onMouseEnterBestPractice,
+            onMouseLeave: this.onMouseLeaveBestPractice,
+          }) }
+
+          <div className='Info__buttons'>
+            <PDFDownloadLink
+              document={<InfoDocument locations={locations} isPersonalInfo={isPersonalInfo} />}
+              fileName="ObligationsAndRequirements.pdf"
+            >
+              <Button variant="primary">Download PDF</Button>
+            </PDFDownloadLink>
+            <div className='fill' />
+            <Link to="/" className='resetButton' onClick={this.reset}>
+              <Icon name='refresh' /> Reset
+            </Link>
           </div>
-        </Container>)
-    }
+        </Jumbotron>
+      </Container>
+    )
+  }
 }
 
 export default Info;

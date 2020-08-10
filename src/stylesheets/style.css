@@ -53,6 +53,9 @@ abbr {
 .ObligationCard {
   overflow: hidden;
 }
+.ObligationCard--active {
+  border-color: #B5D0F9;
+}
 .ObligationCard .card-body {
   position: relative;
   min-height: 100px;
@@ -67,11 +70,25 @@ abbr {
   line-height: 100px;
   color: rgba(0, 0, 0, 0.05);
 }
+.ObligationCard--active .ObligationCard__number {
+  color: #e1edff;
+}
 .ObligationCard .card-text {
   font-weight: 300;
   font-size: 18px;
 }
 
+
+.ObligationPanel {}
+.ObligationPanel .card-header-tabs {
+  margin: 0;
+}
+.ObligationPanel .list-group-item {
+  cursor: default;
+}
+.ObligationPanel .list-group-item:hover {
+  background-color: rgba(0, 0, 0, 0.025);
+}
 
 
 .summaryInfo {

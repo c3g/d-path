@@ -57,16 +57,30 @@ class Info extends Component {
 
   render(){
     const { activeLaws, activeBestPractices } = this.state;
-    const {locations, isPersonalInfo} = this.props;
+    const { locations, isPersonalInfo } = this.props;
+    // const locations = ['Canada', 'Europe', 'United States']
+    // const isPersonalInfo = true
 
     return(
       <Container>
         <Jumbotron>
-          <h1 style={{marginBottom: '2%'}}> Obligations and requirements </h1>
+          <h6
+            style={{
+              marginBottom: '1em',
+              fontSize: '0.9em',
+              fontWeight: 'normal',
+              textTransform: 'uppercase',
+              letterSpacing: 1,
+              opacity: 0.4,
+            }}
+          >
+            Obligations and requirements
+          </h6>
 
           <hr />
           { isPersonalInfo &&
             <>
+              <h1 className='obligationTitle'>Laws and Policies</h1>
               {getLawCards({
                 locations,
                 activeLaws,
@@ -79,12 +93,14 @@ class Info extends Component {
             </>
           }
 
-          <h3 className='obligationTitle'>Best Practices</h3>
+          <h1 className='obligationTitle'>Best Practices</h1>
           { getBestPracticesCards({ activeBestPractices }) }
           { getBestPractices({
             onMouseEnter: this.onMouseEnterBestPractice,
             onMouseLeave: this.onMouseLeaveBestPractice,
           }) }
+
+          <hr />
 
           <div className='Info__buttons'>
             <PDFDownloadLink

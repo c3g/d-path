@@ -37,14 +37,42 @@ abbr {
   }
 }
 
+/*
+ * Obligations page
+ */
+
+.obligationTitle {
+  padding-bottom: 10px;
+}
+
 .obligationCards {
   padding-left: 5px !important;
   padding-right: 5px !important;
 }
 
-.obligationTitle {
-  padding-bottom: 10px;
+.ObligationCard {
+  overflow: hidden;
 }
+.ObligationCard .card-body {
+  position: relative;
+  min-height: 100px;
+  padding-left: 3.75rem;
+}
+.ObligationCard__number {
+  position: absolute;
+  top:  0px;
+  left: -10px;
+  font-weight: bold;
+  font-size: 120px;
+  line-height: 100px;
+  color: rgba(0, 0, 0, 0.05);
+}
+.ObligationCard .card-text {
+  font-weight: 300;
+  font-size: 18px;
+}
+
+
 
 .summaryInfo {
   background-color: white;
@@ -53,19 +81,6 @@ abbr {
   margin: 0px !important;
 }
 
-.resetButton {
-  background-color: white;
-  border-radius: 5px;
-  color: black;
-  padding: 6px 15px;
-  text-decoration: none;
-}
-
-.resetButton:hover {
-  background-color: rgb(240,240,240);  /* Green */
-  color: black;
-  text-decoration: none;
-}
 
 .displayButton {
   background-color: #0080FF;
@@ -79,7 +94,6 @@ abbr {
   font-size: 16px;
   margin-right: 1%;
 }
-
 .displayButton:hover {
   background-color: #0060CC; /* Green */
   color: white;

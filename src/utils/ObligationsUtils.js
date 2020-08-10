@@ -127,22 +127,26 @@ export const getCanadiandLaws = () => {
 export const getLawCards = () => {
   return(
     <>
-      <h3 className='obligationTitle'> Laws and Policies </h3>
-      <div style={{ float: 'left', display: 'flex', paddingBottom: '2%'}}>
-      <Row>
-        {lawCardsText.map(card => {
-          return(
-            <Col lg={4} style={{ paddingBottom: '1%' }}>
-              <Card border='success' style={{ width: '100%' }}>
-                <Card.Header>(1)</Card.Header>
+      <h3 className='obligationTitle'>Laws and Policies</h3>
+
+      <div style={{ paddingBottom: '1em'}}>
+        <Row>
+          {lawCardsText.map((card, i) => {
+            const number = i + 1
+            return(
+              <Col lg={4} style={{ paddingBottom: '1%' }}>
+                <Card className='ObligationCard'>
                   <Card.Body>
+                    <div className='ObligationCard__number'>
+                      {number}
+                    </div>
                     <Card.Text>
                       {card}
                     </Card.Text>
                   </Card.Body>
                 </Card>
               </Col>)
-        })}
+          })}
         </Row>
       </div>
     </>
@@ -151,23 +155,24 @@ export const getLawCards = () => {
 
 export const getBestPracticesCards = () => {
   return(
-    <div className='bestPracticesCards'>
-    <Row>
-      {bestPracticesCardsText.map(card => {
-        return(
-          <Col lg={4} style={{ paddingBottom: '1%' }}>
-            <Card border='warning' style={{ width: '100%' }}>
-              <Card.Header>(1)</Card.Header>
+    <div className='bestPracticesCards' style={{ paddingBottom: '1em'}}>
+      <Row>
+        {bestPracticesCardsText.map((card, i) => {
+          return(
+            <Col lg={4} style={{ paddingBottom: '1%' }}>
+              <Card className='ObligationCard'>
                 <Card.Body>
+                  <div className='ObligationCard__number'>
+                    {i + 1}
+                  </div>
                   <Card.Text>
                     {card}
                   </Card.Text>
                 </Card.Body>
-              </Card>
-            </Col>)
-      })}
-    </Row>
-
+                </Card>
+              </Col>)
+        })}
+      </Row>
     </div>
   )
 }

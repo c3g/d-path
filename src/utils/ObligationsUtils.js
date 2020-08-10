@@ -86,7 +86,7 @@ export const getCanadiandLaws = ({ onMouseEnter, onMouseLeave }) => {
 
   return (
     <Tabs defaultActiveKey='accountability'>
-      {bestPracticeTabs.map(renderTab)}
+      {lawTabs.map(renderTab)}
     </Tabs>
   );
 }

@@ -1,173 +1,195 @@
 import React from 'react';
 import {Card, ListGroup, Tabs, Tab, Col, Row} from 'react-bootstrap';
+import cx from 'classnames';
 import {bestPracticesText, bestPracticesCardsText, lawsText, lawCardsText} from './TextLawsUtils';
 
-export const createCard = (text) => {
-  return (
-    <Card.Body>
-     {text}
-    </Card.Body>
-  );
-}
+const bestPracticeTabs = [
+  {
+    key: 'accountability',
+    title: 'Accountability',
+    items: bestPracticesText.accountability,
+  },
+  {
+    key: 'law',
+    title: 'Lawfulness of Use, Storage, Transfer and Protection',
+    items: bestPracticesText.law,
+  },
+  {
+    key: 'security',
+    title: 'Security and Safeguards',
+    items: bestPracticesText.security,
+  },
+]
 
-export const createText = (text) => {
-  return (
-    <Card.Header className='text-center'>
-      <h5> {text} </h5>
-    </Card.Header>
-  );
-}
+const lawTabs = [
+  {
+    key: 'accountability',
+    title: 'Accountability',
+    items: lawsText.accountability,
+  },
+  {
+    key: 'law',
+    title: 'Lawfulness of Use, Storage, Transfer and Protection',
+    items: lawsText.law,
+  },
+  {
+    key: 'security',
+    title: 'Security and Safeguards',
+    items: lawsText.security,
+  },
+]
 
-export const getLaws = (locations) => {
-  return(
-  <>
-    <Card>
-       { (locations.includes('Canada')) && createCard(getCanadiandLaws()) }
-       { (locations.includes('Europe')) &&  createText('Please refer to the Obligations and Requirements of the GDPR') }
-       { (locations.includes('United States')) && createText('Please refer to the US Legislation (HIPAA)')  }
-    </Card>
-    <hr/>
-  </>
-  );
-}
 
-export const getBestPractices = () => {
-  return(<Card>
-    <Card.Body>
-     <Tabs defaultActiveKey='accountability' id='uncontrolled-tab-example'>
-     <Tab eventKey='accountability' title='Accountability'>
-      <Card.Text style={{ paddingTop: '1%'}}>
-        <ListGroup variant='flush'>
-          {bestPracticesText.accountability.map(item => {
-            return(
-              <ListGroup.Item>
-              {item}
-              </ListGroup.Item>
-            );
-          })}
-        </ListGroup>
-       </Card.Text>
-      </Tab>
-      <Tab eventKey='law' title='Lawfulness of Use, Storage, Transfer and Protection'>
-       <Card.Text style={{ paddingTop: '1%'}}>
-         <ListGroup variant='flush'>
-         {bestPracticesText.law.map(item => {
-           return(
-             <ListGroup.Item>
-             {item}
-             </ListGroup.Item>
-           );
-         })}
-         </ListGroup>
-        </Card.Text>
-       </Tab>
-       <Tab eventKey='security' title='Security and Safeguards'>
-        <Card.Text style={{ paddingTop: '1%'}}>
-          <ListGroup variant='flush'>
-        {bestPracticesText.security.map(item => {
-          return(
-            <ListGroup.Item>
-            {item}
-            </ListGroup.Item>
-          );
-        })}
-          </ListGroup>
-        </Card.Text>
-      </Tab>
-     </Tabs >
-    </Card.Body>
-  </Card>);
-}
+export const getLaws = (props) => {
+  const { locations } = props;
 
-export const getCanadiandLaws = () => {
-  return(
-  <Tabs defaultActiveKey='accountability' id='uncontrolled-tab-example'>
-  <Tab eventKey='accountability' title='Accountability'>
-   <Card.Text style={{ paddingTop: '1%'}}>
-     <ListGroup variant='flush'>
-       {lawsText.accountability.map(item => {
-         return(
-           <ListGroup.Item>
-           {item}
-           </ListGroup.Item>
-         );
-       })}
-     </ListGroup>
-    </Card.Text>
-   </Tab>
-   <Tab eventKey='law' title='Lawfulness of Use, Storage, Transfer and Protection'>
-    <Card.Text style={{ paddingTop: '1%'}}>
-      <ListGroup variant='flush'>
-        {lawsText.law.map(item => {
-          return(
-            <ListGroup.Item>
-            {item}
-            </ListGroup.Item>
-          );
-        })}
-      </ListGroup>
-     </Card.Text>
-    </Tab>
-    <Tab eventKey='security' title='Security and Safeguards'>
-     <Card.Text style={{ paddingTop: '1%'}}>
-       <ListGroup variant='flush'>
-         {lawsText.security.map(item => {
-           return(
-             <ListGroup.Item>
-             {item}
-             </ListGroup.Item>
-           );
-         })}
-       </ListGroup>
-      </Card.Text>
-     </Tab>
-  </Tabs >);
-}
+  const createText = (text) => {
+    return (
+      <Card.Header className='text-center'>
+        <h5>{text}</h5>
+      </Card.Header>
+    );
+  }
 
-export const getLawCards = () => {
   return(
     <>
-      <h3 className='obligationTitle'> Laws and Policies </h3>
-      <div style={{ float: 'left', display: 'flex', paddingBottom: '2%'}}>
-      <Row>
-        {lawCardsText.map(card => {
-          return(
-            <Col lg={4} style={{ paddingBottom: '1%' }}>
-              <Card border='success' style={{ width: '100%' }}>
-                <Card.Header>(1)</Card.Header>
-                  <Card.Body>
-                    <Card.Text>
-                      {card}
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>)
-        })}
-        </Row>
-      </div>
+      <Card  className='ObligationPanel'>
+        {locations.includes('Canada') && <Card.Body>{getCanadiandLaws(props)}</Card.Body> }
+        {locations.includes('Europe') &&
+          createText('Please refer to the Obligations and Requirements of the GDPR')
+        }
+        {locations.includes('United States') &&
+          createText('Please refer to the US Legislation (HIPAA)')
+        }
+      </Card>
+      <hr/>
     </>
-  )
+  );
 }
 
-export const getBestPracticesCards = () => {
-  return(
-    <div className='bestPracticesCards'>
-    <Row>
-      {bestPracticesCardsText.map(card => {
-        return(
-          <Col lg={4} style={{ paddingBottom: '1%' }}>
-            <Card border='warning' style={{ width: '100%' }}>
-              <Card.Header>(1)</Card.Header>
+export const getCanadiandLaws = ({ onMouseEnter, onMouseLeave }) => {
+
+  const textToItem = text =>
+    <ListGroup.Item
+      onMouseEnter={enterHandler(text, onMouseEnter)}
+      onMouseLeave={leaveHandler(text, onMouseLeave)}
+    >
+      {text}
+    </ListGroup.Item>
+
+  const renderTab = tab =>
+    <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
+      <Card.Text>
+        <ListGroup variant='flush'>{tab.items.map(textToItem)}</ListGroup>
+      </Card.Text>
+    </Tab>
+
+  return (
+    <Tabs defaultActiveKey='accountability'>
+      {lawTabs.map(renderTab)}
+    </Tabs>
+  );
+}
+
+export const getLawCards = ({ activeLaws }) => {
+  return (
+    <div style={{ paddingBottom: '1em'}}>
+      <Row>
+        {lawCardsText.map((card, i) => {
+          const number = i + 1
+          return(
+            <Col lg={4} style={{ paddingBottom: '1%' }}>
+              <Card
+                className={cx('ObligationCard', {
+                  'ObligationCard--active': activeLaws.includes(i)
+                })}
+              >
                 <Card.Body>
+                  <div className='ObligationCard__number'>
+                    {number}
+                  </div>
                   <Card.Text>
                     {card}
                   </Card.Text>
                 </Card.Body>
               </Card>
             </Col>)
-      })}
-    </Row>
-
+        })}
+      </Row>
     </div>
   )
+}
+
+export const getBestPracticesCards = ({ activeBestPractices }) => {
+  return(
+    <div className='bestPracticesCards' style={{ paddingBottom: '1em'}}>
+      <Row>
+        {bestPracticesCardsText.map((card, i) => {
+          return(
+            <Col lg={4} style={{ paddingBottom: '1%' }}>
+              <Card
+                className={cx('ObligationCard', {
+                  'ObligationCard--active': activeBestPractices.includes(i)
+                })}
+              >
+                <Card.Body>
+                  <div className='ObligationCard__number'>
+                    {i + 1}
+                  </div>
+                  <Card.Text>
+                    {card}
+                  </Card.Text>
+                </Card.Body>
+                </Card>
+              </Col>)
+        })}
+      </Row>
+    </div>
+  )
+}
+
+export const getBestPractices = ({ onMouseEnter, onMouseLeave }) => {
+  const textToItem = text =>
+    <ListGroup.Item
+      onMouseEnter={enterHandler(text, onMouseEnter)}
+      onMouseLeave={leaveHandler(text, onMouseLeave)}
+    >
+      {text}
+    </ListGroup.Item>
+
+  const renderTab = tab =>
+    <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
+      <Card.Text>
+        <ListGroup variant='flush'>{tab.items.map(textToItem)}</ListGroup>
+      </Card.Text>
+    </Tab>
+
+  return (
+    <Card className='ObligationPanel'>
+      <Card.Body>
+        <Tabs defaultActiveKey='accountability'>
+          {bestPracticeTabs.map(renderTab)}
+        </Tabs>
+      </Card.Body>
+    </Card>
+  );
+}
+
+
+// Helpers
+
+function parseIndexes(text) {
+  const m = text.match(/\((.*)\) *$/)
+  if (!m)
+    return []
+  const indexes = m[1].replace(/ /g, '').split(',').map(n => parseInt(n, 10) - 1)
+  return indexes
+}
+
+function enterHandler(text, onMouseEnter) {
+  return () => onMouseEnter(parseIndexes(text))
+}
+
+function leaveHandler(text, onMouseLeave) {
+  return () => onMouseLeave(parseIndexes(text))
 }

@@ -29,11 +29,11 @@ class PersonalInfo extends Component{
         <>
           <h4 style={{paddingBottom: '1%'}}>
             Is the information{' '}
-            <OverlayTrigger trigger='hover' placement='top' overlay={directly}>
+            <OverlayTrigger trigger={['hover', 'focus']} placement='top' overlay={directly}>
               <abbr>directly</abbr>
             </OverlayTrigger>{' '}
             or{' '}
-            <OverlayTrigger trigger='hover' placement='top' overlay={indirectly}>
+            <OverlayTrigger trigger={['hover', 'focus']} placement='top' overlay={indirectly}>
               <abbr>indirectly</abbr>
             </OverlayTrigger>{' '}
             identifiable?
@@ -51,7 +51,7 @@ class PersonalInfo extends Component{
         <>
           <h4 style={{paddingBottom: '1%'}}>
             Is the information{' '}
-            <OverlayTrigger trigger='hover' placement='top' overlay={publicInfo}>
+            <OverlayTrigger trigger={['hover', 'focus']} placement='top' overlay={publicInfo}>
               <abbr>public</abbr>
             </OverlayTrigger> ?
           </h4>

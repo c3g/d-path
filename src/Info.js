@@ -81,9 +81,10 @@ class Info extends Component {
           { isPersonalInfo &&
             <>
               <h1 className='obligationTitle'>Laws and Policies</h1>
-              {getLawCards({
-                locations,
-                activeLaws,
+              {locations.includes('Canada') &&
+                getLawCards({
+                  locations,
+                  activeLaws,
               })}
               {getLaws({
                 locations,

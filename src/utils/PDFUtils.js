@@ -1,6 +1,6 @@
 import React from 'react';
 import {styles} from './PDFStyles';
-import {bestPracticesText, lawsText } from './TextLawsUtils';
+import {bestPracticesText, cadLawsText } from './TextLawsUtils';
 import { Text} from '@react-pdf/renderer'
 
 export const createTextPDF = (text) => {
@@ -67,7 +67,7 @@ export const getCanadiandLawsPDF = () => {
     <Text style={styles.section}>
       Accountability
     </Text>
-      {lawsText.accountability.map(item => {
+      {cadLawsText.accountability.map(item => {
         return(
           <Text style={styles.text}>
           {item}
@@ -77,7 +77,7 @@ export const getCanadiandLawsPDF = () => {
     <Text style={styles.section}>
         Lawfulness of Use, Storage, Transfer and Protection
     </Text>
-      {lawsText.law.map(item => {
+      {cadLawsText.law.map(item => {
         return(
           <Text style={styles.text}>
           {item}
@@ -87,7 +87,7 @@ export const getCanadiandLawsPDF = () => {
     <Text style={styles.section}>
       Security and Safeguards
     </Text>
-      {lawsText.security.map(item => {
+      {cadLawsText.security.map(item => {
         return(
           <Text style={styles.text}>
           {item}

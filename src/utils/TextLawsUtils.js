@@ -26,7 +26,7 @@ export const bestPracticesText = {
 
 };
 
-export const lawsText = {
+export const cadLawsText = {
   accountability: [
     'ID Person with highest authority in public body or designate a person so they are accountable for the compliance of the organization with corresponding laws. (1,2,5)',
     'Implement procedures to receive and respond to complaints and inquiries from user/clients. (5)',
@@ -53,7 +53,7 @@ export const lawsText = {
   ]
 };
 
-export const lawCardsText = [
+export const cadLawCardsText = [
   'Act Respecting Access to Documents held by Public Bodies',
   'Act Respecting the Sharing of Certain Health Information',
   'Act to Establish a Legal Framework for Information Technology',

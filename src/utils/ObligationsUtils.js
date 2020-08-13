@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, ListGroup, Tabs, Tab, Col, Row} from 'react-bootstrap';
 import cx from 'classnames';
-import {bestPracticesText, bestPracticesCardsText, lawsText, lawCardsText} from './TextLawsUtils';
+import {bestPracticesText, bestPracticesCardsText, cadLawsText, cadLawCardsText} from './TextLawsUtils';
 
 const bestPracticeTabs = [
   {
@@ -25,17 +25,17 @@ const lawTabs = [
   {
     key: 'accountability',
     title: 'Accountability',
-    items: lawsText.accountability,
+    items: cadLawsText.accountability,
   },
   {
     key: 'law',
     title: 'Lawfulness of Use, Storage, Transfer and Protection',
-    items: lawsText.law,
+    items: cadLawsText.law,
   },
   {
     key: 'security',
     title: 'Security and Safeguards',
-    items: lawsText.security,
+    items: cadLawsText.security,
   },
 ]
 
@@ -95,7 +95,7 @@ export const getLawCards = ({ activeLaws }) => {
   return (
     <div style={{ paddingBottom: '1em'}}>
       <Row>
-        {lawCardsText.map((card, i) => {
+        {cadLawCardsText.map((card, i) => {
           const number = i + 1
           return(
             <Col lg={4} style={{ paddingBottom: '1%' }}>

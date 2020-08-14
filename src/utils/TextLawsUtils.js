@@ -1,11 +1,11 @@
 export const bestPracticesText = {
   accountability : [
-    'All persons and organizations are accountable for promoting and protecting data privacy and security and appoint those specifically responsible for privacy, management and reporting. (1, 2, 3, 5)'
+    'All persons and organizations are accountable for promoting and protecting data privacy and security and appoint those specifically responsible for privacy, management and reporting. (1, 2, 3, 5)',
     'Appoint a security officer responsible for implementing and enforcing security policies/practice, monitoring compliance with security policies through standards, audits and reviews. (2, 3, 5)',
     'Where relevant, the data steward should maintain communications with the relevant research ethics committees, data access committees, etc. (2)',
     'Data stewards should track changes in relevant laws, regulations, policies, expectations, and best practices and appropriately respond to them with communication and adjustments. (2)',
     'Having a clear directory of personnel for security issues. (5)',
-    'Procedure to utilize the complaints/inquires process should be easily accessible and simple to use. Consequences for data breaches should be clearly outlined and enforced. (1, 2)'
+    'Procedure to utilize the complaints/inquires process should be easily accessible and simple to use. Consequences for data breaches should be clearly outlined and enforced. (1, 2)',
     'Ongoing training and education of personnel on privacy and security should be required. (1, 2, 5)',
     'Employees and contractors shall be made fully aware of their responsibilities regarding security and include this in their contractual agreements. (5)'
   ],

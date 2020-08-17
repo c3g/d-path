@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, ListGroup, Tabs, Tab, Col, Row} from 'react-bootstrap';
 import cx from 'classnames';
-import {bestPracticesText, bestPracticesCardsText, cadLawsText, cadLawCardsText} from './TextLawsUtils';
+import {bestPracticesText, bestPracticesCardsText, cadLawsText, cadLawCardsText, euroLawsText} from './TextLawsUtils';
 
 const bestPracticeTabs = [
   {
@@ -21,21 +21,21 @@ const bestPracticeTabs = [
   },
 ]
 
-const lawTabs = [
+const lawTabs = (lawText) =>[
   {
     key: 'accountability',
     title: 'Accountability',
-    items: cadLawsText.accountability,
+    items: lawText.accountability,
   },
   {
     key: 'law',
     title: 'Lawfulness of Use, Storage, Transfer and Protection',
-    items: cadLawsText.law,
+    items: lawText.law,
   },
   {
     key: 'security',
     title: 'Security and Safeguards',
-    items: cadLawsText.security,
+    items: lawText.security,
   },
 ]
 
@@ -53,15 +53,11 @@ export const getLaws = (props) => {
 
   return(
     <>
-      <Card  className='ObligationPanel'>
-        {locations.includes('Canada') && <Card.Body>{getCanadiandLaws(props)}</Card.Body> }
-        {locations.includes('Europe') &&
-          createText('Please refer to the Obligations and Requirements of the GDPR')
-        }
+        {locations.includes('Canada') && getCanadiandLaws(props) }
+        {locations.includes('Europe') && getEuropeanLaws() }
         {locations.includes('United States') &&
           createText('Please refer to the US Legislation (HIPAA)')
         }
-      </Card>
       <hr/>
     </>
   );
@@ -85,15 +81,20 @@ export const getCanadiandLaws = ({ onMouseEnter, onMouseLeave }) => {
     </Tab>
 
   return (
-    <Tabs defaultActiveKey='accountability'>
-      {lawTabs.map(renderTab)}
-    </Tabs>
+    <Card>
+      <Card.Body>
+        <Tabs defaultActiveKey='accountability'>
+          {lawTabs(cadLawsText).map(renderTab)}
+        </Tabs>
+      </Card.Body>
+    </Card>
   );
 }
 
 export const getLawCards = ({ activeLaws }) => {
   return (
     <div style={{ paddingBottom: '1em'}}>
+      <h3> Canadian Law </h3>
       <Row>
         {cadLawCardsText.map((card, i) => {
           const number = i + 1
@@ -118,7 +119,31 @@ export const getLawCards = ({ activeLaws }) => {
       </Row>
     </div>
   )
-}
+};
+
+export const getEuropeanLaws = () => {
+  const renderTab = tab =>
+    <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
+      <Card.Text>
+        <ListGroup variant='flush'>{tab.items.map( (text) => {
+          return(
+            <ListGroup.Item> {text}</ListGroup.Item>
+          );})}
+        </ListGroup>
+      </Card.Text>
+    </Tab>
+
+  return(<>
+    <h3 style={{marginTop: '10px', marginBottom: '10px'}}> European Laws - GDPR </h3>
+      <Card>
+        <Card.Body>
+          <Tabs defaultActiveKey='accountability'>
+            {lawTabs(euroLawsText).map(renderTab)}
+          </Tabs>
+        </Card.Body>
+      </Card>
+  </>);
+};
 
 export const getBestPracticesCards = ({ activeBestPractices }) => {
   return(

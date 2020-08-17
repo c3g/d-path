@@ -1,6 +1,6 @@
 import React from 'react';
 import {styles} from './PDFStyles';
-import {bestPracticesText, cadLawsText } from './TextLawsUtils';
+import {bestPracticesText, cadLawsText, euroLawsText } from './TextLawsUtils';
 import { Text} from '@react-pdf/renderer'
 
 export const createTextPDF = (text) => {
@@ -14,9 +14,9 @@ export const createTextPDF = (text) => {
 export const getLawsPDF = (locations) => {
   return(<>
     <Text style={styles.title}>Laws and Policies </Text>
-     { (locations.includes('Canada')) ? getCanadiandLawsPDF() : null }
-     { (locations.includes('Europe')) ?  createTextPDF('Please refer to the Obligations and Requirements of the GDPR') : null }
-     { (locations.includes('United States')) ? createTextPDF('Please refer to the US Legislation (HIPAA)') : null }
+     { (locations.includes('Canada')) && getCanadiandLawsPDF() }
+     { (locations.includes('Europe')) &&  getEuropeanLawsPDF() }
+     { (locations.includes('United States')) && createTextPDF('Please refer to the US Legislation (HIPAA)') }
   </>);
 }
 
@@ -88,6 +88,45 @@ export const getCanadiandLawsPDF = () => {
       Security and Safeguards
     </Text>
       {cadLawsText.security.map(item => {
+        return(
+          <Text style={styles.text}>
+          {item}
+          </Text>
+        );
+      })}
+  </>);
+}
+
+export const getEuropeanLawsPDF = () => {
+  return(
+  <>
+    <Text style={styles.subtitle}>
+      European Jurisdiction - GDPR
+    </Text>
+    <Text style={styles.section}>
+      Accountability
+    </Text>
+      {euroLawsText.accountability.map(item => {
+        return(
+          <Text style={styles.text}>
+          {item}
+          </Text>
+        );
+      })}
+    <Text style={styles.section}>
+        Lawfulness of Use, Storage, Transfer and Protection
+    </Text>
+      {euroLawsText.law.map(item => {
+        return(
+          <Text style={styles.text}>
+          {item}
+          </Text>
+        );
+      })}
+    <Text style={styles.section}>
+      Security and Safeguards
+    </Text>
+      {euroLawsText.security.map(item => {
         return(
           <Text style={styles.text}>
           {item}

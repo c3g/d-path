@@ -125,23 +125,20 @@ export const getEuropeanLaws = () => {
   const renderTab = tab =>
     <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
       <Card.Text>
-        <ListGroup variant='flush'>{tab.items.map( (text) => {
-          return(
-            <ListGroup.Item> {text}</ListGroup.Item>
-          );})}
+        <ListGroup variant='flush'>{tab.items.map((text) => <ListGroup.Item>{text}</ListGroup.Item>)}
         </ListGroup>
       </Card.Text>
     </Tab>
 
   return(<>
     <h3 style={{marginTop: '10px', marginBottom: '10px'}}> European Laws - GDPR </h3>
-      <Card>
-        <Card.Body>
-          <Tabs defaultActiveKey='accountability'>
-            {lawTabs(euroLawsText).map(renderTab)}
-          </Tabs>
-        </Card.Body>
-      </Card>
+    <Card>
+      <Card.Body>
+        <Tabs defaultActiveKey='accountability'>
+          {lawTabs(euroLawsText).map(renderTab)}
+        </Tabs>
+      </Card.Body>
+    </Card>
   </>);
 };
 

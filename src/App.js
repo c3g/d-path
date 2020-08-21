@@ -116,7 +116,7 @@ class App extends Component {
                 render={(props) => (
                   <Info {...props}
                     locations={getLocations(assessment.answers)}
-                    isPersonalInfo={assessment.isPersonalInfo}
+                    assessment={assessment}
                   />
                 )}
               />

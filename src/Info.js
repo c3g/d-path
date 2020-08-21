@@ -57,9 +57,7 @@ class Info extends Component {
 
   render(){
     const { activeLaws, activeBestPractices } = this.state;
-    const { locations, isPersonalInfo } = this.props;
-    // const locations = ['Canada', 'Europe', 'United States']
-    // const isPersonalInfo = true
+    const { locations, assessment } = this.props;
 
     return(
       <Container>
@@ -78,7 +76,7 @@ class Info extends Component {
           </h6>
 
           <hr />
-          { isPersonalInfo &&
+          { assessment.isPersonalInfo &&
             <>
               <h1 className='obligationTitle'>Laws and Policies</h1>
               {locations.includes('Canada') &&
@@ -105,7 +103,7 @@ class Info extends Component {
 
           <div className='Info__buttons'>
             <PDFDownloadLink
-              document={<InfoDocument locations={locations} isPersonalInfo={isPersonalInfo} />}
+              document={<InfoDocument locations={locations} isPersonalInfo={assessment.isPersonalInfo} />}
               fileName="ObligationsAndRequirements.pdf"
             >
               <Button variant="primary">Download PDF</Button>

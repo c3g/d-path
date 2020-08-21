@@ -12,7 +12,7 @@ import Success from './Success';
 import PersonalInfo from './PersonalInfo';
 import UserInfo from './UserInfo';
 import OtherUser from './OtherUser';
-import { USER_TYPE, LOCATION } from '../constants';
+import { USER_TYPE } from '../constants';
 
 const STEPS = [
   UserInfo,
@@ -24,29 +24,13 @@ const STEPS = [
   Success,
 ]
 
-function getLocations(answers) {
-  return Object.values(answers)
-    .filter(Boolean)
-    .filter(l => l !== LOCATION.NON_EU);
-}
-
-const INITIAL_STATE = {
-  step: 0,
-  userType: undefined,
-  isPersonalInfo: false,
-  answers: {
-    organization: undefined,
-    dataProcessed: undefined,
-    dataUsers: undefined,
-    dataDonors: undefined,
-  }
-}
-
 class MainForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = INITIAL_STATE;
+    this.state = {
+      step: 0
+    };
   }
 
   nextStep = () => {
@@ -54,8 +38,9 @@ class MainForm extends Component {
   }
 
   prevStep = () => {
+    const { handleUserChange } = this.props;
     if (this.state.step === 1)
-      this.handleUserChange(undefined);
+      handleUserChange(undefined);
     if (this.state.step === 0)
       this.props.history.push('/')
     else
@@ -63,28 +48,13 @@ class MainForm extends Component {
   }
 
   reset = () => {
-    this.setState(INITIAL_STATE)
-  }
-
-  handleLocChange = (input) => {
-    const { answers } = this.state;
-    this.setState({
-      answers: { ...answers, [input.type]: input.location },
-    });
-  }
-
-  handleInfoChange  = (input) => {
-    this.setState({
-      isPersonalInfo: input,
-    });
-  }
-
-  handleUserChange  = (userType) => {
-    this.setState({ userType });
+    this.setState({step: 0})
   }
 
   getLocationComponent = () => {
-    const { step, userType } = this.state;
+    const { step } = this.state;
+    const { assessment } = this.props;
+    const userType = assessment.userType;
 
     if (userType && userType !== USER_TYPE.PROCESSOR)
       return OtherUser;
@@ -93,13 +63,15 @@ class MainForm extends Component {
   }
 
   render(){
+    const { step } = this.state;
     const {
-      step,
-      userType,
-      answers,
-      isPersonalInfo
-    } = this.state;
-    const { onLocationChange } = this.props;
+      onAssessmentChange,
+      handleLocChange,
+      handleInfoChange,
+      handleUserChange,
+      assessment,
+      locations
+    } = this.props;
 
     const Component = this.getLocationComponent() ;
 
@@ -121,14 +93,12 @@ class MainForm extends Component {
             <Component
               nextStep={this.nextStep}
               prevStep={this.prevStep}
-              handleLocChange={this.handleLocChange}
-              handleInfoChange={this.handleInfoChange}
-              handleUserChange={this.handleUserChange}
-              handleChange={onLocationChange}
-              locations= {getLocations(answers)}
-              userType={userType}
-              isPersonalInfo={isPersonalInfo}
-              answers={answers}
+              handleLocChange={handleLocChange}
+              handleInfoChange={handleInfoChange}
+              handleUserChange={handleUserChange}
+              handleAssessmentChange={onAssessmentChange}
+              locations= {locations}
+              assessment={assessment}
             />
           </div>
 

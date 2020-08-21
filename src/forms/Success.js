@@ -4,13 +4,8 @@ import { Link } from 'react-router-dom';
 
 class Success extends Component{
 
-    saveInformation = (e) => {
-        const { locations, isPersonalInfo, handleChange } = this.props;
-        handleChange(locations, isPersonalInfo);
-    }
-
     render(){
-        const {answers, userType, isPersonalInfo } = this.props;
+        const { answers, userType, isPersonalInfo } = this.props.assessment;
         return(
             <div>
               <h1 className='ui centered'> Summary </h1>
@@ -40,7 +35,7 @@ class Success extends Component{
                     <h4> Is it personal Information? </h4>
                     <p> { isPersonalInfo ? 'Yes' : 'No'}</p>
                     <div style={{paddingTop: '3%'}}>
-                      <Link className='displayButton' onClick={(e) => this.saveInformation(e)} to='/obligations'>
+                      <Link className='displayButton' to='/obligations'>
                         Display Laws and Regulations
                       </Link>
                     </div>

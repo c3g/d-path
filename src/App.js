@@ -7,20 +7,68 @@ import Landing from './Landing';
 import MainForm from './forms/MainForm';
 import Info from './Info';
 import ParticleComponent from './ParticleComponent';
+import { LOCATION } from './constants';
+
+const INITIAL_STATE = {
+  assessment : {
+    userType: undefined,
+    isPersonalInfo: false,
+    answers: {
+      organization: undefined,
+      dataProcessed: undefined,
+      dataUsers: undefined,
+      dataDonors: undefined,
+    }
+  }
+}
+
+function getLocations(answers) {
+  return Object.values(answers)
+    .filter(Boolean)
+    .filter(l => l !== LOCATION.NON_EU);
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.state = INITIAL_STATE;
 
-    this.state = {
-      locations: [],
-      isPersonalInfo: null,
-    }
-
-    this.onLocationChange = this.onLocationChange.bind(this)
+    this.onAssessmentChange = this.onAssessmentChange.bind(this)
   }
 
-  onLocationChange = (locations, isPersonalInfo) => {
+  handleLocChange = (input) => {
+    const answers  = {...this.state.assessment.answers}
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         answers:  { ...answers, [input.type]: input.location },
+      }
+    }));
+  }
+
+  handleInfoChange  = (isPersonalInfo) => {
+    console.log(isPersonalInfo);
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         isPersonalInfo: isPersonalInfo
+      }
+    }));
+  }
+
+  handleUserChange  = (userType) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         userType: userType
+      }
+    }));
+  }
+
+  onAssessmentChange = (locations, isPersonalInfo) => {
     this.setState({
       locations: locations,
       isPersonalInfo: isPersonalInfo
@@ -28,7 +76,7 @@ class App extends Component {
   }
 
   render() {
-    const { locations, isPersonalInfo } = this.state;
+    const { assessment } = this.state;
     return(
       <>
         <ParticleComponent />
@@ -52,13 +100,24 @@ class App extends Component {
               <Route
                 path='/assessment'
                 render={(props) => (
-                  <MainForm {...props} onLocationChange={this.onLocationChange} />
+                  <MainForm {...props}
+                    assessment={assessment}
+                    onAssessmentChange={this.onAssessmentChange}
+                    handleLocChange={this.handleLocChange}
+                    handleInfoChange={this.handleInfoChange}
+                    handleUserChange={this.handleUserChange}
+                    handleAssessmentChange={this.onAssessmentChange}
+                    locations={getLocations(assessment.answers)}
+                   />
                 )}
               />
               <Route
                 path='/obligations'
                 render={(props) => (
-                  <Info {...props} locations={locations} isPersonalInfo={isPersonalInfo}/>
+                  <Info {...props}
+                    locations={getLocations(assessment.answers)}
+                    isPersonalInfo={assessment.isPersonalInfo}
+                  />
                 )}
               />
             </Switch>

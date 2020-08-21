@@ -12,10 +12,9 @@ class PersonalInfo extends Component{
    }
   }
 
-    saveAndContinue = (e, value) => {
-        e.preventDefault();
+    saveAndContinue = (isPersonalInfo) => {
         this.props.nextStep();
-        this.props.handleInfoChange(value);
+        this.props.handleInfoChange(isPersonalInfo);
     }
 
     saveIdentifiable = (info) => {
@@ -39,8 +38,8 @@ class PersonalInfo extends Component{
             identifiable?
           </h4>
           <ButtonGroup style={{width:'100%'}} size='lg' vertical>
-            <Button variant='light' onClick={(e) => this.saveIdentifiable(true)}>Yes</Button>
-            <Button variant='light' onClick={(e) => this.saveAndContinue(e, false) }>No</Button>
+            <Button variant='light' onClick={() => this.saveIdentifiable(true)}>Yes</Button>
+            <Button variant='light' onClick={() => this.saveAndContinue(false)}>No</Button>
           </ButtonGroup>
         </>
       );
@@ -56,8 +55,8 @@ class PersonalInfo extends Component{
             </OverlayTrigger> ?
           </h4>
           <ButtonGroup style={{width:'100%'}} size='lg' vertical>
-            <Button variant='light' onClick={(e) => this.saveAndContinue(e, false )}>Yes</Button>
-            <Button variant='light' onClick={(e) => this.saveAndContinue(e, true )}>No</Button>
+            <Button variant='light' onClick={() => this.saveAndContinue(false)}>Yes</Button>
+            <Button variant='light' onClick={() => this.saveAndContinue(true)}>No</Button>
           </ButtonGroup>
         </>
       );

@@ -6,9 +6,9 @@ import { USER_TYPE } from '../constants';
 
 class UserInfo extends Component{
 
-    saveAndContinue = (type) => {
+    saveAndContinue = (userType) => {
         this.props.nextStep();
-        this.props.handleUserChange(type);
+        this.props.handleUserChange(userType);
     }
 
     render(){

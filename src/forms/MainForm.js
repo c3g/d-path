@@ -49,6 +49,7 @@ class MainForm extends Component {
 
   reset = () => {
     this.setState({step: 0})
+    this.props.resetAssessment();
   }
 
   getLocationComponent = () => {
@@ -69,6 +70,8 @@ class MainForm extends Component {
       handleLocChange,
       handleInfoChange,
       handleUserChange,
+      handleProcessorChange,
+      handleProvinceChange,
       assessment,
       locations
     } = this.props;
@@ -96,6 +99,8 @@ class MainForm extends Component {
               handleLocChange={handleLocChange}
               handleInfoChange={handleInfoChange}
               handleUserChange={handleUserChange}
+              handleProcessorChange={handleProcessorChange}
+              handleProvinceChange={handleProvinceChange}
               handleAssessmentChange={onAssessmentChange}
               locations= {locations}
               assessment={assessment}

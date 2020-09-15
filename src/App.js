@@ -18,7 +18,9 @@ const INITIAL_STATE = {
       dataProcessed: undefined,
       dataUsers: undefined,
       dataDonors: undefined,
-    }
+    },
+    processor: undefined,
+    province: undefined
   }
 }
 
@@ -34,6 +36,11 @@ class App extends Component {
     this.state = INITIAL_STATE;
 
     this.onAssessmentChange = this.onAssessmentChange.bind(this)
+  }
+
+  resetAssessment = () => {
+    console.log('resetting');
+    this.setState({ ...INITIAL_STATE });
   }
 
   handleLocChange = (input) => {
@@ -64,6 +71,26 @@ class App extends Component {
       assessment: {
          ...prevState.assessment,
          userType: userType
+      }
+    }));
+  }
+
+  handleProcessorChange  = (processorType) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         processor: processorType
+      }
+    }));
+  }
+
+  handleProvinceChange  = (province) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         province: province
       }
     }));
   }
@@ -106,7 +133,10 @@ class App extends Component {
                     handleLocChange={this.handleLocChange}
                     handleInfoChange={this.handleInfoChange}
                     handleUserChange={this.handleUserChange}
+                    handleProcessorChange={this.handleProcessorChange}
+                    handleProvinceChange={this.handleProvinceChange}
                     handleAssessmentChange={this.onAssessmentChange}
+                    resetAssessment={this.resetAssessment}
                     locations={getLocations(assessment.answers)}
                    />
                 )}

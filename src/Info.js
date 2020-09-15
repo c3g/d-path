@@ -7,7 +7,7 @@ import {styles} from './utils/PDFStyles';
 import {getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
 import {getLaws, getBestPractices, getLawCards, getBestPracticesCards} from './utils/ObligationsUtils';
 
-function InfoDocument({locations, isPersonalInfo}) {
+function InfoDocument({locations, assessment}) {
   // Create styles
   Font.register({
     family: 'Oswald',
@@ -22,7 +22,7 @@ function InfoDocument({locations, isPersonalInfo}) {
       </Text>
       <Text style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
       <Text style={styles.author}>Epishare</Text>
-        { (isPersonalInfo) && getLawsPDF(locations) }
+        { (assessment.isPersonalInfo) && getLawsPDF(locations, assessment) }
         { getBestPracticesPDF() }
       <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
         `${pageNumber} / ${totalPages}`
@@ -79,13 +79,15 @@ class Info extends Component {
           { assessment.isPersonalInfo &&
             <>
               <h1 className='obligationTitle'>Laws and Policies</h1>
-              {locations.includes('Canada') &&
+              {locations.includes('Canada') && assessment.province==='Quebec' &&
                 getLawCards({
                   locations,
+                  assessment,
                   activeLaws,
               })}
               {getLaws({
                 locations,
+                assessment,
                 onMouseEnter: this.onMouseEnterLaw,
                 onMouseLeave: this.onMouseLeaveLaw,
               })}
@@ -103,7 +105,7 @@ class Info extends Component {
 
           <div className='Info__buttons'>
             <PDFDownloadLink
-              document={<InfoDocument locations={locations} isPersonalInfo={assessment.isPersonalInfo} />}
+              document={<InfoDocument locations={locations} assessment={assessment} />}
               fileName="ObligationsAndRequirements.pdf"
             >
               <Button variant="primary">Download PDF</Button>

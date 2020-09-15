@@ -1,6 +1,6 @@
 import React from 'react';
 import {styles} from './PDFStyles';
-import {bestPracticesText, cadLawsText, euroLawsText } from './TextLawsUtils';
+import {bestPracticesText, quebecLawsText, euroLawsText } from './TextLawsUtils';
 import { Text} from '@react-pdf/renderer'
 
 export const createTextPDF = (text) => {
@@ -11,10 +11,13 @@ export const createTextPDF = (text) => {
   );
 }
 
-export const getLawsPDF = (locations) => {
+export const getLawsPDF = (locations, assessment) => {
   return(<>
     <Text style={styles.title}>Laws and Policies </Text>
-     { (locations.includes('Canada')) && getCanadiandLawsPDF() }
+     { (locations.includes('Canada')) && assessment.province==='Quebec' && getQuebecLawsPDF() }
+     { (locations.includes('Canada')) && assessment.province!=='Quebec' &&
+        createTextPDF(`Please refer to the ${assessment.processor.laws} Legislation of ${assessment.province}`)
+     }
      { (locations.includes('Europe')) &&  getEuropeanLawsPDF() }
      { (locations.includes('United States')) && createTextPDF('Please refer to the US Legislation (HIPAA)') }
   </>);
@@ -58,16 +61,16 @@ export const getBestPracticesPDF = () => {
   </>);
 }
 
-export const getCanadiandLawsPDF = () => {
+export const getQuebecLawsPDF = () => {
   return(
   <>
     <Text style={styles.subtitle}>
-      Canadian Jurisdiction
+      Quebec Jurisdiction
     </Text>
     <Text style={styles.section}>
       Accountability
     </Text>
-      {cadLawsText.accountability.map(item => {
+      {quebecLawsText.accountability.map(item => {
         return(
           <Text style={styles.text}>
           {item}
@@ -77,7 +80,7 @@ export const getCanadiandLawsPDF = () => {
     <Text style={styles.section}>
         Lawfulness of Use, Storage, Transfer and Protection
     </Text>
-      {cadLawsText.law.map(item => {
+      {quebecLawsText.law.map(item => {
         return(
           <Text style={styles.text}>
           {item}
@@ -87,7 +90,7 @@ export const getCanadiandLawsPDF = () => {
     <Text style={styles.section}>
       Security and Safeguards
     </Text>
-      {cadLawsText.security.map(item => {
+      {quebecLawsText.security.map(item => {
         return(
           <Text style={styles.text}>
           {item}

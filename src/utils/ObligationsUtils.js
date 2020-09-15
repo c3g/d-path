@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, ListGroup, Tabs, Tab, Col, Row} from 'react-bootstrap';
 import cx from 'classnames';
-import {bestPracticesText, bestPracticesCardsText, cadLawsText, cadLawCardsText, euroLawsText} from './TextLawsUtils';
+import {bestPracticesText, bestPracticesCardsText, quebecLawsText, quebecLawCardsText, euroLawsText} from './TextLawsUtils';
 
 const bestPracticeTabs = [
   {
@@ -41,19 +41,23 @@ const lawTabs = (lawText) =>[
 
 
 export const getLaws = (props) => {
-  const { locations } = props;
+  const { locations, assessment } = props;
+  console.log(assessment);
 
   const createText = (text) => {
     return (
-      <Card.Header className='text-center'>
-        <h5>{text}</h5>
-      </Card.Header>
+      <h3 style={{marginTop: '20px', marginBottom: '20px'}}>
+        {text}
+      </h3>
     );
   }
 
   return(
     <>
-        {locations.includes('Canada') && getCanadiandLaws(props) }
+        {locations.includes('Canada') && assessment.province==='Quebec' && getQuebecLaws(props) }
+        {locations.includes('Canada') && assessment.province!=='Quebec' &&
+          createText(`Please refer to the ${assessment.processor.laws} Legislation of ${assessment.province}`)
+        }
         {locations.includes('Europe') && getEuropeanLaws() }
         {locations.includes('United States') &&
           createText('Please refer to the US Legislation (HIPAA)')
@@ -63,7 +67,7 @@ export const getLaws = (props) => {
   );
 }
 
-export const getCanadiandLaws = ({ onMouseEnter, onMouseLeave }) => {
+export const getQuebecLaws = ({ onMouseEnter, onMouseLeave }) => {
 
   const textToItem = text =>
     <ListGroup.Item
@@ -84,7 +88,7 @@ export const getCanadiandLaws = ({ onMouseEnter, onMouseLeave }) => {
     <Card>
       <Card.Body>
         <Tabs defaultActiveKey='accountability'>
-          {lawTabs(cadLawsText).map(renderTab)}
+          {lawTabs(quebecLawsText).map(renderTab)}
         </Tabs>
       </Card.Body>
     </Card>
@@ -94,9 +98,9 @@ export const getCanadiandLaws = ({ onMouseEnter, onMouseLeave }) => {
 export const getLawCards = ({ activeLaws }) => {
   return (
     <div style={{ paddingBottom: '1em'}}>
-      <h3> Canadian Law </h3>
+      <h3> Quebec Law </h3>
       <Row>
-        {cadLawCardsText.map((card, i) => {
+        {quebecLawCardsText.map((card, i) => {
           const number = i + 1
           return(
             <Col lg={4} style={{ paddingBottom: '1%' }}>

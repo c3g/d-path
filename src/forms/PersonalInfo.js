@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ButtonGroup, Button, OverlayTrigger, Alert } from 'react-bootstrap';
 import { directly, indirectly, publicInfo } from '../utils/Popovers';
 
+import JurisdictionCanada from './JurisdictionCanada';
+
 class PersonalInfo extends Component{
 
   constructor(props) {
@@ -9,6 +11,8 @@ class PersonalInfo extends Component{
 
    this.state = {
      identifiable: null,
+     personal: null,
+     jurisdictionCanada: this.props.locations.includes('Canada') ? true : false
    }
   }
 
@@ -17,10 +21,18 @@ class PersonalInfo extends Component{
         this.props.handleInfoChange(isPersonalInfo);
     }
 
-    saveIdentifiable = (info) => {
+    saveIdentifiable = (identifiable) => {
       this.setState({
-        identifiable: info
+        identifiable: identifiable
       });
+    }
+
+    savePersonal = (isPersonalInfo) => {
+      this.setState({
+        personal: isPersonalInfo
+      });
+      if(!this.state.jurisdictionCanada) this.saveAndContinue(isPersonalInfo);
+      else this.props.handleInfoChange(isPersonalInfo);
     }
 
     getIdentifiableForm = () => {
@@ -56,25 +68,33 @@ class PersonalInfo extends Component{
           </h4>
           <ButtonGroup style={{width:'100%'}} size='lg' vertical>
             <Button variant='light' onClick={() => this.saveAndContinue(false)}>Yes</Button>
-            <Button variant='light' onClick={() => this.saveAndContinue(true)}>No</Button>
+            <Button variant='light' onClick={() => this.savePersonal(true)}>No</Button>
           </ButtonGroup>
         </>
       );
     }
 
-    render(){
-        const { identifiable } = this.state;
+    getCurrentForm = () => {
+      const { identifiable, personal, jurisdictionCanada } = this.state;
+      console.log(this.state);
+      if(identifiable && !personal) return this.getPublicForm()
+      else if(identifiable && personal && jurisdictionCanada)
+        return <JurisdictionCanada
+                  nextStep={this.props.nextStep}
+                  handleProcessorChange={this.props.handleProcessorChange}
+                  handleProvinceChange={this.props.handleProvinceChange}
+                />
+      else return this.getIdentifiableForm()
+    }
 
+    render(){
         return (
           <div>
             <h1>Personal information</h1>
             <Alert variant='obligations' style={{paddingBottom: '1%'}}>
               Locations selected: {this.props.locations.join(', ')}
             </Alert>
-            {identifiable ?
-              this.getPublicForm() :
-              this.getIdentifiableForm()
-            }
+            {  this.getCurrentForm() }
           </div>
         )
     }

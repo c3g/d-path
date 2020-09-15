@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class Success extends Component{
 
     render(){
-        const { answers, userType, isPersonalInfo } = this.props.assessment;
+        const { answers, userType, isPersonalInfo, processor, province } = this.props.assessment;
         return(
             <div>
               <h1 className='ui centered'> Summary </h1>
@@ -34,6 +34,10 @@ class Success extends Component{
                     <p> { userType } </p>
                     <h4> Is it personal Information? </h4>
                     <p> { isPersonalInfo ? 'Yes' : 'No'}</p>
+                    <h4> {processor && ('Who processes the information?')} </h4>
+                    <p> {processor && (processor.body  + ' : ' + processor.laws) }</p>
+                    <h4> {province && ('In which province is the information processed?')} </h4>
+                    <p> {province && (province) }</p>
                     <div style={{paddingTop: '3%'}}>
                       <Link className='displayButton' to='/obligations'>
                         Display Laws and Regulations

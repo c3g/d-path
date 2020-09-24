@@ -42,7 +42,9 @@ const lawTabs = (lawText) =>[
 
 export const getLaws = (props) => {
   const { locations, assessment } = props;
-  console.log(assessment);
+  const includesCanada = locations.includes('Canada');
+  const includesEU = locations.includes('Europe');
+  const includesUS = locations.includes('United States');
 
   const createText = (text) => {
     return (
@@ -52,15 +54,27 @@ export const getLaws = (props) => {
     );
   }
 
+  const getOtherCountries = () => {
+    const { locations } = props;
+    const valuesToRemove = ["Canada", "Europe", "United States"];
+    return Array.from(new Set(locations.filter((i) => !valuesToRemove.includes(i))));
+  }
+
   return(
     <>
-        {locations.includes('Canada') && assessment.province==='Quebec' && getQuebecLaws(props) }
-        {locations.includes('Canada') && assessment.province!=='Quebec' &&
-          createText(`Please refer to the ${assessment.processor.laws} Legislation of ${assessment.province}`)
+        {includesCanada && assessment.province==='Quebec' && getQuebecLaws(props) }
+        {includesCanada && assessment.province!=='Quebec' &&
+          createText(`Please refer to the
+            ${assessment.processor.laws} Legislation of
+            ${(assessment.province) ? assessment.province : 'Canada'}`)
         }
-        {locations.includes('Europe') && getEuropeanLaws() }
-        {locations.includes('United States') &&
+        {includesEU && getEuropeanLaws() }
+        {includesUS &&
           createText('Please refer to the US Legislation (HIPAA)')
+        }
+        {getOtherCountries().map(country => {
+          return createText(`Please refer to the Legislation of ${country}`)
+         })
         }
       <hr/>
     </>

@@ -5,6 +5,7 @@ import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
 import Landing from './Landing';
 import MainForm from './forms/MainForm';
+import MissingCountry from './forms/MissingCountry';
 import Info from './Info';
 import ParticleComponent from './ParticleComponent';
 import { LOCATION } from './constants';
@@ -13,6 +14,7 @@ const INITIAL_STATE = {
   assessment : {
     userType: undefined,
     isPersonalInfo: false,
+    infoType: undefined,
     answers: {
       organization: undefined,
       dataProcessed: undefined,
@@ -54,13 +56,22 @@ class App extends Component {
     }));
   }
 
-  handleInfoChange  = (isPersonalInfo) => {
-    console.log(isPersonalInfo);
+  handlePersonalInfoChange  = (isPersonalInfo) => {
     this.setState(prevState => ({
       ...prevState,
       assessment: {
          ...prevState.assessment,
          isPersonalInfo: isPersonalInfo
+      }
+    }));
+  }
+
+  handleInfoTypeChange  = (infoType) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         infoType: infoType
       }
     }));
   }
@@ -131,7 +142,8 @@ class App extends Component {
                     assessment={assessment}
                     onAssessmentChange={this.onAssessmentChange}
                     handleLocChange={this.handleLocChange}
-                    handleInfoChange={this.handleInfoChange}
+                    handlePersonalInfoChange={this.handlePersonalInfoChange}
+                    handleInfoTypeChange={this.handleInfoTypeChange}
                     handleUserChange={this.handleUserChange}
                     handleProcessorChange={this.handleProcessorChange}
                     handleProvinceChange={this.handleProvinceChange}
@@ -150,6 +162,7 @@ class App extends Component {
                   />
                 )}
               />
+              <Route exact path='/missingCountry' component={MissingCountry} />
             </Switch>
           </div>
           <SiteFooter />

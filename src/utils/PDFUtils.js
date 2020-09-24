@@ -12,11 +12,12 @@ export const createTextPDF = (text) => {
 }
 
 export const getLawsPDF = (locations, assessment) => {
+  const province = assessment.province;
   return(<>
     <Text style={styles.title}>Laws and Policies </Text>
      { (locations.includes('Canada')) && assessment.province==='Quebec' && getQuebecLawsPDF() }
      { (locations.includes('Canada')) && assessment.province!=='Quebec' &&
-        createTextPDF(`Please refer to the ${assessment.processor.laws} Legislation of ${assessment.province}`)
+        createTextPDF(`Please refer to the ${assessment.processor.laws} Legislation of ${(province) ? province : 'Canada'}`)
      }
      { (locations.includes('Europe')) &&  getEuropeanLawsPDF() }
      { (locations.includes('United States')) && createTextPDF('Please refer to the US Legislation (HIPAA)') }
@@ -58,6 +59,9 @@ export const getBestPracticesPDF = () => {
         </Text>
       );
     })}
+    <Text style={styles.subtitle}>
+      Please note that is not an official legal assessment.
+    </Text>  
   </>);
 }
 

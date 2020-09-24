@@ -16,6 +16,14 @@ export const USER_TYPE = {
   DONOR: 'donor',
 }
 
+export const INFO_TYPE = {
+  DIRECTLY: 'directly identifiable',
+  INDIRECTLY: 'indirectly identifiable',
+  ANONYMIZED: 'anonymized',
+  ANONYMOUS: 'anonymous',
+  CODED: 'coded'
+}
+
 //** Ask provincial and then depending on the province display 'refer to the law that applies'
 //*** Just display the law that applies
 // FWUB JUST REFER TO PIPEDA
@@ -59,7 +67,7 @@ export const PROCESSOR = {
   INDIV_NON_COMM: {
     body: 'Individuals & Non-Commercial',
     laws: ['Provincial Law (Non-Privacy Legislation)'], //***
-    provincial: false 
+    provincial: false
   } ,
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Jumbotron, Button } from 'react-bootstrap';
+import { Container, Jumbotron, Button, Card } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import { PDFDownloadLink, Document, Page, Text, Font} from '@react-pdf/renderer'
 import Icon from 'react-fontawesome';
@@ -60,63 +60,73 @@ class Info extends Component {
     const { locations, assessment } = this.props;
 
     return(
-      <Container>
-        <Jumbotron>
-          <h6
-            style={{
-              marginBottom: '1em',
-              fontSize: '0.9em',
-              fontWeight: 'normal',
-              textTransform: 'uppercase',
-              letterSpacing: 1,
-              opacity: 0.4,
-            }}
-          >
-            Obligations and requirements
-          </h6>
+        <Container>
+          <Jumbotron>
+            <h6
+              style={{
+                marginBottom: '1em',
+                fontSize: '0.9em',
+                fontWeight: 'normal',
+                textTransform: 'uppercase',
+                letterSpacing: 1,
+                opacity: 0.4,
+              }}
+            >
+              Obligations and requirements
+            </h6>
 
-          <hr />
-          { assessment.isPersonalInfo &&
-            <>
-              <h1 className='obligationTitle'>Laws and Policies</h1>
-              {locations.includes('Canada') && assessment.province==='Quebec' &&
-                getLawCards({
+            <hr />
+            { assessment.isPersonalInfo &&
+              <>
+                <h1 className='obligationTitle'>Laws and Policies</h1>
+                {locations.includes('Canada') && assessment.province==='Quebec' &&
+                  getLawCards({
+                    locations,
+                    assessment,
+                    activeLaws,
+                })}
+                {getLaws({
                   locations,
                   assessment,
-                  activeLaws,
-              })}
-              {getLaws({
-                locations,
-                assessment,
-                onMouseEnter: this.onMouseEnterLaw,
-                onMouseLeave: this.onMouseLeaveLaw,
-              })}
-            </>
-          }
+                  onMouseEnter: this.onMouseEnterLaw,
+                  onMouseLeave: this.onMouseLeaveLaw,
+                })}
+              </>
+            }
 
-          <h1 className='obligationTitle'>Best Practices</h1>
-          { getBestPracticesCards({ activeBestPractices }) }
-          { getBestPractices({
-            onMouseEnter: this.onMouseEnterBestPractice,
-            onMouseLeave: this.onMouseLeaveBestPractice,
-          }) }
+            <h1 className='obligationTitle'>Best Practices</h1>
+            { getBestPracticesCards({ activeBestPractices }) }
+            { getBestPractices({
+              onMouseEnter: this.onMouseEnterBestPractice,
+              onMouseLeave: this.onMouseLeaveBestPractice,
+            }) }
 
+            <hr />
+
+            <div className='Info__buttons'>
+              <PDFDownloadLink
+                document={<InfoDocument locations={locations} assessment={assessment} />}
+                fileName="ObligationsAndRequirements.pdf"
+              >
+                <Button variant="primary">Download PDF</Button>
+              </PDFDownloadLink>
+              <div className='fill' />
+              <Link to="/" className='resetButton' onClick={this.reset}>
+                <Icon name='refresh' /> Reset
+              </Link>
+            </div>
+          </Jumbotron>
+          <Card body
+          style={{
+            textAlign: 'center',
+            marginBottom: '1rem'
+          }}>
+          Please note that is not an official legal assessment.
           <hr />
-
-          <div className='Info__buttons'>
-            <PDFDownloadLink
-              document={<InfoDocument locations={locations} assessment={assessment} />}
-              fileName="ObligationsAndRequirements.pdf"
-            >
-              <Button variant="primary">Download PDF</Button>
-            </PDFDownloadLink>
-            <div className='fill' />
-            <Link to="/" className='resetButton' onClick={this.reset}>
-              <Icon name='refresh' /> Reset
-            </Link>
-          </div>
-        </Jumbotron>
-      </Container>
+          If your country's obligations are not listed in detail you can click
+            <Link to="/missingCountry"> here </Link>
+          </Card>
+        </Container>
     )
   }
 }

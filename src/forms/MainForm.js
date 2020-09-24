@@ -68,7 +68,8 @@ class MainForm extends Component {
     const {
       onAssessmentChange,
       handleLocChange,
-      handleInfoChange,
+      handlePersonalInfoChange,
+      handleInfoTypeChange,
       handleUserChange,
       handleProcessorChange,
       handleProvinceChange,
@@ -97,7 +98,8 @@ class MainForm extends Component {
               nextStep={this.nextStep}
               prevStep={this.prevStep}
               handleLocChange={handleLocChange}
-              handleInfoChange={handleInfoChange}
+              handlePersonalInfoChange={handlePersonalInfoChange}
+              handleInfoTypeChange={handleInfoTypeChange}
               handleUserChange={handleUserChange}
               handleProcessorChange={handleProcessorChange}
               handleProvinceChange={handleProvinceChange}

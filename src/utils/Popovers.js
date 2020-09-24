@@ -56,6 +56,47 @@ export const indirectly = (
     </Popover>
 );
 
+export const anonymized = (
+    <Popover id='popover-basic'>
+      <Popover.Title as='h3'>Anonymized</Popover.Title>
+      <Popover.Content>
+        Information that <strong> has been irrecovably stripped </strong>
+        from direct identifiers.
+      </Popover.Content>
+    </Popover>
+);
+
+export const anonymous = (
+    <Popover id='popover-basic'>
+      <Popover.Title as='h3'>Anonymous</Popover.Title>
+      <Popover.Content>
+        Information that <strong> has never been identifiable </strong>
+      </Popover.Content>
+    </Popover>
+);
+
+export const coded = (
+    <Popover id='popover-basic'>
+      <Popover.Title as='h3'>Coded</Popover.Title>
+      <Popover.Content>
+        Information from which direct identifiers <strong> have been removed and have been
+        replaced with a code </strong>. Access terms to this code will determine whether the
+        information can identify and individual.
+      </Popover.Content>
+    </Popover>
+);
+
+export const identifiable = (
+    <Popover id='popover-basic'>
+      <Popover.Title as='h3'>Identifiable</Popover.Title>
+      <Popover.Content>
+        Information is deemed identifiable <strong> if it may reasonably be expected
+        to identify an individual </strong>, when used alone or combined with other available
+        information. Identifiability is a key component of personal information.
+      </Popover.Content>
+    </Popover>
+);
+
 export const publicInfo = (
       <Popover id='popover-basic'>
         <Popover.Title as='h3'>Public Information</Popover.Title>

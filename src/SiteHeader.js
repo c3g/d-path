@@ -11,7 +11,7 @@ class SiteHeader extends Component {
                 <Link to='/'>
                     <img
                         alt=''
-                        src={require('./media/logo.png')}
+                        src={require('./media/C3GLogo.png')}
                         width='170'
                         height='60'
                     />

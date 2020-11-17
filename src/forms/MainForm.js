@@ -38,13 +38,24 @@ class MainForm extends Component {
   }
 
   prevStep = () => {
-    const { handleUserChange } = this.props;
+    const {
+      handleUserChange,
+      assessment,
+      handleProcessorChange,
+      handleProvinceChange,
+      handleInfoTypeChange
+     } = this.props;
+    console.log(assessment);
     if (this.state.step === 1)
       handleUserChange(undefined);
     if (this.state.step === 0)
       this.props.history.push('/')
-    else
-      this.setState({ step: this.state.step - 1 });
+    if(this.state.step === 6 && assessment.province && assessment.infoType){
+      handleProcessorChange(undefined)
+      handleProvinceChange(undefined)
+      handleInfoTypeChange(undefined)
+    }
+    this.setState({ step: this.state.step - 1 });
   }
 
   reset = () => {

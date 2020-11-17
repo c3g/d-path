@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ButtonGroup, Button, OverlayTrigger, Alert } from 'react-bootstrap';
+import { ButtonGroup, Button, OverlayTrigger } from 'react-bootstrap';
 import { identifiable, directly, indirectly, anonymous, anonymized, coded, publicInfo } from '../utils/Popovers';
 
 import JurisdictionCanada from './JurisdictionCanada';
@@ -141,9 +141,6 @@ class PersonalInfo extends Component{
             Personal Info
           </h6>
           <hr />
-            <Alert variant='obligations' style={{paddingBottom: '1%'}}>
-              Locations selected: {this.props.locations.join(', ')}
-            </Alert>
             {  this.getCurrentForm() }
           </div>
         )

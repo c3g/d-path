@@ -6,7 +6,7 @@ import Select from 'react-select';
 import countryList from 'react-select-country-list';
 
 
-class MissingCountry extends Component{
+class AdditionalCountry extends Component{
 
     constructor(props) {
       super(props)
@@ -53,7 +53,7 @@ class MissingCountry extends Component{
         return(
             <Container>
               <Jumbotron>
-                <h1 style={{marginBottom: '1rem'}}> Missing Country Form </h1>
+                <h1 style={{marginBottom: '1rem'}}> Additional Country Form </h1>
                 <Form onSubmit={this.handleSubmit}>
                   <Form.Row style={{marginBottom: '1rem'}}>
                      <Col>
@@ -75,7 +75,7 @@ class MissingCountry extends Component{
                      </Col>
                   </Form.Row>
                   <Form.Group controlId="exampleForm.ControlSelect1">
-                    <Form.Label>Missing Country</Form.Label>
+                    <Form.Label>Additional Country</Form.Label>
                     <Select
                        options={this.state.options}
                        value={this.state.country}
@@ -101,4 +101,4 @@ class MissingCountry extends Component{
     }
 }
 
-export default MissingCountry;
+export default AdditionalCountry;

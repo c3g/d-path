@@ -5,7 +5,7 @@ import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
 import Landing from './Landing';
 import MainForm from './forms/MainForm';
-import MissingCountry from './forms/MissingCountry';
+import AdditionalCountry from './forms/AdditionalCountry';
 import Info from './Info';
 import ParticleComponent from './ParticleComponent';
 import { LOCATION } from './constants';
@@ -13,7 +13,7 @@ import { LOCATION } from './constants';
 const INITIAL_STATE = {
   assessment : {
     userType: undefined,
-    isPersonalInfo: false,
+    isPersonalInfo: undefined,
     infoType: undefined,
     answers: {
       organization: undefined,
@@ -162,7 +162,7 @@ class App extends Component {
                   />
                 )}
               />
-              <Route exact path='/missingCountry' component={MissingCountry} />
+              <Route exact path='/additionalCountry' component={AdditionalCountry} />
             </Switch>
           </div>
           <SiteFooter />

@@ -94,7 +94,7 @@ class Info extends Component {
               </>
             }
 
-            <h1 className='obligationTitle'>Best Practices</h1>
+            <h1 className='obligationTitle'>Best Practices (Optional)</h1>
             { getBestPracticesCards({ activeBestPractices }) }
             { getBestPractices({
               onMouseEnter: this.onMouseEnterBestPractice,
@@ -124,7 +124,7 @@ class Info extends Component {
           Please note that is not an official legal assessment.
           <hr />
           If your country's obligations are not listed in detail you can click
-            <Link to="/missingCountry"> here </Link>
+            <Link to="/additionalCountry"> here </Link>
           </Card>
         </Container>
     )

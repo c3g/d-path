@@ -15,6 +15,7 @@ const INITIAL_STATE = {
     userType: undefined,
     isPersonalInfo: undefined,
     infoType: undefined,
+    isPublic: undefined,
     answers: {
       organization: undefined,
       dataProcessed: undefined,
@@ -62,6 +63,16 @@ class App extends Component {
       assessment: {
          ...prevState.assessment,
          isPersonalInfo: isPersonalInfo
+      }
+    }));
+  }
+
+  handlePublicInfoChange  = (isPublic) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         isPublic: isPublic
       }
     }));
   }
@@ -144,6 +155,7 @@ class App extends Component {
                     handleLocChange={this.handleLocChange}
                     handlePersonalInfoChange={this.handlePersonalInfoChange}
                     handleInfoTypeChange={this.handleInfoTypeChange}
+                    handlePublicInfoChange={this.handlePublicInfoChange}
                     handleUserChange={this.handleUserChange}
                     handleProcessorChange={this.handleProcessorChange}
                     handleProvinceChange={this.handleProvinceChange}

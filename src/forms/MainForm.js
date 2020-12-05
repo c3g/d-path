@@ -81,6 +81,7 @@ class MainForm extends Component {
       handleLocChange,
       handlePersonalInfoChange,
       handleInfoTypeChange,
+      handlePublicInfoChange,
       handleUserChange,
       handleProcessorChange,
       handleProvinceChange,
@@ -97,7 +98,15 @@ class MainForm extends Component {
             {STEPS.map((_, i) =>
               <div
                 key={i}
-                className={cx('MainForm__step', { 'MainForm__step--active': i <= step })}
+                className={cx('MainForm__step',
+                { 'MainForm__step--active-1' : i <= step && i === 0 },
+                { 'MainForm__step--active-2' : i <= step && i === 1},
+                { 'MainForm__step--active-3' : i <= step && i === 2},
+                { 'MainForm__step--active-4' : i <= step && i === 3},
+                { 'MainForm__step--active-5' : i <= step && i === 4},
+                { 'MainForm__step--active-6' : i <= step && i === 5},
+                { 'MainForm__step--active-7' : i <= step && i === 6},
+                )}
               >
                 {i + 1}
               </div>
@@ -112,6 +121,7 @@ class MainForm extends Component {
               handlePersonalInfoChange={handlePersonalInfoChange}
               handleInfoTypeChange={handleInfoTypeChange}
               handleUserChange={handleUserChange}
+              handlePublicInfoChange={handlePublicInfoChange}
               handleProcessorChange={handleProcessorChange}
               handleProvinceChange={handleProvinceChange}
               handleAssessmentChange={onAssessmentChange}

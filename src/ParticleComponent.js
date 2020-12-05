@@ -25,13 +25,17 @@ export default () => (
             'size': {
                 'value': 5
             },
-        },
-        'interactivity': {
-            'events': {
-                'onhover': {
-                    'enable': true,
-                    'mode': 'repulse'
-                },
+            'interactivity' : {
+                'events': {
+                    'onhover': {
+                        'enable': true,
+                        'mode': 'repulse'
+                    },
+                }
+            },
+            'move': {
+              'enable': true,
+              'speed': 0.2
             }
         }
     }} />

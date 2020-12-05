@@ -157,9 +157,31 @@ abbr {
   height: 1px;
   background-color: #c0c0c0;
 }
-.MainForm__step--active {
-  background-color: #599eff;
+.MainForm__step--active-1 {
+  background-color: #6df7ff;
 }
+.MainForm__step--active-2 {
+  background-color: #6debff;
+}
+.MainForm__step--active-3 {
+  background-color: #6dc8ff;
+}
+.MainForm__step--active-4 {
+  background-color: #6db0ff;
+}
+.MainForm__step--active-5 {
+  background-color: #6d9bff;
+}
+.MainForm__step--active-6 {
+  background-color: #6d84ff;
+}
+.MainForm__step--active-7 {
+  background-color: #6d6aff;
+}
+
+
+
+
 .MainForm__step--success {
   background-color: #28a745;
 }

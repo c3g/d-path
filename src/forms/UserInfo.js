@@ -17,7 +17,7 @@ class UserInfo extends Component{
             <h1 style={{paddingBottom: '2%'}}> What type of user are you? </h1>
             <ButtonGroup className='userButtons' style={{width: '60%'}} size='lg' vertical>
               <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={processor}>
-                <Button variant='light' className='text-left' onClick={() => this.saveAndContinue(USER_TYPE.PROCESSOR)}>Processor of data</Button>
+                <Button variant='light' className='text-left' onClick={() => this.saveAndContinue(USER_TYPE.PROCESSOR)}>Data processor</Button>
                </OverlayTrigger>
                <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={recipient}>
                 <Button variant='light' className='text-left' onClick={() => this.saveAndContinue(USER_TYPE.RECIPIENT)}>Data recipient</Button>

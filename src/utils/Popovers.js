@@ -155,3 +155,17 @@ export const healthcare = (
         </Popover.Content>
       </Popover>
 );
+
+export const healthInfo = (
+      <Popover id='popover-basic'>
+        <Popover.Title as='h3'> Personal Health Information </Popover.Title>
+        <Popover.Content>
+          Information of a living or deceased natural person concerning their physical
+          or mental health, any health service provided to them, donation of body parts
+          or bodily substance of that natural person or information derived from the testing
+          or examination of a body part or bodily substance of that natural person, information collected in the course of
+          providing health sevices to that narual person or information collected incidentally
+          to the provision of health services to the natural person.
+        </Popover.Content>
+      </Popover>
+);

@@ -19,8 +19,9 @@ class PersonalInfo extends Component{
    }
   }
 
-    saveAndContinue = (isPersonalInfo) => {
+    saveAndContinue = (isPersonalInfo, isPublicInfo) => {
         this.props.nextStep();
+        this.props.handlePublicInfoChange(isPublicInfo);
         this.props.handlePersonalInfoChange(isPersonalInfo);
     }
 
@@ -39,11 +40,11 @@ class PersonalInfo extends Component{
       });
     }
 
-    savePersonal = (isPersonalInfo) => {
+    savePersonal = (isPersonalInfo, isPublicInfo) => {
       this.setState({
         personal: isPersonalInfo
       });
-      if(!this.state.jurisdictionCanada) this.saveAndContinue(isPersonalInfo);
+      if(!this.state.jurisdictionCanada) this.saveAndContinue(isPersonalInfo, isPublicInfo);
       else this.props.handlePersonalInfoChange(isPersonalInfo);
     }
 
@@ -100,8 +101,8 @@ class PersonalInfo extends Component{
             </OverlayTrigger> ?
           </h4>
           <ButtonGroup style={{width:'100%'}} size='lg' vertical>
-            <Button variant='light' onClick={() => this.saveAndContinue(false)}>Yes</Button>
-            <Button variant='light' onClick={() => this.savePersonal(true)}>No</Button>
+            <Button variant='light' onClick={() => this.saveAndContinue(false, true)}>Yes</Button>
+            <Button variant='light' onClick={() => this.savePersonal(true, false)}>No</Button>
           </ButtonGroup>
         </>
       );

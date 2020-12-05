@@ -22,7 +22,7 @@ class SiteHeader extends Component {
               <Navbar.Text
                 style={{color: 'white', padding: '20px'}}
                 className='blockquote mb-0'>
-                  D-Path
+                  D-PATH
               </Navbar.Text>
             </Navbar.Collapse>
           </Navbar>

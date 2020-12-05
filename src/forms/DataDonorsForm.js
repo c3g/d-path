@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ButtonGroup, Button, Alert } from 'react-bootstrap';
+import { ButtonGroup, Button, Alert, Card } from 'react-bootstrap';
 
 import { LOCATION } from '../constants';
 
@@ -20,6 +20,13 @@ class DataDonorsForm extends Component{
             <Button variant='light' onClick={() => this.saveLocation(LOCATION.EU)}>Europe</Button>
             <Button variant='light' onClick={() => this.saveLocation(LOCATION.NON_EU)}>Non-Europe</Button>
           </ButtonGroup>
+          <Card body
+          style={{
+            textAlign: 'center',
+            marginBottom: '1rem'
+          }}>
+          Please note that the GDPR applies only when the donors belong to the European Union.
+          </Card>
         </div>
       )
     }

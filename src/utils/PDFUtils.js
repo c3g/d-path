@@ -2,6 +2,7 @@ import React from 'react';
 import {styles} from './PDFStyles';
 import {bestPracticesText, quebecLawsText, euroLawsText } from './TextLawsUtils';
 import { Text} from '@react-pdf/renderer'
+import { PROCESSOR } from '../constants';
 
 export const createTextPDF = (text) => {
   return (
@@ -16,17 +17,20 @@ export const getLawsPDF = (locations, assessment) => {
   return(<>
     <Text style={styles.title}>Laws and Policies </Text>
      { (locations.includes('Canada')) && assessment.province==='Quebec' && getQuebecLawsPDF() }
-     { (locations.includes('Canada')) && assessment.province!=='Quebec' &&
-        createTextPDF(`Please refer to the ${assessment.processor.laws} Legislation of ${(province) ? province : 'Canada'}`)
+     { (locations.includes('Canada')) && assessment.province!=='Quebec' && assessment.processor !== PROCESSOR.NON_COMM &&
+        createTextPDF(`• Please refer to the ${assessment.processor.laws} Legislation of ${(province) ? province : 'Canada'}`)
+     }
+     { (locations.includes('Canada')) &&assessment.processor === PROCESSOR.NON_COMM &&
+       createTextPDF(`• Privacy laws do NOT apply. `)
      }
      { (locations.includes('Europe')) &&  getEuropeanLawsPDF() }
-     { (locations.includes('United States')) && createTextPDF('Please refer to the US Legislation (HIPAA)') }
+     { (locations.includes('United States')) && createTextPDF('• Please refer to the US Legislation (HIPAA)') }
   </>);
 }
 
 export const getBestPracticesPDF = () => {
   return(<>
-  <Text style={styles.subtitle}>
+  <Text style={styles.title}>
     Best Practices
   </Text>
   <Text style={styles.section}>
@@ -60,8 +64,8 @@ export const getBestPracticesPDF = () => {
       );
     })}
     <Text style={styles.subtitle}>
-      Please note that is not an official legal assessment.
-    </Text>  
+      Please note that this is NOT a formal legal assessment.
+    </Text>
   </>);
 }
 
@@ -69,7 +73,7 @@ export const getQuebecLawsPDF = () => {
   return(
   <>
     <Text style={styles.subtitle}>
-      Quebec Jurisdiction
+      • Quebec Jurisdiction
     </Text>
     <Text style={styles.section}>
       Accountability
@@ -108,7 +112,7 @@ export const getEuropeanLawsPDF = () => {
   return(
   <>
     <Text style={styles.subtitle}>
-      European Jurisdiction - GDPR
+      • European Jurisdiction - GDPR
     </Text>
     <Text style={styles.section}>
       Accountability

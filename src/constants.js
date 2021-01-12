@@ -39,11 +39,6 @@ export const PROCESSOR = {
     laws: ['PIPEDA'], //**
     provincial: true
   },
-  PRIV_NON_COMM: {
-    body: 'Private Organization & Not Commercial',
-    laws: ['Provincial Personal and Health Information Legislation'], //**
-    provincial: true
-  },
   FWUB: {
     body: 'FWUB',
     laws: ['PIPEDA'], //Refer to PIPEDA
@@ -64,9 +59,9 @@ export const PROCESSOR = {
     laws: ['Provincial Law'], //**
     provincial: true
   },
-  INDIV_NON_COMM: {
+  NON_COMM: {
     body: 'Individuals & Non-Commercial',
-    laws: ['Provincial Law (Non-Privacy Legislation)'], //***
+    laws: ['Privacy laws do NOT apply'], //***
     provincial: false
   } ,
 }

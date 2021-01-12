@@ -71,7 +71,7 @@ abbr {
   color: rgba(0, 0, 0, 0.05);
 }
 .ObligationCard--active .ObligationCard__number {
-  color: #e1edff;
+  color: #bcd7ff;
 }
 .ObligationCard .card-text {
   font-weight: 300;

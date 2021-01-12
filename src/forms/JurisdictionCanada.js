@@ -114,9 +114,8 @@ class JurisdictionCanada extends Component{
         <ButtonGroup style={{width: '60%'}} size="lg" vertical>
           <Button variant='light'onClick={() => this.saveProcessor(PROCESSOR.FED)}>Federal Government Institution</Button>
           <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={commercialActivity}>
-            <Button variant='light' onClick={() => this.saveProcessor(PROCESSOR.PRIV_COMM)}>Private Organization in the course of commercial activities</Button>
+            <Button variant='light' onClick={() => this.saveProcessor(PROCESSOR.PRIV_COMM)}>Private Individuals and Organizations in the course of Commercial activities</Button>
           </OverlayTrigger>
-          <Button variant='light' onClick={() => this.saveProcessor(PROCESSOR.PRIV_NON_COMM)}>Private Organization in the course of non-commercial activities</Button>
           <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={fwub}>
             <Button variant='light' onClick={() => this.saveProcessor(PROCESSOR.FWUB)}>Federally regulated businesses</Button>
           </OverlayTrigger>
@@ -127,7 +126,7 @@ class JurisdictionCanada extends Component{
           <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={healthcare}>
               <Button variant='light' onClick={() => this.saveProcessor(PROCESSOR.HEALTH)}>Healthcare Professionals</Button>
           </OverlayTrigger>
-          <Button variant='light' onClick={() => this.saveProcessor(PROCESSOR.INDIV_NON_COMM)}>Individuals & in the course of non-commercial activities</Button>
+          <Button variant='light' onClick={() => this.saveProcessor(PROCESSOR.NON_COMM)}>Individuals and Organizations in the course of Non-Commercial activities</Button>
         </ButtonGroup>
       </div>
     )

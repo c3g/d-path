@@ -25,7 +25,7 @@ class DataDonorsForm extends Component{
             textAlign: 'center',
             marginBottom: '1rem'
           }}>
-          Please note that the GDPR applies only when the donors belong to the European Union.
+          Please note that the GDPR applies in certain cases where the donors belong to the European Union and European Economic Area
           </Card>
         </div>
       )

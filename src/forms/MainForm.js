@@ -61,6 +61,7 @@ class MainForm extends Component {
   reset = () => {
     this.setState({step: 0})
     this.props.resetAssessment();
+    this.props.history.push('/');
   }
 
   getLocationComponent = () => {

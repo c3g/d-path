@@ -21,7 +21,6 @@ function InfoDocument({locations, assessment}) {
         ~ D-Path Tool ~
       </Text>
       <Text style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
-      <Text style={styles.author}>Epishare</Text>
         { (assessment.isPersonalInfo) && getLawsPDF(locations, assessment) }
         { getBestPracticesPDF() }
       <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
@@ -121,7 +120,7 @@ class Info extends Component {
             textAlign: 'center',
             marginBottom: '1rem'
           }}>
-          Please note that is not an official legal assessment.
+          <strong> Please note that this is NOT a formal legal assessment. </strong>
           <hr />
           If your country's obligations are not listed in detail you can click
             <Link to="/additionalCountry"> here </Link>

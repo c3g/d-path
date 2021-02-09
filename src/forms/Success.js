@@ -5,13 +5,34 @@ import { Link } from 'react-router-dom';
 class Success extends Component{
 
     render(){
-        const { answers, userType, isPersonalInfo, isPublic, infoType, processor, province } = this.props.assessment;
+        const { locations } = this.props;
+        const { answers, userType, isPersonalInfo, isPublic, infoType, processor, province, isHealthInfo, crossesBorders  } = this.props.assessment;
         const user = (
           <div>
             <h4> Type of user: </h4>
             <p> { userType ? 'Processor' : userType } </p>
           </div>
         )
+
+        const crossingBorders = (
+          <div>
+            <h4> Is the information crossing borders?: </h4>
+            <p> { crossesBorders ? 'Yes' : 'No' } </p>
+          </div>
+        )
+
+        const healthInfo = (
+          <div>
+            <h4> Is the information health information?: </h4>
+            <p> { isHealthInfo ? 'Yes' : 'No' } </p>
+          </div>
+        )
+
+        const getOtherCountries = () => {
+          const valuesToRemove = ["Canada", "Europe", "United States"];
+          return Array.from(new Set(locations.filter((i) => !valuesToRemove.includes(i))));
+        }
+
         return(
             <div>
               <h1 className='ui centered'> Summary </h1>
@@ -35,9 +56,11 @@ class Success extends Component{
                         <p>{answers.dataDonors}</p>
                     </div>
                     { isPersonalInfo ? user : null }
+                    { crossesBorders !== undefined ? crossingBorders: null}
                   </Col>
                   <Col lg={6}>
                     { isPersonalInfo ? null : user }
+                    { isHealthInfo !== undefined ? healthInfo: null}
                     <div>
                       <h4> Information type </h4>
                       <p> { infoType }</p>
@@ -56,11 +79,17 @@ class Success extends Component{
                     </div>
                     <div>
                       <h4> {province && ('In which province is the information processed?')} </h4>
-                      <p> {province && (province) }</p>
+                      <p> {province && (province.name) }</p>
                     </div>
                     <div>
-                      <h4> {processor && processor.body && ('Applicable Legislation')} </h4>
-                      <p> {processor && (processor.laws) }</p>
+                      <h4> {processor && processor.body && ('Applicable Legislation(s)')} </h4>
+                      {processor && processor.laws.map(law => {
+                        return <p> {law}</p>
+                      })}
+                      {getOtherCountries().map(country => {
+                        return <p> Privacy Legislation of {country} </p>
+                       })
+                      }
                     </div>
                     <div style={{paddingTop: '3%'}}>
                       <Link className='displayButton' to='/obligations'>

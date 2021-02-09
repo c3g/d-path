@@ -8,6 +8,7 @@ class UserInfo extends Component{
 
     saveAndContinue = (userType) => {
         this.props.nextStep();
+        this.props.onUserChange(userType);
         this.props.handleUserChange(userType);
     }
 

@@ -35,6 +35,15 @@ export const donor = (
     </Popover>
 );
 
+export const europe = (
+  <Popover id='popover-basic'>
+    <Popover.Title as='h3'>Europe</Popover.Title>
+    <Popover.Content>
+      It refers to the country members of the European Union and the European Economic Area
+    </Popover.Content>
+  </Popover>
+);
+
 export const directly = (
   <Popover id='popover-basic'>
     <Popover.Title as='h3'>Directly Identifiable</Popover.Title>

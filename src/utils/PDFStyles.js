@@ -21,6 +21,11 @@ export const styles = StyleSheet.create({
     margin: 12,
     fontFamily: 'Oswald'
   },
+  sectionSummary: {
+    fontSize: 14,
+    margin: 2,
+    fontFamily: 'Oswald'
+  },
   subtitle: {
     fontSize: 18,
     margin: 12,
@@ -28,6 +33,12 @@ export const styles = StyleSheet.create({
   },
   text: {
     margin: 12,
+    fontSize: 12,
+    textAlign: 'justify',
+    fontFamily: 'Times-Roman'
+  },
+  textSummary: {
+    margin: 5,
     fontSize: 12,
     textAlign: 'justify',
     fontFamily: 'Times-Roman'
@@ -41,6 +52,18 @@ export const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
     color: 'grey',
+  },
+  tool: {
+    fontSize: 15,
+    marginBottom: 20,
+    textAlign: 'center',
+    color: 'black',
+  },
+  optional: {
+    fontSize: 15,
+    textAlign: 'center',
+    fontFamily: 'Oswald',
+    color: 'grey'
   },
   pageNumber: {
     position: 'absolute',

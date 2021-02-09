@@ -23,7 +23,9 @@ const INITIAL_STATE = {
       dataDonors: undefined,
     },
     processor: undefined,
-    province: undefined
+    province: undefined,
+    isHealthInformation: undefined,
+    crossesBorders: undefined,
   }
 }
 
@@ -117,6 +119,26 @@ class App extends Component {
     }));
   }
 
+  handleHealthInfoChange  = (isHealthInfo) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         isHealthInfo: isHealthInfo
+      }
+    }));
+  }
+
+  handleCrossesBordersChange  = (crossesBorders) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         crossesBorders: crossesBorders
+      }
+    }));
+  }
+
   onAssessmentChange = (locations, isPersonalInfo) => {
     this.setState({
       locations: locations,
@@ -160,6 +182,8 @@ class App extends Component {
                     handleProcessorChange={this.handleProcessorChange}
                     handleProvinceChange={this.handleProvinceChange}
                     handleAssessmentChange={this.onAssessmentChange}
+                    handleHealthInfoChange={this.handleHealthInfoChange}
+                    handleCrossesBordersChange={this.handleCrossesBordersChange}
                     resetAssessment={this.resetAssessment}
                     locations={getLocations(assessment.answers)}
                    />
@@ -171,6 +195,7 @@ class App extends Component {
                   <Info {...props}
                     locations={getLocations(assessment.answers)}
                     assessment={assessment}
+                    resetAssessment={this.resetAssessment}
                   />
                 )}
               />

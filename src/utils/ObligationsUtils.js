@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, ListGroup, Tabs, Tab, Col, Row} from 'react-bootstrap';
+import {Card, ListGroup, Tabs, Tab, Col, Row, Accordion, Button} from 'react-bootstrap';
 import cx from 'classnames';
 import {bestPracticesText, bestPracticesCardsText, quebecLawsText, quebecLawCardsText, euroLawsText} from './TextLawsUtils';
 import { PROCESSOR } from '../constants';
@@ -47,12 +47,13 @@ export const getLaws = (props) => {
   const includesEU = locations.includes('Europe');
   const includesUS = locations.includes('United States');
 
-  const createText = (text) => {
-    return (
-      <h3 style={{marginTop: '20px', marginBottom: '20px'}}>
-        {text}
-      </h3>
-    );
+
+  const accordion = (text) =>{
+    return(
+        <Accordion.Collapse eventKey="0">
+          <Card.Body> {text} </Card.Body>
+        </Accordion.Collapse>
+    )
   }
 
   const getOtherCountries = () => {
@@ -63,26 +64,86 @@ export const getLaws = (props) => {
 
   return(
     <>
+        {console.log(assessment)}
         {includesCanada && assessment.province==='Quebec' && getQuebecLaws(props) }
-        {includesCanada && assessment.province!=='Quebec' && assessment.processor !== PROCESSOR.NON_COMM &&
-          createText(`• Please refer to the
-            ${assessment.processor.laws} Legislation of
-            ${(assessment.province) ? assessment.province : 'Canada'}`)
+        {includesCanada && assessment.province!=='Quebec' && assessment.processor.laws.includes('PIPEDA') &&
+          <Accordion defaultActiveKey="0">
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                Canadian Jurisdiction
+              </Accordion.Toggle>
+            </Card.Header>
+              {assessment.processor.laws.map(law => {
+                return accordion(`• Please refer to ${assessment.processor.laws}`)
+              })}
+            </Card>
+            </Accordion>
+        }
+        {includesCanada && assessment.province!=='Quebec' && assessment.processor !== PROCESSOR.NON_COMM && !assessment.processor.laws.includes('PIPEDA') &&
+          <Accordion defaultActiveKey="0">
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                Canadian Jurisdiction
+              </Accordion.Toggle>
+            </Card.Header>
+              {assessment.processor.laws.map(law => {
+                return accordion(`• Please refer to the
+                  ${law} Legislation of
+                  ${(assessment.province) ? assessment.province.name : 'Canada'}`)
+              })}
+            </Card>
+            </Accordion>
         }
         {includesCanada && assessment.processor === PROCESSOR.NON_COMM &&
-          createText(`• Privacy laws do NOT apply. `)
+          <Accordion defaultActiveKey="0">
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                Canadian Jurisdiction
+              </Accordion.Toggle>
+            </Card.Header>
+              {  accordion(`• Privacy laws do NOT apply. `) }
+            </Card>
+            </Accordion>
         }
-        {includesEU && getEuropeanLaws() }
+        {includesEU && getEuropeanLaws(accordion) }
         {includesUS &&
-          createText('• Please refer to the US Legislation (HIPAA)')
+          <Accordion defaultActiveKey="0">
+          <Card>
+            <Card.Header>
+              <Accordion.Toggle as={Button} variant="link" eventKey="0">
+                US Jurisdiction
+              </Accordion.Toggle>
+            </Card.Header>
+              {  accordion('• Please refer to the US Legislation (HIPAA)') }
+            </Card>
+            </Accordion>
         }
-        {getOtherCountries().map(country => {
-          return createText(`• Please refer to the Legislation of ${country}`)
-         })
-        }
+        { getOtherCountries().length !== 0 && getOtherCountriesLaws(getOtherCountries(), accordion)}
+
       <hr/>
     </>
   );
+}
+
+const getOtherCountriesLaws = (countries, accordion) => {
+  return(
+    <Accordion defaultActiveKey="0">
+     <Card>
+       <Card.Header>
+         <Accordion.Toggle as={Button} variant="link" eventKey="0">
+           Other Jurisdictions
+         </Accordion.Toggle>
+       </Card.Header>
+         {countries.map(country => {
+           return accordion(`• Please refer to the Privacy Legislation of ${country}`)
+         })}
+     </Card>
+     </Accordion>
+  )
+
 }
 
 export const getQuebecLaws = ({ onMouseEnter, onMouseLeave }) => {
@@ -143,7 +204,7 @@ export const getLawCards = ({ activeLaws }) => {
   )
 };
 
-export const getEuropeanLaws = () => {
+export const getEuropeanLaws = (accordion) => {
   const renderTab = tab =>
     <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
       <Card.Text>
@@ -153,14 +214,27 @@ export const getEuropeanLaws = () => {
     </Tab>
 
   return(<>
-    <h3 style={{marginTop: '10px', marginBottom: '10px'}}> • European Laws - GDPR </h3>
-    <Card>
-      <Card.Body>
-        <Tabs defaultActiveKey='accountability'>
-          {lawTabs(euroLawsText).map(renderTab)}
-        </Tabs>
-      </Card.Body>
-    </Card>
+    <Accordion defaultActiveKey="0">
+     <Card>
+       <Card.Header>
+         <Accordion.Toggle as={Button} variant="link" eventKey="0">
+           European Laws - GDPR
+         </Accordion.Toggle>
+       </Card.Header>
+        {accordion(
+         <div>
+           <Card>
+             <Card.Body>
+               <Tabs defaultActiveKey='accountability'>
+                 {lawTabs(euroLawsText).map(renderTab)}
+               </Tabs>
+             </Card.Body>
+           </Card>
+          </div>
+          )}
+         </Card>
+     </Accordion>
+
   </>);
 };
 

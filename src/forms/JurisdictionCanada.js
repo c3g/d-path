@@ -15,6 +15,7 @@ class JurisdictionCanada extends Component{
      isHealthInfo: null,
      hasSimilarRegulation: null,
      isCrossingBorders: null,
+     askHealthInfo:null
    }
   }
 
@@ -36,30 +37,57 @@ class JurisdictionCanada extends Component{
 
     this.props.handleProvinceChange(province);
 
-    if((this.state.processor !== PROCESSOR.PRIV_COMM || !this.hasSimilarRegulation(province)) && this.state.processor !== PROCESSOR.PRIV_NON_COMM){
+    if(this.state.processor !== PROCESSOR.PRIV_COMM){
+
+        //just for these 2 we have to display all laws
+        if(this.state.processor === PROCESSOR.MUSH || this.state.processor === PROCESSOR.PROV_GOV){
+          this.props.handleProcessorChange({
+            body: 'Private Organization & Not Commercial',
+            laws: province.laws,
+            provincial: true
+          });
+        }
+
         this.props.nextStep();
     }
     else{
       this.setState({
-        hasSimilarRegulation: true
+        //only the Private Commercial have similar legislations (have to ask crossing borders)
+        hasSimilarRegulation: true,
+        askHealthInfo: this.askHealthInfo(province)
       });
     }
   }
 
   saveIsCrossingBorders = (isCrossingBorders) => {
+    const {province, askHealthInfo} = this.state;
+
     this.setState({
       isCrossingBorders: isCrossingBorders
     });
 
-    if(isCrossingBorders && this.state.processor === PROCESSOR.PRIV_NON_COMM ){
+    this.props.handleCrossesBordersChange(isCrossingBorders);
+
+    if(isCrossingBorders){
       this.props.handleProcessorChange({
         body: 'Private Organization & Not Commercial',
         laws: ['PIPEDA'],
         provincial: true
       });
-        this.props.nextStep();
+      //no need to continue
+      this.props.nextStep();
     }
-    else if((isCrossingBorders && this.state.processor === PROCESSOR.PRIV_COMM) || (this.state.processor === PROCESSOR.PRIV_NON_COMM && !isCrossingBorders)){
+
+    //change the law to the specific private law if province is quebec before going to the next step
+    if(province === PROVINCES.QC){
+      this.props.handleProcessorChange({
+        body: 'Private Organization & Commercial',
+        laws: province.privateLaw,
+        provincial: true
+      })
+    }
+
+    if(!askHealthInfo){
       this.props.nextStep();
     }
   }
@@ -70,31 +98,26 @@ class JurisdictionCanada extends Component{
       isHealthInfo: isHealthInfo
     });
 
+    this.props.handleHealthInfoChange(isHealthInfo);
+
     this.setProcessorLaws(isHealthInfo, province);
     this.props.nextStep();
     }
 
 
 
-  hasSimilarRegulation = (province) => {
-    if(province === PROVINCES.MAN || province === PROVINCES.NT || province === PROVINCES.NUN || province === PROVINCES.PE || province === PROVINCES.SAS || province === PROVINCES.YUK){
-        return false;
+  askHealthInfo = (province) => {
+    if(province === PROVINCES.ON || province === PROVINCES.NB || province === PROVINCES.NS || province === PROVINCES.NL){
+        return true;
     }
-    else return true;
+    else return false;
   }
 
   setProcessorLaws = (isHealthInfo, province) => {
-      if(!isHealthInfo && (province === PROVINCES.QC || province === PROVINCES.ALB || province === PROVINCES.BC)){
+      if(isHealthInfo){
         this.props.handleProcessorChange({
           body: 'Private Organization & Commercial',
-          laws: ['Provincial Personal Information Protection Laws'],
-          provincial: true
-        })
-      }
-      else if(isHealthInfo && (province === PROVINCES.ON || province === PROVINCES.NB || province === PROVINCES.NS || province === PROVINCES.NL)){
-        this.props.handleProcessorChange({
-          body: 'Private Organization & Commercial',
-          laws: ['Provincial Health Information Protection Laws'],
+          laws: province.healthLaw,
           provincial: true
         })
       }
@@ -145,7 +168,7 @@ class JurisdictionCanada extends Component{
           <Button variant='light' onClick={() => this.saveProvince(PROVINCES.NT)}>Northwest Territories</Button>
           <Button variant='light' onClick={() => this.saveProvince(PROVINCES.NS)}>Nova Scotia</Button>
           <Button variant='light' onClick={() => this.saveProvince(PROVINCES.NUN)}>Nunavut</Button>
-          <Button variant='light' onClick={() => this.saveProvince(PROVINCES.ONT)}>Ontario</Button>
+          <Button variant='light' onClick={() => this.saveProvince(PROVINCES.ON)}>Ontario</Button>
           <Button variant='light' onClick={() => this.saveProvince(PROVINCES.PE)}>Prince Edward Island</Button>
           <Button variant='light' onClick={() => this.saveProvince(PROVINCES.QC)}>Quebec</Button>
           <Button variant='light' onClick={() => this.saveProvince(PROVINCES.SAS)}>Saskatchewan</Button>
@@ -172,7 +195,7 @@ class JurisdictionCanada extends Component{
       <div>
         <h4 style={{paddingBottom: '2%'}}> Is the personal information processed {' '}
           <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={healthInfo}>
-            <abbr> Personal Health Information? </abbr>
+            <abbr> Personal Health Information </abbr>
           </OverlayTrigger> ?
         </h4>
         <ButtonGroup style={{width: '60%'}} size="lg" vertical>
@@ -184,10 +207,9 @@ class JurisdictionCanada extends Component{
   }
 
   getOptions = () => {
-    const {processor, hasSimilarRegulation, isCrossingBorders, province} = this.state;
-    if(processor === PROCESSOR.PRIV_COMM && isCrossingBorders === false && province) { return this.getHealthInformation(); }
+    const {processor, hasSimilarRegulation, isCrossingBorders, askHealthInfo} = this.state;
+    if(processor === PROCESSOR.PRIV_COMM && isCrossingBorders === false && askHealthInfo) { return this.getHealthInformation(); }
     else if (processor === PROCESSOR.PRIV_COMM && hasSimilarRegulation) { return this.getCrossingBorders(); }
-    else if (processor === PROCESSOR.PRIV_NON_COMM && province) { return this.getCrossingBorders(); }
     else if (processor && processor.provincial) return this.getProvincesOptions();
     else if (processor) { this.saveAndContinue(); return null; }
     else return this.getProcessorOptions();

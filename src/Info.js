@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import { PDFDownloadLink, Document, Page, Text, Font} from '@react-pdf/renderer'
 import Icon from 'react-fontawesome';
 import {styles} from './utils/PDFStyles';
-import {getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
+import {getSummaryPDF, getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
 import {getLaws, getBestPractices, getLawCards, getBestPracticesCards} from './utils/ObligationsUtils';
 
 function InfoDocument({locations, assessment}) {
@@ -17,12 +17,17 @@ function InfoDocument({locations, assessment}) {
   return (
     <Document>
     <Page style={styles.body}>
-      <Text style={styles.header} fixed>
-        ~ D-Path Tool ~
+      <Text style={styles.tool} fixed>
+        ~ D-PATH ~
       </Text>
-      <Text style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
+      <Text style={styles.header} fixed>
+        Please note that this is NOT a legal assessment.
+      </Text>
+      <Text style={styles.title}>SUMMARY</Text>
+        { getSummaryPDF(assessment) }
+      <Text break style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
         { (assessment.isPersonalInfo) && getLawsPDF(locations, assessment) }
-        { getBestPracticesPDF() }
+        { getBestPracticesPDF(assessment.isPersonalInfo) }
       <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
         `${pageNumber} / ${totalPages}`
       )} fixed />
@@ -110,7 +115,7 @@ class Info extends Component {
                 <Button variant="primary">Download PDF</Button>
               </PDFDownloadLink>
               <div className='fill' />
-              <Link to="/" className='resetButton' onClick={this.reset}>
+              <Link to="/" className='resetButton' onClick={this.props.resetAssessment}>
                 <Icon name='refresh' /> Reset
               </Link>
             </div>
@@ -120,7 +125,7 @@ class Info extends Component {
             textAlign: 'center',
             marginBottom: '1rem'
           }}>
-          <strong> Please note that this is NOT a formal legal assessment. </strong>
+          <strong> Please note that this is NOT a legal assessment. </strong>
           <hr />
           If your country's obligations are not listed in detail you can click
             <Link to="/additionalCountry"> here </Link>

@@ -8,9 +8,9 @@ class Success extends Component{
       return(
           <div>
               <h1 className='ui centered'> {assessment.userType === 'recipient' ? 'Data Recipient' : 'Data Donor'}</h1>
-              <h5 className='ui centered'>
-                <Alert variant='info' style={{paddingBottom: '1%'}}> Refer to
-                {assessment.userType === 'recipient' ? ' the Terms of Service ' : ' your Consent Agreement '}
+              <h5 className='ui centered' style={{fontSize: '17px', marginTop:'2%'}}>
+                <Alert variant='info'  style={{paddingBottom: '1%', width: '60%', marginLeft:'20%'}}> Refer to
+                {assessment.userType === 'recipient' ? ' the terms of service ' : ' your consent agreement '}
                 with your data producer for your obligations. </Alert>
 
               </h5>

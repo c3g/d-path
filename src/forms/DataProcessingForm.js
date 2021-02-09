@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ButtonGroup, Button, Alert } from 'react-bootstrap';
+import { ButtonGroup, Button, Alert, OverlayTrigger } from 'react-bootstrap';
 import Select from 'react-select';
 import countryList from 'react-select-country-list';
+import { europe } from '../utils/Popovers';
 
 import { LOCATION } from '../constants';
 
@@ -36,9 +37,11 @@ class DataProcessingForm extends Component{
             <div>
               <h1> Where is the data stored/processed? </h1>
               <Alert variant='info' style={{paddingBottom: '1%'}}> Type of user: {assessment.userType}</Alert>
-              <ButtonGroup style={{width:'100%'}} size="lg" vertical>
+              <ButtonGroup style={{width:'60%'}} size="lg" vertical>
                 <Button variant='light' onClick={() => this.saveLocation(LOCATION.CAN)}>Canada</Button>
-                <Button variant='light' onClick={() => this.saveLocation(LOCATION.EU)}>Europe</Button>
+                <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={europe}>
+                    <Button variant='light' onClick={() => this.saveLocation(LOCATION.EU)}>Europe</Button>
+                </OverlayTrigger>
                 <Button variant='light' onClick={() => this.saveLocation(LOCATION.USA)}>United States</Button>
               </ButtonGroup>
             </div>

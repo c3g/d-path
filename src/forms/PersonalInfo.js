@@ -119,6 +119,8 @@ class PersonalInfo extends Component{
                   nextStep={this.props.nextStep}
                   handleProcessorChange={this.props.handleProcessorChange}
                   handleProvinceChange={this.props.handleProvinceChange}
+                  handleCrossesBordersChange={this.props.handleCrossesBordersChange}
+                  handleHealthInfoChange={this.props.handleHealthInfoChange}
                 />
 
       else if(informationType === INFO_TYPE.CODED) return this.getIdentifiableForm()

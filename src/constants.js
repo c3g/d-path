@@ -55,8 +55,8 @@ export const PROCESSOR = {
     provincial: true
   },
   HEALTH: {
-    body: 'Healthcare',
-    laws: ['Provincial Law'], //**
+    body: 'Healthcare Professionals',
+    laws: ['Provincial laws for Healthcare Professionals'], //**
     provincial: true
   },
   NON_COMM: {
@@ -66,18 +66,63 @@ export const PROCESSOR = {
   } ,
 }
 
+
 export const PROVINCES = {
-  ALB: 'Alberta',
-  BC: 'British Columbia',
-  MAN: 'Manitoba',
-  NB: 'New Brunswick',
-  NL: 'Newfoundland and Labrador',
-  NT: 'Northwest Territories',
-  NS: 'Nova Scotia',
-  NUN: 'Nunavut',
-  ONT: 'Ontario',
-  PE: 'Prince Edward Island',
-  QC: 'Quebec',
-  SAS: 'Saskatchewan',
-  YUK: 'Yukon'
+  ALB: {
+    name: 'Alberta',
+    laws: ['Freedom of Information and Protection Privacy Act', 'Personal Information Protection Act', 'Health Information Act']
+  },
+  BC: {
+    name: 'British Columbia',
+    laws: ['Freedom of Information and Protection Privacy Act', 'Personal Information Protection Act', 'E-Health (Personal Health Information Access and Protection of Privacy)']
+  },
+  MAN: {
+    name: 'Manitoba',
+    laws: ['Freedom of Information and Protection Privacy Act', 'Personal Information Protection Act', 'Privacy law relating to health records']
+  },
+  NB: {
+    name: 'New Brunswick',
+    healthLaw: ['Personal Health Information Privacy and Access Act'],
+    laws: ['Right to information and Protection of Privacy Act', 'Personal Health Information Privacy and Access Act']
+  },
+  NL: {
+    name: 'Newfoundland and Labrador',
+    healthLaw: ['Personal Health Information Act'],
+    laws: ['Access to Information and Protection of Privacy Act', 'Personal Health Information Act']
+  },
+  NT: {
+    name: 'Northwest Territories',
+    laws: ['Access to Information and Protection of Privacy Act', 'Health Information Act']
+  },
+  NS: {
+    name: 'Nova Scotia',
+    healthLaw: '[Personal Health Information Act]',
+    laws: ['Freedom of Information and Protection Privacy Act', 'Personal Health Informatio Act', 'Part XX of the Municipal Government Act ']
+  },
+  NUN: {
+    name: 'Nunavut',
+    laws: ['Freedom of Information and Protection Privacy Act']
+  },
+  ON: {
+    name: 'Ontario',
+    healthLaw: ['Personal Health Information Protection of Privacy Act'],
+    laws: ['Freedom of Information and Protection Privacy Act', 'Municipal Freedom of Information and Protection of Privacy Act', 'Personal Health Information Protection of Privacy Act']
+  },
+  PE: {
+    name: 'Prince Edward Island',
+    laws: ['Freedom of Information and Protection Privacy Act']
+  },
+  QC: {
+    name: 'Quebec',
+    privateLaw: ['Act Respecting the Protection of Personal Information in the Private Sector'],
+    laws: ['Act Respecting Access to Documents Held by Public Bodies and the Protection of Personal Information', 'Act Respecting the Protection of Personal Information in the Private Sector', 'Act Respecting Health Services and Social Services', 'Health Insurance Act', 'Act Respecting the Régie de l\'Assurance Maladie du Québec']
+  },
+  SAS: {
+    name: 'Saskatchewan',
+    laws: ['Freedom of Information and Protection Privacy Act', 'Health Information Protection Act']
+  },
+  YUK: {
+    name: 'Yukon',
+    laws: ['Access to information and Protection of Privacy Act', 'Health Information Privacy and Management Act']
+  }
 }

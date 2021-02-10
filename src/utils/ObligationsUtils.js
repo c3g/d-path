@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, ListGroup, Tabs, Tab, Col, Row, Accordion, Button} from 'react-bootstrap';
 import cx from 'classnames';
 import {bestPracticesText, bestPracticesCardsText, quebecLawsText, quebecLawCardsText, euroLawsText} from './TextLawsUtils';
-import { PROCESSOR } from '../constants';
+import { PROCESSOR, PROVINCES } from '../constants';
 
 const bestPracticeTabs = [
   {
@@ -65,8 +65,8 @@ export const getLaws = (props) => {
   return(
     <>
         {console.log(assessment)}
-        {includesCanada && assessment.province==='Quebec' && getQuebecLaws(props) }
-        {includesCanada && assessment.province!=='Quebec' && assessment.processor.laws.includes('PIPEDA') &&
+        {includesCanada && assessment.province===PROVINCES.QC && getQuebecLaws(props, accordion) }
+        {includesCanada && assessment.province!==PROVINCES.QC && assessment.processor.laws.includes('PIPEDA') &&
           <Accordion defaultActiveKey="0">
           <Card>
             <Card.Header>
@@ -80,7 +80,7 @@ export const getLaws = (props) => {
             </Card>
             </Accordion>
         }
-        {includesCanada && assessment.province!=='Quebec' && assessment.processor !== PROCESSOR.NON_COMM && !assessment.processor.laws.includes('PIPEDA') &&
+        {includesCanada && assessment.province!==PROVINCES.QC && assessment.processor !== PROCESSOR.NON_COMM && !assessment.processor.laws.includes('PIPEDA') &&
           <Accordion defaultActiveKey="0">
           <Card>
             <Card.Header>
@@ -146,7 +146,7 @@ const getOtherCountriesLaws = (countries, accordion) => {
 
 }
 
-export const getQuebecLaws = ({ onMouseEnter, onMouseLeave }) => {
+export const getQuebecLaws = ({ onMouseEnter, onMouseLeave}, accordion) => {
 
   const textToItem = text =>
     <ListGroup.Item
@@ -164,20 +164,32 @@ export const getQuebecLaws = ({ onMouseEnter, onMouseLeave }) => {
     </Tab>
 
   return (
-    <Card>
-      <Card.Body>
-        <Tabs defaultActiveKey='accountability'>
-          {lawTabs(quebecLawsText).map(renderTab)}
-        </Tabs>
-      </Card.Body>
-    </Card>
+    <Accordion defaultActiveKey="0">
+     <Card>
+       <Card.Header>
+         <Accordion.Toggle as={Button} variant="link" eventKey="0">
+          Quebec Law
+         </Accordion.Toggle>
+       </Card.Header>
+       {accordion(
+        <div>
+          <Card>
+            <Card.Body>
+              <Tabs defaultActiveKey='accountability'>
+                {lawTabs(quebecLawsText).map(renderTab)}
+              </Tabs>
+            </Card.Body>
+          </Card>
+         </div>
+         )}
+     </Card>
+    </Accordion>
   );
 }
 
 export const getLawCards = ({ activeLaws }) => {
   return (
     <div style={{ paddingBottom: '1em'}}>
-      <h3> • Quebec Law </h3>
       <Row>
         {quebecLawCardsText.map((card, i) => {
           const number = i + 1

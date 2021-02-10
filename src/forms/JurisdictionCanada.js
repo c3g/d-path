@@ -40,7 +40,7 @@ class JurisdictionCanada extends Component{
     if(this.state.processor !== PROCESSOR.PRIV_COMM){
 
         //just for these 2 we have to display all laws
-        if(this.state.processor === PROCESSOR.MUSH || this.state.processor === PROCESSOR.PROV_GOV){
+        if((this.state.processor === PROCESSOR.MUSH || this.state.processor === PROCESSOR.PROV_GOV)){
           this.props.handleProcessorChange({
             body: 'Private Organization & Not Commercial',
             laws: province.laws,

@@ -6,6 +6,7 @@ import Icon from 'react-fontawesome';
 import {styles} from './utils/PDFStyles';
 import {getSummaryPDF, getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
 import {getLaws, getBestPractices, getLawCards, getBestPracticesCards} from './utils/ObligationsUtils';
+import { PROVINCES } from './constants';
 
 function InfoDocument({locations, assessment}) {
   // Create styles
@@ -83,7 +84,7 @@ class Info extends Component {
             { assessment.isPersonalInfo &&
               <>
                 <h1 className='obligationTitle'>Laws and Policies</h1>
-                {locations.includes('Canada') && assessment.province==='Quebec' &&
+                {locations.includes('Canada') && assessment.province===PROVINCES.QC &&
                   getLawCards({
                     locations,
                     assessment,

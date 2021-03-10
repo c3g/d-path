@@ -129,7 +129,7 @@ class Info extends Component {
           <strong> Please note that this is NOT a legal assessment. </strong>
           <hr />
           If your country's obligations are not listed in detail you can click
-            <Link to="/additionalCountry"> here </Link>
+            <Link to="/additional-country"> here </Link>
           </Card>
         </Container>
     )

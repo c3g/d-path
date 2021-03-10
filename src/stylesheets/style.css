@@ -98,6 +98,48 @@ abbr {
   margin: 0px !important;
 }
 
+.formButton {
+  display: flex;
+  flex-direction: row;
+  font-size: 50px;
+  background-color: white;
+  border: 1px  ;
+  border-radius: 5px;
+  padding: 10px 15px ;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  color:black;
+  margin-left: 50%;
+  width: 70%;
+}
+
+.formButton:hover {
+  color: black;
+  text-decoration: none;
+  background-color: #f2f2f2;
+}
+
+.resetButton {
+  display: flex;
+  flex-direction: row;
+  font-size: 50px;
+  background-color: white;
+  border: 1px  ;
+  border-radius: 5px;
+  padding: 10px 15px ;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  color:black;
+}
+.resetButton:hover {
+  background-color: #f2f2f2; /* Green */
+  color: black;
+  text-decoration: none;
+}
 
 .displayButton {
   background-color: #0080FF;
@@ -178,7 +220,21 @@ abbr {
 .MainForm__step--active-7 {
   background-color: #6d6aff;
 }
-
+.MainForm__step--active-8 {
+  background-color: #5f6cf5;
+}
+.MainForm__step--active-9 {
+  background-color: #1d2fde;
+}
+.MainForm__step--active-10 {
+  background-color: #0a2ea6;
+}
+.MainForm__step--active-11 {
+  background-color: #041d6e;
+}
+.MainForm__step--active-12 {
+  background-color: #010f3d;
+}
 
 
 

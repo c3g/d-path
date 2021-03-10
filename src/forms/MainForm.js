@@ -1,28 +1,11 @@
 import React, { Component } from 'react';
 import {Container, Jumbotron, Button} from 'react-bootstrap';
 import {withRouter} from 'react-router-dom';
-import cx from 'classnames';
 import Icon from 'react-fontawesome';
 
-import OrganizationForm from './OrganizationForm';
-import DataProcessingForm from './DataProcessingForm';
-import DataUsersForm from './DataUsersForm';
-import DataDonorsForm from './DataDonorsForm';
-import Success from './Success';
-import PersonalInfo from './PersonalInfo';
-import UserInfo from './UserInfo';
 import OtherUser from './OtherUser';
+import {getSteps, STEPS} from '../utils/Steps.js';
 import { USER_TYPE } from '../constants';
-
-const STEPS = [
-  UserInfo,
-  OrganizationForm,
-  DataProcessingForm,
-  DataUsersForm,
-  DataDonorsForm,
-  PersonalInfo,
-  Success,
-]
 
 class MainForm extends Component {
 
@@ -46,7 +29,6 @@ class MainForm extends Component {
       handleProvinceChange,
       handleInfoTypeChange
      } = this.props;
-    console.log(assessment);
     if (this.state.step === 1)
       handleUserChange(undefined);
     if (this.state.step === 0)
@@ -82,50 +64,6 @@ class MainForm extends Component {
     return STEPS[step];
   }
 
-  getSteps = () => {
-    const { step, userType } = this.state;
-    console.log(userType);
-    if (userType && userType !== USER_TYPE.PROCESSOR){
-      return (
-        <div className='MainForm__steps'>
-          {STEPS.slice(0,2).map((_, i) =>
-            <div
-              key={i}
-              className={cx('MainForm__step',
-              { 'MainForm__step--active-1' : i <= step && i === 0 },
-              { 'MainForm__step--active-2' : i <= step && i === 1}
-              )}
-            >
-              {i + 1}
-            </div>
-          )}
-        </div>
-      )
-    }
-    else{
-      return(
-        <div className='MainForm__steps'>
-          {STEPS.map((_, i) =>
-            <div
-              key={i}
-              className={cx('MainForm__step',
-              { 'MainForm__step--active-1' : i <= step && i === 0},
-              { 'MainForm__step--active-2' : i <= step && i === 1},
-              { 'MainForm__step--active-3' : i <= step && i === 2},
-              { 'MainForm__step--active-4' : i <= step && i === 3},
-              { 'MainForm__step--active-5' : i <= step && i === 4},
-              { 'MainForm__step--active-6' : i <= step && i === 5},
-              { 'MainForm__step--active-7' : i <= step && i === 6},
-              )}
-            >
-              {i + 1}
-            </div>
-          )}
-        </div>
-      )
-    }
-  }
-
   render(){
     const {
       onAssessmentChange,
@@ -141,11 +79,12 @@ class MainForm extends Component {
       assessment,
       locations
     } = this.props;
+    const { step, userType } = this.state;
 
     //const {userType} = this.state;
 
     const Component = this.getLocationComponent() ;
-    const Steps = this.getSteps();
+    const Steps = getSteps(step, userType);
 
     return(
       <Container className='MainForm'>

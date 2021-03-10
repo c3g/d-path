@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { ButtonGroup, Button, Alert, OverlayTrigger } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { ButtonGroup, Container, Jumbotron, OverlayTrigger } from 'react-bootstrap';
 import Select from 'react-select';
+import Icon from 'react-fontawesome';
+import {getSteps} from '../utils/Steps.js';
 import countryList from 'react-select-country-list';
 import { europe } from '../utils/Popovers';
 
@@ -22,6 +25,7 @@ class DataUsersForm extends Component{
    changeHandler = value => {
      this.setState({ value });
      this.saveLocation(value.label);
+     this.props.history.push('/assessment/donors');
    }
 
 
@@ -30,50 +34,71 @@ class DataUsersForm extends Component{
       this.props.handleLocChange({ type: 'dataUsers', location });
     }
 
-    createType = (location) => {
-
-      return ({
-        type : 'dataUsers',
-        location: location,
-        print: 'Where are the data users?'
-      });
-    }
-
     render(){
-      const { assessment } = this.props;
+      const {step, assessment} = this.props;
+      const Steps = getSteps(step, assessment.userType);
       return(
-        <div>
-          <div>
-            <h1> Where are the data recipients/users? </h1>
-            <Alert variant='info' style={{paddingBottom: '1%'}}> Type of user: {assessment.userType}</Alert>
-            <ButtonGroup style={{width:'60%'}} size="lg" vertical>
-              <Button variant='light' onClick={() => this.saveLocation(LOCATION.CAN)}>Canada</Button>
-              <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={europe}>
-                  <Button variant='light' onClick={() => this.saveLocation(LOCATION.EU)}>Europe</Button>
-              </OverlayTrigger>
-              <Button variant='light' onClick={() => this.saveLocation(LOCATION.USA)}>United States</Button>
-            </ButtonGroup>
-          </div>
-          <h4
-          style={{
-            textAlign: 'center',
-            paddingTop: '1em',
-            paddingBottom: '0.5em',
-            fontSize: '1.5em',
-            fontWeight: 'normal',
-            textTransform: 'uppercase',
-            letterSpacing: 1,
-          }}>
-            OR
-          </h4>
-          <div  style={{width: '50%', marginLeft: '25%'}}>
-            <Select
-               options={this.state.options}
-               value={this.state.value}
-               onChange={this.changeHandler}
-            />
-          </div>
-        </div>
+        <>
+          <Container className='MainForm'>
+            <Jumbotron className='MainForm__content'>
+              {Steps}
+              <div>
+                <h6
+                  style={{
+                    marginBottom: '1rem',
+                    marginTop: '1rem',
+                    fontSize: '1em',
+                    fontWeight: 'normal',
+                    textTransform: 'uppercase',
+                    letterSpacing: 1,
+                    opacity: 0.4,
+                  }}
+                >
+                  Location Information
+                </h6>
+                <hr />
+                <div>
+                  <h1 style={{paddingBottom: '2%'}}> Where are the data recipients/users? </h1>
+                  <ButtonGroup style={{width:'60%'}} size="lg" vertical>
+                    <Link className='formButton' to='/assessment/donors' onClick={() => this.saveLocation(LOCATION.CAN)}> Canada </Link>
+                    <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={europe}>
+                        <Link className='formButton' to='/assessment/donors' onClick={() => this.saveLocation(LOCATION.EU)}> Europe </Link>
+                    </OverlayTrigger>
+                    <Link className='formButton' to='/assessment/donors' onClick={() => this.saveLocation(LOCATION.USA)}> United States </Link>
+                  </ButtonGroup>
+                </div>
+                <h4
+                style={{
+                  textAlign: 'center',
+                  paddingTop: '1em',
+                  paddingBottom: '0.5em',
+                  fontSize: '1.5em',
+                  fontWeight: 'normal',
+                  textTransform: 'uppercase',
+                  letterSpacing: 1,
+                }}>
+                  OR
+                </h4>
+                <div  style={{width: '50%', marginLeft: '25%'}}>
+                  <Select
+                     options={this.state.options}
+                     value={this.state.value}
+                     onChange={this.changeHandler}
+                  />
+                </div>
+              </div>
+              <div className='MainForm__buttons'>
+                <Link className='resetButton' to='/assessment/processor' onClick={this.props.prevStep}>
+                  <Icon name='arrow-left' /> Previous
+                </Link>
+                <div className='fill' />
+                <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
+                  <Icon name='refresh' /> Reset
+                </Link>
+              </div>
+            </Jumbotron>
+          </Container>
+        </>
       )
     }
 }

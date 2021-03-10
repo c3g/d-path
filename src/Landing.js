@@ -17,7 +17,7 @@ class Landing extends Component {
               of the human health-related datasets they process in a manner that is in agreement with the applicable legal, professional and ethical norms.
             </p>
             <div className='text-center'>
-              <Link to='/assessment' className='btn btn-primary btn-lg'>
+              <Link to='/assessment/user' className='btn btn-primary btn-lg'>
                 Start My Assessment
               </Link>
             </div>

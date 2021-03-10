@@ -27,20 +27,24 @@ class InfoCrossesBorders extends Component{
       this.props.nextStep();
       this.props.history.push('/assessment/success');
     }
+    else{
+      //change the law to the specific private law if province is quebec before going to the next step
+      if(province === PROVINCES.QC){
+        this.props.handleProcessorChange({
+          body: 'Private Organization & Commercial',
+          laws: province.privateLaw,
+          provincial: true
+        });
+      }
 
-    //change the law to the specific private law if province is quebec before going to the next step
-    if(province === PROVINCES.QC){
-      this.props.handleProcessorChange({
-        body: 'Private Organization & Commercial',
-        laws: province.privateLaw,
-        provincial: true
-      });
-    }
-
-    if(this.askHealthInfo(province)){
-      addHealthStep();
-      this.props.nextStep();
-      this.props.history.push('/assessment/info/health');
+      if(this.askHealthInfo(province)){
+        addHealthStep();
+        this.props.nextStep();
+        this.props.history.push('/assessment/info/health');
+      }else{
+        this.props.nextStep();
+        this.props.history.push('/assessment/success');
+      }
     }
   }
 

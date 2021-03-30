@@ -1,17 +1,71 @@
 import React, { Component } from 'react';
-import { Container, Jumbotron, ButtonGroup, OverlayTrigger } from 'react-bootstrap';
+import { Container, Jumbotron, Card, Button, Row, Col, OverlayTrigger } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Icon from 'react-fontawesome';
+import ReactCardFlip from 'react-card-flip';
 
 import {getSteps} from '../utils/Steps.js';
-import { processor, recipient, donor } from '../utils/Popovers';
+import { select, ConditionalWrapper } from '../utils/Popovers';
+import { dataProcessor, dataRecipient, dataDonor} from '../utils/Definitions';
 import { USER_TYPE } from '../constants';
 
 class UserInfo extends Component{
 
-    saveAndContinue = (userType) => {
+    constructor() {
+      super();
+        this.state = {
+        isFlipped: false,
+        processorSelected: false,
+        recipientSelected: false,
+        donorSelected: false,
+        optionSelected: false,
+      };
+      this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e) {
+      e.preventDefault();
+      this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+    }
+
+
+    select = (userType) => {
+        if(userType === USER_TYPE.PROCESSOR ) {
+            this.setState({
+              processorSelected: true,
+              donorSelected: false,
+              recipientSelected: false,
+              optionSelected: true,
+             });
+        }
+        else if(userType === USER_TYPE.DONOR){
+            this.setState({
+              processorSelected: false,
+              donorSelected: true,
+              recipientSelected: false,
+              optionSelected: true,
+             });
+        }
+        else{
+            this.setState({
+              processorSelected: false,
+              donorSelected: false,
+              recipientSelected: true,
+              optionSelected: true,
+             });
+        }
         this.props.handleUserChange(userType);
-        this.props.nextStep();
+
+    }
+
+    continue = () => {
+      if(this.state.optionSelected) this.props.nextStep();
+    }
+
+    getLinkTo = () => {
+      if(this.state.processorSelected) return "organization"
+      if(!this.state.optionSelected) return "/assessment/user"
+      else return "other-user"
     }
 
     render(){
@@ -38,28 +92,150 @@ class UserInfo extends Component{
                 </h6>
                 <hr />
                 <h1 style={{paddingBottom: '2%'}}> What type of user are you? </h1>
-                <ButtonGroup className='userButtons' style={{width: '60%'}} size='lg' vertical>
-                  <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={processor}>
-                    <Link className='formButton' to='/assessment/organization' onClick={() => this.saveAndContinue(USER_TYPE.PROCESSOR)}>
-                      Data processor
-                    </Link>
-                   </OverlayTrigger>
-                   <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={recipient}>
-                    <Link className='formButton' to='/assessment/other-user' onClick={() => this.saveAndContinue(USER_TYPE.RECIPIENT)}>
-                      Data recipient
-                    </Link>
-                   </OverlayTrigger>
-                  <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={donor}>
-                    <Link className='formButton' to='/assessment/other-user' onClick={() => this.saveAndContinue(USER_TYPE.DONOR)}>
-                      Data donor
-                    </Link>
-                  </OverlayTrigger>
-                </ButtonGroup>
+                <Row className='summaryInfo'>
+                  <Col lg={4}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
+                     <Card  border={this.state.processorSelected ? 'primary' : ''} className={this.state.processorSelected ? ' selectedCard' : ''}>
+                     <Card.Body>
+                       <Card.Title style={{
+                         margingLeft: '3rem',
+                         fontSize: '1rem',
+                         fontWeight: 'normal',
+                         textTransform: 'uppercase',
+                         letterSpacing: 1,
+                         opacity: 0.4,
+                       }}> Data Processor </Card.Title>
+
+                       <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/datapeople/data2-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.PROCESSOR)}> Select </Button>
+                    </Card.Body>
+                    </Card>
+                     </div>
+                     <div className='cardOption'>
+                     <Card border={this.state.processorSelected ? 'primary' : ''}  className={this.state.processorSelected ? 'selectedCard ' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} >Data Processor</Card.Title>
+                        <Card.Text>
+                          {dataProcessor}
+                        </Card.Text>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.PROCESSOR)}> Select </Button>
+                      </Card.Body>
+                    </Card>
+                    </div>
+                   </ReactCardFlip>
+                  </Col>
+                  <Col lg={4}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
+                     <Card  border={this.state.recipientSelected ? 'primary ' : ''}  className={this.state.recipientSelected ? 'selectedCard ' : ''}>
+                     <Card.Body>
+                       <Card.Title style={{
+                         margingLeft: '3rem',
+                         fontSize: '1rem',
+                         fontWeight: 'normal',
+                         textTransform: 'uppercase',
+                         letterSpacing: 1,
+                         opacity: 0.4,
+                       }}> Data Recipient </Card.Title>
+                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/data3-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.RECIPIENT)}> Select </Button>
+                    </Card.Body>
+                    </Card>
+                     </div>
+                     <div className="cardOption">
+                     <Card border={this.state.recipientSelected ? 'primary' : ''} className={this.state.recipientSelected ? 'selectedCard' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} >Data Recipient</Card.Title>
+                        <Card.Text>
+                          {dataRecipient}
+                        </Card.Text>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.RECIPIENT)}> Select </Button>
+                      </Card.Body>
+                    </Card>
+                    </div>
+                   </ReactCardFlip>
+                   <Button variant="primary" style={{margin: '1rem 5rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
+                  </Col>
+                  <Col lg={4}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
+                     <Card border={this.state.donorSelected ? 'primary' : ''} className={this.state.donorSelected ? 'selectedCard' : ''}>
+                     <Card.Body>
+                       <Card.Title style={{
+                         margingLeft: '3rem',
+                         fontSize: '1rem',
+                         fontWeight: 'normal',
+                         textTransform: 'uppercase',
+                         letterSpacing: 1,
+                         opacity: 0.4,
+                       }}> Data Donor </Card.Title>
+                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/data1-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.DONOR)}> Select </Button>
+                    </Card.Body>
+                    </Card>
+                     </div>
+                     <div className="cardOption">
+                     <Card border={this.state.donorSelected ? 'primary' : ''} className={this.state.donorSelected ? 'selectedCard' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} >Data Donor</Card.Title>
+                        <Card.Text>
+                          {dataDonor}
+                        </Card.Text>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.DONOR)}> Select </Button>
+                      </Card.Body>
+                    </Card>
+                    </div>
+                   </ReactCardFlip>
+                  </Col>
+                </Row>
               </div>
               <div className='MainForm__buttons'>
                 <Link className='resetButton' to='/'>
                   <Icon name='arrow-left' /> Previous
                 </Link>
+                <ConditionalWrapper
+                   condition={!this.state.optionSelected}
+                   wrapper={children => (
+                     <OverlayTrigger
+                     placement="right"
+                     delay={{ show: 250, hide: 400 }}
+                     overlay={select}
+                     >
+                      {children}
+                     </OverlayTrigger>
+                   )}
+                >
+                   <div>
+                     <Link style={{marginLeft: '23rem'}} className='resetButton' to={this.getLinkTo()} onClick={this.continue} disabled={!this.props.optionSelected}>
+                       <Icon name='arrow-right' /> Next
+                     </Link>
+                   </div>
+                </ConditionalWrapper>
                 <div className='fill' />
                 <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
                   <Icon name='refresh' /> Reset

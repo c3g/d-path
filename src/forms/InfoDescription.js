@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
-import { Container, Jumbotron, ButtonGroup, Button, OverlayTrigger } from 'react-bootstrap';
+import { Container, Jumbotron, Card, Row, Col , Button, OverlayTrigger } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Icon from 'react-fontawesome';
+import ReactCardFlip from 'react-card-flip';
 import {getSteps, addInfoPublicStep, addIdentifiableStep} from '../utils/Steps.js';
-import { directly, indirectly, anonymous, anonymized, coded } from '../utils/Popovers';
+import { select, ConditionalWrapper } from '../utils/Popovers';
+import { directlyIdentifiable, indirectlyIdentifiable, anonymous, anonymized, coded } from '../utils/Definitions';
 
 import { INFO_TYPE } from '../constants';
 
 class InfoDescription extends Component{
+
+  constructor() {
+    super();
+      this.state = {
+      isFlipped: false,
+      directlySelected: false,
+      indirectlySelected: false,
+      anonymousSelected: false,
+      anonymizedSelected: false,
+      codedSelected: false,
+      optionSelected: false,
+    };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    e.preventDefault();
+    this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+  }
 
     saveAndContinue = (isPersonalInfo, isPublicInfo) => {
         this.props.nextStep();
@@ -16,14 +37,66 @@ class InfoDescription extends Component{
         this.props.history.push('/assessment/success');
     }
 
-    saveInfoType = (infoType) => {
-      if(infoType === INFO_TYPE.DIRECTLY || infoType === INFO_TYPE.INDIRECTLY) this.nextStepPublic(true);
-      else if (infoType === INFO_TYPE.ANONYMOUS || infoType === INFO_TYPE.ANONYMIZED)  this.saveAndContinue(false, false);
+    select = (infoType) => {
+        if(infoType === INFO_TYPE.DIRECTLY ) {
+          this.setState({
+            directlySelected: true,
+            indirectlySelected: false,
+            anonymousSelected: false,
+            anonymizedSelected: false,
+            codedSelected: false,
+            optionSelected: true,
+          });
+        }
+        else if(infoType === INFO_TYPE.INDIRECTLY){
+          this.setState({
+            directlySelected: false,
+            indirectlySelected: true,
+            anonymousSelected: false,
+            anonymizedSelected: false,
+            codedSelected: false,
+            optionSelected: true,
+          });
+        }
+        else if(infoType === INFO_TYPE.ANONYMOUS){
+          this.setState({
+            directlySelected: false,
+            indirectlySelected: false,
+            anonymousSelected: true,
+            anonymizedSelected: false,
+            codedSelected: false,
+            optionSelected: true,
+           });
+        }
+        else if(infoType === INFO_TYPE.ANONYMIZED){
+          this.setState({
+            directlySelected: false,
+            indirectlySelected: false,
+            anonymousSelected: false,
+            anonymizedSelected: true,
+            codedSelected: false,
+            optionSelected: true,
+          });
+        }
+        else{
+          this.setState({
+            directlySelected: false,
+            indirectlySelected: false,
+            anonymousSelected: false,
+            anonymizedSelected: false,
+            codedSelected: true,
+            optionSelected: true,
+          });
+        }
+        this.props.handleInfoTypeChange(infoType);
+
+    }
+
+    continue = () => {
+      if(!this.state.optionSelected) this.props.history.push('/assessment/info/description');
+      else if(this.state.directlySelected || this.state.indirectlySelected) this.nextStepPublic(true);
+      else if (this.state.anonymousSelected || this.state.anonymizedSelected)  this.saveAndContinue(false, false);
       else this.nextStepIdentifiable();
-      this.setState({
-        informationType: infoType
-      });
-      this.props.handleInfoTypeChange(infoType);
     }
 
     nextStepPublic = (identifiable) => {
@@ -64,39 +137,239 @@ class InfoDescription extends Component{
               <hr />
               <div>
                 <h1 style={{paddingBottom: '2%'}}> How would you describe the information? </h1>
-                <ButtonGroup className='userButtons' style={{width: '60%'}} size='lg' vertical>
-                  <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={directly}>
-                    <Button variant='light' className='text-left' onClick={() => this.saveInfoType(INFO_TYPE.DIRECTLY)}>Directly Identifiable</Button>
-                   </OverlayTrigger>
-                   <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={indirectly}>
-                    <Button variant='light' className='text-left' onClick={() => this.saveInfoType(INFO_TYPE.INDIRECTLY)}>Indirectly Identifiable</Button>
-                   </OverlayTrigger>
-                  <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={anonymized}>
-                    <Button variant='light' className='text-left' onClick={() => this.saveInfoType(INFO_TYPE.ANONYMIZED)}>Anonymized</Button>
-                  </OverlayTrigger>
-                  <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={anonymous}>
-                    <Button variant='light' className='text-left' onClick={() => this.saveInfoType(INFO_TYPE.ANONYMOUS)}>Anonymous</Button>
-                  </OverlayTrigger>
-                  <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={coded}>
-                    <Button variant='light' className='text-left' onClick={() => this.saveInfoType(INFO_TYPE.CODED)}>Coded</Button>
-                  </OverlayTrigger>
-                </ButtonGroup>
+                <Row className='summaryInfo'>
+                  <Col lg={4}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
+                     <Card  border={this.state.directlySelected ? 'primary' : ''} className={this.state.directlySelected ? ' selectedCard' : ''}>
+                     <Card.Body>
+                       <Card.Title style={{
+                         margingLeft: '3rem',
+                         fontSize: '1rem',
+                         fontWeight: 'normal',
+                         textTransform: 'uppercase',
+                         letterSpacing: 1,
+                         opacity: 0.4,
+                       }}> Directly Identifiable </Card.Title>
+
+                       <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/datapeople/1-person-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.DIRECTLY)}> Select </Button>
+                    </Card.Body>
+                    </Card>
+                     </div>
+                     <div className='cardOption'>
+                     <Card border={this.state.directlySelected ? 'primary' : ''}  className={this.state.directlySelected ? 'selectedCard ' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} > Directly Identifiable </Card.Title>
+                        <Card.Text>
+                          {directlyIdentifiable}
+                        </Card.Text>
+                        <Button variant="success"  className="selectCardButton" onClick={() => this.select(INFO_TYPE.DIRECTLY)}> Select </Button>
+                      </Card.Body>
+                    </Card>
+                    </div>
+                   </ReactCardFlip>
+                  </Col>
+                  <Col lg={4}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
+                     <Card  border={this.state.indirectlySelected ? 'primary ' : ''}  className={this.state.indirectlySelected ? 'selectedCard ' : ''}>
+                     <Card.Body>
+                       <Card.Title style={{
+                         margingLeft: '3rem',
+                         fontSize: '1rem',
+                         fontWeight: 'normal',
+                         textTransform: 'uppercase',
+                         letterSpacing: 1,
+                         opacity: 0.4,
+                       }}> Indirectly Identifiable </Card.Title>
+                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/2-person-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.INDIRECTLY)}> Select </Button>
+                    </Card.Body>
+                    </Card>
+                     </div>
+                     <div className="cardOption">
+                     <Card border={this.state.indirectlySelected ? 'primary' : ''} className={this.state.indirectlySelected ? 'selectedCard' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} > Indirectly Identifiable </Card.Title>
+                        <Card.Text>
+                          {indirectlyIdentifiable}
+                        </Card.Text>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.INDIRECTLY)}> Select </Button>
+                      </Card.Body>
+                    </Card>
+                    </div>
+                   </ReactCardFlip>
+                  </Col>
+                  <Col lg={4}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
+                     <Card border={this.state.anonymizedSelected ? 'primary' : ''} className={this.state.anonymizedSelected ? 'selectedCard' : ''}>
+                     <Card.Body>
+                       <Card.Title style={{
+                         margingLeft: '3rem',
+                         fontSize: '1rem',
+                         fontWeight: 'normal',
+                         textTransform: 'uppercase',
+                         letterSpacing: 1,
+                         opacity: 0.4,
+                       }}> Anonymized </Card.Title>
+                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/3-person-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.ANONYMIZED)}> Select </Button>
+                    </Card.Body>
+                    </Card>
+                     </div>
+                     <div className="cardOption">
+                     <Card border={this.state.anonymizedSelected ? 'primary' : ''} className={this.state.anonymizedSelected ? 'selectedCard' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} > Anonymized </Card.Title>
+                        <Card.Text>
+                          {anonymized}
+                        </Card.Text>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.ANONYMIZED)}> Select </Button>
+                      </Card.Body>
+                    </Card>
+                    </div>
+                   </ReactCardFlip>
+                  </Col>
+                  <Col style={{marginTop: '2rem', marginLeft:'10rem'}} lg={4}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
+                     <Card border={this.state.anonymousSelected ? 'primary' : ''} className={this.state.anonymousSelected ? 'selectedCard' : ''}>
+                     <Card.Body>
+                       <Card.Title style={{
+                         margingLeft: '3rem',
+                         fontSize: '1rem',
+                         fontWeight: 'normal',
+                         textTransform: 'uppercase',
+                         letterSpacing: 1,
+                         opacity: 0.4,
+                       }}> Anonymous </Card.Title>
+                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/4-person-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.ANONYMOUS)}> Select </Button>
+                    </Card.Body>
+                    </Card>
+                     </div>
+                     <div className="cardOption">
+                     <Card border={this.state.anonymousSelected ? 'primary' : ''} className={this.state.anonymousSelected ? 'selectedCard' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} > Anonymous </Card.Title>
+                        <Card.Text>
+                          {anonymous}
+                        </Card.Text>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.ANONYMOUS)}> Select </Button>
+                      </Card.Body>
+                    </Card>
+                    </div>
+                   </ReactCardFlip>
+                  </Col>
+                  <Col style={{marginTop: '2rem'}} lg={4}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
+                     <Card border={this.state.codedSelected ? 'primary' : ''} className={this.state.codedSelected ? 'selectedCard' : ''}>
+                     <Card.Body>
+                       <Card.Title style={{
+                         margingLeft: '3rem',
+                         fontSize: '1rem',
+                         fontWeight: 'normal',
+                         textTransform: 'uppercase',
+                         letterSpacing: 1,
+                         opacity: 0.4,
+                       }}> Coded </Card.Title>
+                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/5-person-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.CODED)}> Select </Button>
+                    </Card.Body>
+                    </Card>
+                     </div>
+                     <div className="cardOption">
+                     <Card border={this.state.codedSelected ? 'primary' : ''} className={this.state.codedSelected ? 'selectedCard' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} > Coded </Card.Title>
+                        <Card.Text>
+                          {coded}
+                        </Card.Text>
+                        <Button variant="success"  className="selectCardButton" onClick={() => this.select(INFO_TYPE.CODED)}> Select </Button>
+                      </Card.Body>
+                    </Card>
+                    </div>
+                   </ReactCardFlip>
+                   <Button variant="primary" style={{margin: '1rem -6rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
+                  </Col>
+                </Row>
               </div>
-              </div>
-              <div className='MainForm__buttons'>
-                <Link className='resetButton' to='/assessment/donors' onClick={this.props.prevStep}>
+              <div style={{marginTop: '2rem'}} className='MainForm__buttons'>
+                <Link className='resetButton' to='/assessment/donors'>
                   <Icon name='arrow-left' /> Previous
                 </Link>
+                <ConditionalWrapper
+                   condition={!this.state.optionSelected}
+                   wrapper={children => (
+                     <OverlayTrigger
+                     placement="right"
+                     delay={{ show: 250, hide: 400 }}
+                     overlay={select}
+                     >
+                      {children}
+                     </OverlayTrigger>
+                   )}
+                >
+                   <div>
+                     <Link style={{marginLeft: '23rem'}} className='resetButton' onClick={this.continue} disabled={!this.props.optionSelected}>
+                       <Icon name='arrow-right' /> Next
+                     </Link>
+                   </div>
+                </ConditionalWrapper>
                 <div className='fill' />
                 <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
                   <Icon name='refresh' /> Reset
                 </Link>
               </div>
-            </Jumbotron>
-          </Container>
+            </div>
+          </Jumbotron>
+        </Container>
         </>
       )
-    }
+   }
 }
 
 export default InfoDescription;

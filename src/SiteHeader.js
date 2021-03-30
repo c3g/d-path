@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-
-import {Navbar} from 'react-bootstrap';
+import {Navbar, DropdownButton} from 'react-bootstrap';
 
 class SiteHeader extends Component {
     render() {
@@ -19,6 +18,13 @@ class SiteHeader extends Component {
             </Navbar.Brand>
 
             <Navbar.Collapse className='justify-content-end'>
+              <DropdownButton style={{marginRight: "2rem"}}id="dropdown-primary-button" size="lg" variant="secondary" title="Menu">
+                <Link to="/about-us" className='navButton'> About Us </Link>
+                <Link to="/terminology" className='navButton'> Terminology </Link>
+                <Link to="/privacy-policy" className='navButton'> Privacy Policy </Link>
+                <Link to="/disclaimer" className='navButton'> Disclaimer </Link>
+              </DropdownButton>
+
               <Navbar.Text
                 style={{color: 'white', padding: '20px'}}
                 className='blockquote mb-0'>

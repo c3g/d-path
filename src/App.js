@@ -4,6 +4,10 @@ import {Route, Switch} from 'react-router-dom';
 import SiteHeader from './SiteHeader';
 import SiteFooter from './SiteFooter';
 import Landing from './Landing';
+import AboutUs from './AboutUs';
+import Terminology from './Terminology';
+import PrivacyPolicy from './PrivacyPolicy';
+import Disclaimer from './Disclaimer';
 import DataDonorsForm from './forms/DataDonorsForm';
 import DataProcessingForm from './forms/DataProcessingForm';
 import DataUsersForm from './forms/DataUsersForm';
@@ -224,6 +228,10 @@ class App extends Component {
           <div style={{ flex: '1' }}>
             <Switch>
               <Route exact path='/' component={Landing} />
+              <Route exact path='/about-us' component={AboutUs} />
+              <Route exact path='/terminology' component={Terminology} />
+              <Route exact path='/privacy-policy' component={PrivacyPolicy} />
+              <Route exact path='/disclaimer' component={Disclaimer} />
               <Route
                 path='/assessment/user'
                 render={(props) => (

@@ -1,5 +1,18 @@
 import React from 'react';
-import { Popover} from 'react-bootstrap';
+import { Popover, Tooltip} from 'react-bootstrap';
+
+export const select = (props) => (
+  <Tooltip id="button-tooltip" {...props}>
+    Please select an option to continue.
+  </Tooltip>
+);
+
+export const ConditionalWrapper = ({
+    condition,
+    wrapper,
+    children,
+}) => (condition ? wrapper(children) : children);
+
 
 export const processor = (
   <Popover id='popover-basic'>

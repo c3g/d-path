@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { ButtonGroup, Container, Jumbotron, OverlayTrigger } from 'react-bootstrap';
+import { Col, Row, Card, Button, Container, Jumbotron, OverlayTrigger } from 'react-bootstrap';
 import Select from 'react-select';
 import Icon from 'react-fontawesome';
 import {getSteps} from '../utils/Steps.js';
 import countryList from 'react-select-country-list';
-import { europe } from '../utils/Popovers';
+import { ConditionalWrapper, select } from '../utils/Popovers';
 
 import { LOCATION } from '../constants';
 
@@ -18,21 +18,71 @@ class DataUsersForm extends Component{
 
     this.state = {
       options: this.options,
+      canadaSelected: false,
+      USASelected: false,
+      EUSelected: false,
+      otherSelected: false,
+      optionSelected: false,
       value: null,
     }
   }
 
    changeHandler = value => {
      this.setState({ value });
-     this.saveLocation(value.label);
-     this.props.history.push('/assessment/donors');
+     this.select(value.label);
    }
 
-
-    saveLocation = (location) => {
-      this.props.nextStep();
-      this.props.handleLocChange({ type: 'dataUsers', location });
+    continue = () => {
+      if(this.state.optionSelected) this.props.nextStep();
     }
+
+    getLinkTo = () => {
+      if(!this.state.optionSelected) return "/assessment/recipients"
+      else return "/assessment/donors"
+    }
+
+    select = (location) => {
+        if(location === LOCATION.CAN) {
+            this.setState({
+              canadaSelected: true,
+              USASelected : false,
+              EUSelected: false,
+              otherSelected: false,
+              optionSelected: true
+             });
+        }
+        else if(location === LOCATION.USA){
+            this.setState({
+              canadaSelected: false,
+              USASelected : true,
+              EUSelected: false,
+              otherSelected: false,
+              optionSelected: true
+             });
+        }
+        else if (location === LOCATION.EU){
+            this.setState({
+              canadaSelected: false,
+              USASelected : false,
+              EUSelected: true,
+              otherSelected: false,
+              optionSelected: true
+             });
+        }
+        else{
+          this.setState({
+            canadaSelected: false,
+            USASelected : false,
+            EUSelected: false,
+            otherSelected: true,
+            optionSelected: true
+          });
+        }
+
+        this.props.handleLocChange({ type: 'dataUsers', location: location });
+
+    }
+
 
     render(){
       const {step, assessment} = this.props;
@@ -59,13 +109,63 @@ class DataUsersForm extends Component{
                 <hr />
                 <div>
                   <h1 style={{paddingBottom: '2%'}}> Where are the data recipients/users? </h1>
-                  <ButtonGroup style={{width:'60%'}} size="lg" vertical>
-                    <Link className='formButton' to='/assessment/donors' onClick={() => this.saveLocation(LOCATION.CAN)}> Canada </Link>
-                    <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={europe}>
-                        <Link className='formButton' to='/assessment/donors' onClick={() => this.saveLocation(LOCATION.EU)}> Europe </Link>
-                    </OverlayTrigger>
-                    <Link className='formButton' to='/assessment/donors' onClick={() => this.saveLocation(LOCATION.USA)}> United States </Link>
-                  </ButtonGroup>
+                  <Row className='summaryInfo'>
+                    <Col lg={4}>
+                       <div className='cardOption'>
+                       <Card  border={this.state.canadaSelected ? 'primary' : ''} className={this.state.canadaSelected ? ' selectedCard' : ''}>
+                       <Card.Body>
+                         <Card.Title style={{
+                           margingLeft: '3rem',
+                           fontSize: '1rem',
+                           fontWeight: 'normal',
+                           textTransform: 'uppercase',
+                           letterSpacing: 1,
+                           opacity: 0.4,
+                         }}> Canada </Card.Title>
+
+                        <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/maps/1-map-200x200.png')} rounded />
+                      <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.CAN)}> Select </Button>
+                      </Card.Body>
+                      </Card>
+                       </div>
+                    </Col>
+                    <Col lg={4}>
+                       <div className='cardOption'>
+                       <Card  border={this.state.USASelected ? 'primary ' : ''}  className={this.state.USASelected ? 'selectedCard ' : ''}>
+                       <Card.Body>
+                         <Card.Title style={{
+                           margingLeft: '3rem',
+                           fontSize: '1rem',
+                           fontWeight: 'normal',
+                           textTransform: 'uppercase',
+                           letterSpacing: 1,
+                           opacity: 0.4,
+                         }}> United States </Card.Title>
+                         <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/maps/3-map-200x200.png')} rounded />
+                      <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.USA)}> Select </Button>
+                      </Card.Body>
+                      </Card>
+                    </div>
+                    </Col>
+                    <Col lg={4}>
+                       <div className='cardOption'>
+                       <Card border={this.state.EUSelected ? 'primary' : ''} className={this.state.EUSelected ? 'selectedCard' : ''}>
+                       <Card.Body>
+                         <Card.Title style={{
+                           margingLeft: '3rem',
+                           fontSize: '1rem',
+                           fontWeight: 'normal',
+                           textTransform: 'uppercase',
+                           letterSpacing: 1,
+                           opacity: 0.4,
+                         }}> European Union </Card.Title>
+                         <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/maps/2-map-200x200.png')} rounded />
+                      <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
+                      </Card.Body>
+                      </Card>
+                       </div>
+                    </Col>
+                  </Row>
                 </div>
                 <h4
                 style={{
@@ -79,7 +179,7 @@ class DataUsersForm extends Component{
                 }}>
                   OR
                 </h4>
-                <div  style={{width: '50%', marginLeft: '25%'}}>
+                <div  style={{width: '50%', marginLeft: '25%', marginBottom: '2rem'}}>
                   <Select
                      options={this.state.options}
                      value={this.state.value}
@@ -88,9 +188,27 @@ class DataUsersForm extends Component{
                 </div>
               </div>
               <div className='MainForm__buttons'>
-                <Link className='resetButton' to='/assessment/processor' onClick={this.props.prevStep}>
+                <Link className='resetButton' to='/assessment/recipients' onClick={this.props.prevStep}>
                   <Icon name='arrow-left' /> Previous
                 </Link>
+                <ConditionalWrapper
+                   condition={!this.state.optionSelected}
+                   wrapper={children => (
+                     <OverlayTrigger
+                     placement="right"
+                     delay={{ show: 250, hide: 400 }}
+                     overlay={select}
+                     >
+                      {children}
+                     </OverlayTrigger>
+                   )}
+                >
+                   <div>
+                     <Link style={{marginLeft: '23rem'}} className='resetButton' to={this.getLinkTo()} onClick={this.continue} disabled={!this.props.optionSelected}>
+                       <Icon name='arrow-right' /> Next
+                     </Link>
+                   </div>
+                </ConditionalWrapper>
                 <div className='fill' />
                 <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
                   <Icon name='refresh' /> Reset

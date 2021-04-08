@@ -7,6 +7,7 @@ import Landing from './Landing';
 import AboutUs from './AboutUs';
 import Terminology from './Terminology';
 import PrivacyPolicy from './PrivacyPolicy';
+import License from './License';
 import Disclaimer from './Disclaimer';
 import DataDonorsForm from './forms/DataDonorsForm';
 import DataProcessingForm from './forms/DataProcessingForm';
@@ -231,6 +232,7 @@ class App extends Component {
               <Route exact path='/about-us' component={AboutUs} />
               <Route exact path='/terminology' component={Terminology} />
               <Route exact path='/privacy-policy' component={PrivacyPolicy} />
+              <Route exact path='/license' component={License} />
               <Route exact path='/disclaimer' component={Disclaimer} />
               <Route
                 path='/assessment/user'

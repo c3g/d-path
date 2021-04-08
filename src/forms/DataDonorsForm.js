@@ -80,7 +80,7 @@ class DataDonorsForm extends Component{
                 Location Information
               </h6>
               <hr />
-              <h1 style={{paddingBottom: '2%'}}> Where are the data subjects/data donors?  </h1>
+              <h3 style={{paddingBottom: '2%'}}>  Where were the data subjects/data donors located when their behaviour was being monitored OR when they were being offered goods and services?  </h3>
               <Row className='summaryInfo'>
                 <Col style={{marginLeft: '10rem'}} lg={4}>
                   <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >

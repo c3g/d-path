@@ -96,7 +96,7 @@ export const PROVINCES = {
   },
   NS: {
     name: 'Nova Scotia',
-    healthLaw: '[Personal Health Information Act]',
+    healthLaw: ['Personal Health Information Act'],
     laws: ['Freedom of Information and Protection Privacy Act', 'Personal Health Informatio Act', 'Part XX of the Municipal Government Act ']
   },
   NUN: {

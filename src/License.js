@@ -1,12 +1,12 @@
-import React, {Component}from 'react';
+import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import {Jumbotron, Container} from 'react-bootstrap';
-import myPDF from './media/PrivacyPolicy.pdf'
+import license from './media/License.pdf'
 import Icon from 'react-fontawesome';
 import Viewer, { Worker } from '@phuocng/react-pdf-viewer';
 import '@phuocng/react-pdf-viewer/cjs/react-pdf-viewer.css';
 
-class PrivacyPolicy extends Component {
+class License extends Component {
 
   render() {
     return (
@@ -14,12 +14,12 @@ class PrivacyPolicy extends Component {
         <div>
           <Jumbotron>
             <h1 className='text-center' style={{ fontSize: '45px', fontWeight: '300', marginBottom: '1em' }}>
-              Privacy Policy
+              License
             </h1>
             <div>
                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.5.207/build/pdf.worker.min.js">
                 <div id="pdfviewer">
-                    <Viewer fileUrl={myPDF} />
+                    <Viewer fileUrl={license} />
                 </div>
                 </Worker>
             </div>
@@ -33,6 +33,7 @@ class PrivacyPolicy extends Component {
       </Container>
     );
   }
+
 }
 
-export default PrivacyPolicy;
+export default License;

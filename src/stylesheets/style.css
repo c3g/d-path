@@ -146,16 +146,15 @@ abbr {
   display: flex;
   flex-direction: row;
   font-size: 50px;
-  width: 100%;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.1);
+  float: right;
   border: 1px  ;
-  border-radius: 5px;
   padding: 10px 15px ;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  color:black;
+  color:white;
 }
 
 .navButton:hover {
@@ -163,6 +162,8 @@ abbr {
   color: black;
   text-decoration: none;
 }
+
+
 
 .selectCardButton {
   position: absolute;
@@ -338,4 +339,67 @@ abbr {
   display: flex;
   flex-direction: row;
   margin-top: 10px;
+}
+
+.pagination {
+  display: flex;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-left: 33%;
+  width: 50%;
+}
+
+.page-link{
+  border: 1px solid ;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+}
+
+.page-link:hover{
+  background-color: #0060CC; /* Green */
+  color: white;
+  text-decoration: none;
+}
+
+.next{
+  padding: 0.5rem 0rem;
+}
+
+.next-link{
+  padding: 0.5rem 1rem;
+  border: 1px solid ;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.next-link:hover {
+  background-color: #0060CC; /* Green */
+  color: white;
+  text-decoration: none;
+}
+
+.previous{
+  padding: 0.5rem 0rem;
+}
+
+.previous-link{
+  padding: 0.5rem 1rem;
+  border: 1px solid ;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.previous-link:hover {
+  background-color: #0060CC; /* Green */
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-toggler{
+  background: white;
+}
+
+.nav-link{
+  text-align: right;
+  padding:1%;
 }

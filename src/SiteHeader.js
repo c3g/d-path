@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {Navbar, DropdownButton} from 'react-bootstrap';
+import {Navbar, Nav } from 'react-bootstrap';
+
+//import "bootstrap/dist/css/bootstrap.min.css";
 
 class SiteHeader extends Component {
+
+    showSettings (event) {
+      event.preventDefault();
+    }
+
     render() {
         return (
-          <Navbar variant='white' >
+          <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.1)', marginBottom: '2rem' }}>
+          <Navbar expand={false} collapseOnSelect >
             <Navbar.Brand>
                 <Link to='/'>
                     <img
@@ -16,22 +24,30 @@ class SiteHeader extends Component {
                     />
                 </Link>
             </Navbar.Brand>
-
-            <Navbar.Collapse className='justify-content-end'>
-              <DropdownButton style={{marginRight: "2rem"}}id="dropdown-primary-button" size="lg" variant="secondary" title="Menu">
+            <Navbar.Brand style={{marginLeft: "65%"}}>
+                <Link to='/'>
+                    <img
+                        alt=''
+                        src={require('./media/logoD-Path.png')}
+                        width='170'
+                        height='60'
+                    />
+                </Link>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="mr-auto">
+                <Link to="/" className='navButton'> Home </Link>
                 <Link to="/about-us" className='navButton'> About Us </Link>
                 <Link to="/terminology" className='navButton'> Terminology </Link>
-                <Link to="/privacy-policy" className='navButton'> Privacy Policy </Link>
                 <Link to="/disclaimer" className='navButton'> Disclaimer </Link>
-              </DropdownButton>
-
-              <Navbar.Text
-                style={{color: 'white', padding: '20px'}}
-                className='blockquote mb-0'>
-                  D-PATH
-              </Navbar.Text>
+                <Link to="/privacy-policy" className='navButton'> Privacy Policy </Link>
+                <Link to="/license" className='navButton'> License </Link>
+              </Nav>
             </Navbar.Collapse>
           </Navbar>
+
+          </div>
         );
     }
 }

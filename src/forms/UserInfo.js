@@ -91,7 +91,7 @@ class UserInfo extends Component{
                   User Information
                 </h6>
                 <hr />
-                <h1 style={{paddingBottom: '2%'}}> What type of user are you? </h1>
+                <h1 style={{paddingBottom: '2%'}}> What is your relationship to the data? </h1>
                 <Row className='summaryInfo'>
                   <Col lg={4}>
                     <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import Icon from 'react-fontawesome';
 import {Jumbotron, Container} from 'react-bootstrap';
 
 class Disclaimer extends Component {
@@ -12,13 +13,11 @@ class Disclaimer extends Component {
               Disclaimer
             </h1>
             <p style={{ fontSize: '20px', fontWeight: '300', margin: '0 auto 3em', width: '80ch', maxWidth: '100%' }}>
-              D-PATH (Data Privacy Assessment Tool for Health) is a privacy assessment tool for the sharing of health-related data
-              that aims to guide researchers, data hosts, and service providers such as cloud computing companies, in protecting the privacy and confidentiality
-              of the human health-related datasets they process in a manner that is in agreement with the applicable legal, professional and ethical norms.
+            The content displayed at the end of using D-PATH (List of obligations and requirements) is provided only for general information purposes with the intention to give you an initial general idea of what type of obligations you may have to comply with.  It does NOT constitute legal or other professional advice. Users of D-PATH are therefore advised and encouraged to seek proper legal advice.
             </p>
-            <div className='text-center'>
+            <div className='text-center' style={{marginTop: '1rem'}}>
               <Link to='/' className='btn btn-primary btn-lg'>
-                Back
+              <Icon name="home"/>    Back
               </Link>
             </div>
           </Jumbotron>

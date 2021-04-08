@@ -1,24 +1,24 @@
 import React from 'react';
 import {Card, ListGroup, Tabs, Tab, Col, Row, Accordion, Button} from 'react-bootstrap';
 import cx from 'classnames';
-import {bestPracticesText, bestPracticesCardsText, quebecLawsText, quebecLawCardsText, euroLawsText} from './TextLawsUtils';
+import {newBestPracticesText, bestPracticesCardsText, quebecLawsText, quebecLawCardsText, euroLawsText} from './TextLawsUtils';
 import { PROCESSOR, PROVINCES } from '../constants';
 
 const bestPracticeTabs = [
   {
     key: 'accountability',
     title: 'Accountability',
-    items: bestPracticesText.accountability,
+    items: newBestPracticesText.accountability,
   },
   {
     key: 'law',
     title: 'Lawfulness of Use, Storage, Transfer and Protection',
-    items: bestPracticesText.law,
+    items: newBestPracticesText.law,
   },
   {
     key: 'security',
     title: 'Security and Safeguards',
-    items: bestPracticesText.security,
+    items: newBestPracticesText.security,
   },
 ]
 

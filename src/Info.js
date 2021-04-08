@@ -128,8 +128,7 @@ class Info extends Component {
           }}>
           <strong> Please note that this is NOT a legal assessment. </strong>
           <hr />
-          If your country's obligations are not listed in detail you can click
-            <Link to="/additional-country"> here </Link>
+          If your country's obligations are not listed in detail you can send us an email to fulanito@detal.com
           </Card>
         </Container>
     )

@@ -269,7 +269,7 @@ class InfoDescription extends Component{
                          letterSpacing: 1,
                          opacity: 0.4,
                        }}> Anonymous </Card.Title>
-                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/4-person-200x200.png')} rounded />
+                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/6-person-200x200.png')} rounded />
                     <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.ANONYMOUS)}> Select </Button>
                     </Card.Body>
                     </Card>

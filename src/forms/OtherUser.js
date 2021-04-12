@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Jumbotron, Container, Alert} from 'react-bootstrap';
+import { Jumbotron, Container, Alert, Image} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Icon from 'react-fontawesome';
 
@@ -23,6 +23,7 @@ class Success extends Component{
                   with your data producer for your obligations. </Alert>
                 </h5>
               </div>
+              <Image src={require('../media/yes-no/contract-200x200.png')} width='200' height='200' style={{ marginLeft: '40%'}} />
               <div className='MainForm__buttons'>
                 <Link className='resetButton' to='/assessment/user' onClick={this.props.prevStep}>
                   <Icon name='arrow-left' /> Previous

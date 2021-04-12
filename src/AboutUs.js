@@ -24,7 +24,6 @@ class AboutUs extends Component {
             <Card>
               <Card.Header as="h5"> What D-PATH is not?</Card.Header>
               <Card.Body>
-                <Card.Title>Special title treatment</Card.Title>
                 <Card.Text>
                   D-PATH is NOT a tool that provides legal or other professional advice. Users of D-PATH are therefore advised and encouraged to seek proper legal advice to ensure their activities of management and sharing are lawful and fully compliant with the applicable law.
                 </Card.Text>

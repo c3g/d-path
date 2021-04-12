@@ -192,7 +192,7 @@ class InfoProcessor extends Component{
                     </Card>
                    </div>
                    <div className="cardOptionProcessor">
-                   <Card border={this.state.commercialSelected ? 'primary' : ''} className={this.state.commercialSelected ? 'selectedCard' : ''}>
+                   <Card border={this.state.federalSelected ? 'primary' : ''} className={this.state.federalSelected ? 'selectedCard' : ''}>
                     <Card.Body>
                       <Card.Title style={{
                         marginBottom: '1rem',
@@ -203,10 +203,10 @@ class InfoProcessor extends Component{
                         letterSpacing: 1,
                         opacity: 0.4,
                       }} > Federal Government Institution </Card.Title>
-                      <Card.Text  style={{fontSize:'0.8rem'}}>
+                      <Card.Text  style={{fontSize:'0.9rem'}}>
                         {federalGovernmentInstitution}
                       </Card.Text>
-                      <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.commercialSelected)}> Select </Button>
+                      <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.FED)}> Select </Button>
                     </Card.Body>
                   </Card>
                   </div>
@@ -242,10 +242,10 @@ class InfoProcessor extends Component{
                           letterSpacing: 1,
                           opacity: 0.4,
                         }} > Private Individuals and Organizations in the course of Commercial activities </Card.Title>
-                        <Card.Text  style={{fontSize:'0.8rem'}}>
+                        <Card.Text  style={{fontSize:'0.9rem'}}>
                           {privateCommercial}
                         </Card.Text>
-                        <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.commercialSelected)}> Select </Button>
+                        <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.PRIV_COMM)}> Select </Button>
                       </Card.Body>
                     </Card>
                     </div>
@@ -281,7 +281,7 @@ class InfoProcessor extends Component{
                           letterSpacing: 1,
                           opacity: 0.4,
                         }} > Federally regulated businesses </Card.Title>
-                        <Card.Text  style={{fontSize:'0.8rem'}}>
+                        <Card.Text  style={{fontSize:'0.9rem'}}>
                           {fwub}
                         </Card.Text>
                         <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.FWUB)}> Select </Button>
@@ -319,7 +319,7 @@ class InfoProcessor extends Component{
                            letterSpacing: 1,
                            opacity: 0.4,
                          }}> Provincial Government Institution </Card.Title>
-                         <Card.Text  style={{fontSize:'0.8rem'}}>
+                         <Card.Text  style={{fontSize:'0.9rem'}}>
                            {provincial}
                          </Card.Text>
                       <Button variant="success"  className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.PROV_GOV)}> Select </Button>
@@ -340,7 +340,7 @@ class InfoProcessor extends Component{
                          textTransform: 'uppercase',
                          letterSpacing: 1,
                          opacity: 0.4,
-                       }}> MUSHs </Card.Title>
+                       }}> MUSH </Card.Title>
                        <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/institutions/5-institution-200x200.png')} rounded />
                     <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.MUSH)}> Select </Button>
                     </Card.Body>
@@ -357,8 +357,8 @@ class InfoProcessor extends Component{
                           textTransform: 'uppercase',
                           letterSpacing: 1,
                           opacity: 0.4,
-                        }} > MUSHs </Card.Title>
-                        <Card.Text style={{fontSize:'0.8rem'}}>
+                        }} > MUSH </Card.Title>
+                        <Card.Text style={{fontSize:'0.9rem'}}>
                           {mush}
                         </Card.Text>
                         <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.MUSH)}> Select </Button>
@@ -397,7 +397,7 @@ class InfoProcessor extends Component{
                           letterSpacing: 1,
                           opacity: 0.4,
                         }} > Healthcare Professionals </Card.Title>
-                        <Card.Text>
+                        <Card.Text style={{fontSize:'0.9rem'}}>
                           {healthcare}
                         </Card.Text>
                         <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.HEALTHCARE)}> Select </Button>
@@ -436,7 +436,7 @@ class InfoProcessor extends Component{
                         letterSpacing: 1,
                         opacity: 0.4,
                       }}> Individuals and Organizations in the course of Non-Commercial activities </Card.Title>
-                      <Card.Text>
+                      <Card.Text style={{fontSize:'0.9rem'}}>
                         {privateNonCommercial}
                       </Card.Text>
                    <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.NON_COMM)}> Select </Button>

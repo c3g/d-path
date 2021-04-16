@@ -448,7 +448,7 @@ class InfoProcessor extends Component{
                 </Row>
               </div>
               <div style={{marginTop: '2rem'}} className='MainForm__buttons'>
-                <Link className='resetButton' to='/assessment/info/public'>
+                <Link className='resetButton' to='/assessment/info/public'  onClick={this.props.prevStep}>
                   <Icon name='arrow-left' /> Previous
                 </Link>
                 <ConditionalWrapper

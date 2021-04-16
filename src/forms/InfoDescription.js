@@ -220,6 +220,45 @@ class InfoDescription extends Component{
                   <Col lg={4}>
                     <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
                      <div className='cardOption'>
+                     <Card border={this.state.codedSelected ? 'primary' : ''} className={this.state.codedSelected ? 'selectedCard' : ''}>
+                     <Card.Body>
+                       <Card.Title style={{
+                         margingLeft: '3rem',
+                         fontSize: '1rem',
+                         fontWeight: 'normal',
+                         textTransform: 'uppercase',
+                         letterSpacing: 1,
+                         opacity: 0.4,
+                       }}> Coded </Card.Title>
+                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/5-person-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.CODED)}> Select </Button>
+                    </Card.Body>
+                    </Card>
+                     </div>
+                     <div className="cardOption">
+                     <Card border={this.state.codedSelected ? 'primary' : ''} className={this.state.codedSelected ? 'selectedCard' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} > Coded </Card.Title>
+                        <Card.Text>
+                          {coded}
+                        </Card.Text>
+                        <Button variant="success"  className="selectCardButton" onClick={() => this.select(INFO_TYPE.CODED)}> Select </Button>
+                      </Card.Body>
+                    </Card>
+                    </div>
+                   </ReactCardFlip>
+                  </Col>
+                  <Col lg={4} style={{marginTop: '2rem', marginLeft:'10rem'}}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
                      <Card border={this.state.anonymizedSelected ? 'primary' : ''} className={this.state.anonymizedSelected ? 'selectedCard' : ''}>
                      <Card.Body>
                        <Card.Title style={{
@@ -256,7 +295,7 @@ class InfoDescription extends Component{
                     </div>
                    </ReactCardFlip>
                   </Col>
-                  <Col style={{marginTop: '2rem', marginLeft:'10rem'}} lg={4}>
+                  <Col style={{marginTop: '2rem'}} lg={4}>
                     <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
                      <div className='cardOption'>
                      <Card border={this.state.anonymousSelected ? 'primary' : ''} className={this.state.anonymousSelected ? 'selectedCard' : ''}>
@@ -294,51 +333,12 @@ class InfoDescription extends Component{
                     </Card>
                     </div>
                    </ReactCardFlip>
-                  </Col>
-                  <Col style={{marginTop: '2rem'}} lg={4}>
-                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
-                     <div className='cardOption'>
-                     <Card border={this.state.codedSelected ? 'primary' : ''} className={this.state.codedSelected ? 'selectedCard' : ''}>
-                     <Card.Body>
-                       <Card.Title style={{
-                         margingLeft: '3rem',
-                         fontSize: '1rem',
-                         fontWeight: 'normal',
-                         textTransform: 'uppercase',
-                         letterSpacing: 1,
-                         opacity: 0.4,
-                       }}> Coded </Card.Title>
-                       <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/datapeople/5-person-200x200.png')} rounded />
-                    <Button variant="success" className="selectCardButton" onClick={() => this.select(INFO_TYPE.CODED)}> Select </Button>
-                    </Card.Body>
-                    </Card>
-                     </div>
-                     <div className="cardOption">
-                     <Card border={this.state.codedSelected ? 'primary' : ''} className={this.state.codedSelected ? 'selectedCard' : ''}>
-                      <Card.Body>
-                        <Card.Title style={{
-                          marginBottom: '1rem',
-                          marginTop: '1rem',
-                          fontSize: '1em',
-                          fontWeight: 'normal',
-                          textTransform: 'uppercase',
-                          letterSpacing: 1,
-                          opacity: 0.4,
-                        }} > Coded </Card.Title>
-                        <Card.Text>
-                          {coded}
-                        </Card.Text>
-                        <Button variant="success"  className="selectCardButton" onClick={() => this.select(INFO_TYPE.CODED)}> Select </Button>
-                      </Card.Body>
-                    </Card>
-                    </div>
-                   </ReactCardFlip>
                    <Button variant="primary" style={{margin: '1rem -6rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
                   </Col>
                 </Row>
               </div>
               <div style={{marginTop: '2rem'}} className='MainForm__buttons'>
-                <Link className='resetButton' to='/assessment/donors'>
+                <Link className='resetButton' to='/assessment/donors'  onClick={this.props.prevStep}>
                   <Icon name='arrow-left' /> Previous
                 </Link>
                 <ConditionalWrapper

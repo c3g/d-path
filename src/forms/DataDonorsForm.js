@@ -94,9 +94,9 @@ class DataDonorsForm extends Component{
                            textTransform: 'uppercase',
                            letterSpacing: 1,
                            opacity: 0.4,
-                         }}> Europe </Card.Title>
+                         }}> European Union </Card.Title>
 
-                         <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/maps/1-map-200x200.png')} rounded />
+                         <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/maps/2-map-200x200.png')} rounded />
                       <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
                       </Card.Body>
                       </Card>
@@ -112,7 +112,7 @@ class DataDonorsForm extends Component{
                           textTransform: 'uppercase',
                           letterSpacing: 1,
                           opacity: 0.4,
-                        }} > Europe </Card.Title>
+                        }} > European Union </Card.Title>
                         <Card.Text>
                           {europe}
                         </Card.Text>
@@ -151,7 +151,7 @@ class DataDonorsForm extends Component{
               </Card>
             </div>
             <div className='MainForm__buttons'>
-              <Link className='resetButton' to='/assessment/recipients'>
+              <Link className='resetButton' to='/assessment/recipients'  onClick={this.props.prevStep}>
                 <Icon name='arrow-left' /> Previous
               </Link>
               <ConditionalWrapper

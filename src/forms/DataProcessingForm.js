@@ -5,7 +5,9 @@ import Select from 'react-select';
 import Icon from 'react-fontawesome';
 import {getSteps} from '../utils/Steps.js';
 import countryList from 'react-select-country-list';
+import { link  } from '../utils/Link';
 import { ConditionalWrapper, select } from '../utils/Popovers';
+import ReactCardFlip from 'react-card-flip';
 
 import { LOCATION } from '../constants';
 
@@ -18,6 +20,7 @@ class DataProcessingForm extends Component{
 
     this.state = {
       options: this.options,
+      isFlipped: false,
       canadaSelected: false,
       USASelected: false,
       EUSelected: false,
@@ -25,7 +28,14 @@ class DataProcessingForm extends Component{
       optionSelected: false,
       value: null,
     }
+
+    this.handleClick = this.handleClick.bind(this);
   }
+
+    handleClick(e) {
+      e.preventDefault();
+      this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+    }
 
    changeHandler = value => {
      this.setState({ value });
@@ -148,22 +158,45 @@ class DataProcessingForm extends Component{
                     </div>
                     </Col>
                     <Col lg={4}>
+                    <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
                        <div className='cardOption'>
+                         <Card  border={this.state.EUSelected ? 'primary' : ''} className={this.state.EUSelected ? ' selectedCard' : ''}>
+                         <Card.Body>
+                           <Card.Title style={{
+                             margingLeft: '3rem',
+                             fontSize: '1rem',
+                             fontWeight: 'normal',
+                             textTransform: 'uppercase',
+                             letterSpacing: 1,
+                             opacity: 0.4,
+                           }}> European Union </Card.Title>
+
+                           <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/maps/2-map-200x200.png')} rounded />
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
+                        </Card.Body>
+                        </Card>
+                      </div>
+                      <div className="cardOption">
                        <Card border={this.state.EUSelected ? 'primary' : ''} className={this.state.EUSelected ? 'selectedCard' : ''}>
-                       <Card.Body>
-                         <Card.Title style={{
-                           margingLeft: '3rem',
-                           fontSize: '1rem',
-                           fontWeight: 'normal',
-                           textTransform: 'uppercase',
-                           letterSpacing: 1,
-                           opacity: 0.4,
-                         }}> European Union </Card.Title>
-                         <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/maps/2-map-200x200.png')} rounded />
-                      <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
-                      </Card.Body>
+                        <Card.Body>
+                          <Card.Title style={{
+                            marginBottom: '1rem',
+                            marginTop: '1rem',
+                            fontSize: '1em',
+                            fontWeight: 'normal',
+                            textTransform: 'uppercase',
+                            letterSpacing: 1,
+                            opacity: 0.4,
+                          }} > European Union </Card.Title>
+                          <Card.Text>
+                            It refers to the country members of the European Union and the European Economic Area. The full list of countries belonging to the European Union can be found {link}
+                          </Card.Text>
+                          <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
+                        </Card.Body>
                       </Card>
-                       </div>
+                      </div>
+                    </ReactCardFlip>
+                    <Button variant="primary" style={{margin: '1rem 5rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
                     </Col>
                   </Row>
                 </div>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Card, Button, Container, Jumbotron, OverlayTrigger } from 'react-bootstrap';
 import Icon from 'react-fontawesome';
 import {getSteps} from '../utils/Steps.js';
-import { europe  } from '../utils/Definitions';
+import { link  } from '../utils/Link';
 import { ConditionalWrapper, select } from '../utils/Popovers'
 import { LOCATION } from '../constants';
 import ReactCardFlip from 'react-card-flip';
@@ -54,6 +54,14 @@ class DataUsersForm extends Component{
   getLinkTo = () => {
     if(!this.state.optionSelected) return "/assessment/recipients"
     else return "/assessment/donors"
+  }
+
+  openEUList = () => {
+    window.open('ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:European_Economic_Area_(EEA)', '_blank').focus();
+  }
+
+  linkHover = (e) => {
+    e.target.style.cursor = 'pointer';
   }
 
   render(){
@@ -113,9 +121,9 @@ class DataUsersForm extends Component{
                           opacity: 0.4,
                         }} > European Union </Card.Title>
                         <Card.Text>
-                          {europe}
+                          It refers to the country members of the European Union and the European Economic Area. The full list of countries belonging to the European Union can be found {link}
                         </Card.Text>
-                        <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.NON_EU)}> Select </Button>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
                       </Card.Body>
                     </Card>
                     </div>
@@ -141,13 +149,6 @@ class DataUsersForm extends Component{
                   </div>
                 </Col>
               </Row>
-              <Card body
-              style={{
-                textAlign: 'center',
-                marginBottom: '1rem'
-              }}>
-              Please note that the GDPR applies in certain cases where the donors belong to the European Union and European Economic Area
-              </Card>
             </div>
             <div className='MainForm__buttons'>
               <Link className='resetButton' to='/assessment/processor'  onClick={this.props.prevStep}>

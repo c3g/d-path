@@ -7,7 +7,7 @@ import ReactCardFlip from 'react-card-flip';
 import {getSteps} from '../utils/Steps.js';
 import { LOCATION } from '../constants';
 import { select, ConditionalWrapper } from '../utils/Popovers';
-import { europe  } from '../utils/Definitions';
+import { link  } from '../utils/Link';
 
 class DataDonorsForm extends Component{
 
@@ -114,9 +114,9 @@ class DataDonorsForm extends Component{
                           opacity: 0.4,
                         }} > European Union </Card.Title>
                         <Card.Text>
-                          {europe}
+                          It refers to the country members of the European Union and the European Economic Area. The full list of countries belonging to the European Union can be found {link}
                         </Card.Text>
-                        <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.NON_EU)}> Select </Button>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
                       </Card.Body>
                     </Card>
                     </div>
@@ -142,13 +142,6 @@ class DataDonorsForm extends Component{
                   </div>
                 </Col>
               </Row>
-              <Card body
-              style={{
-                textAlign: 'center',
-                marginBottom: '1rem'
-              }}>
-              Please note that the GDPR applies in certain cases where the donors belong to the European Union and European Economic Area
-              </Card>
             </div>
             <div className='MainForm__buttons'>
               <Link className='resetButton' to='/assessment/recipients'  onClick={this.props.prevStep}>

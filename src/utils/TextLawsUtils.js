@@ -103,48 +103,48 @@ export const bestPracticesText = {
 
 export const quebecLawsText = {
   accountability: [
-    'ID Person with highest authority in public body or designate a person so they are accountable for the compliance of the organization with corresponding laws. (1,2,5)',
-    'Implement procedures to receive and respond to complaints and inquiries from user/clients. (5)',
+    'ID Person with highest authority in a public body or designate a person so they are accountable for the compliance of the organization with corresponding laws. (1,2,5)',
+    'Implement procedures to receive and respond to complaints and inquiries from users/clients. (5)',
     'Implement/require practices/policies for training staff regarding the policies/practices of the organization, including those regarding privacy/security. (5)',
   ],
   law: [
-    'Contractual or other means should be used to provide comparable levels of protection while information is processed by a third party. The management of health informations is governed by specific rules of laws with which the contract has to comply, particularly with respect to security measures. (2,5)',
+    'Contractual or other means should be used to provide comparable levels of protection while information is processed by a third party. The management of health information is governed by specific rules of laws with which the contract has to comply, particularly with respect to security measures. (2,5)',
     'Execute a contract that determines the type of information being transferred or communicated, ID the purposes and scope of the use and transfer/communication, terms of confidentiality, and terms/measures of data protection. (1,5)',
     'Display clear terms of service stating the purpose, limitations and conditions associated with the use of the data, including for instance that coded or anonymized data shall not be re-identified. (1,5)',
-    'Data shall be collected used, and disclosed by fair and lawful means and limited to the identified purposes. Details on collection, storage, and disclosure shall be informed. Before relasing to outside of the province, equivalent protection shall be ensured in the recipient\'s policies/practices. (1,2,5)',
+    'Data shall be collected, used, and disclosed by fair and lawful means and limited to the identified purposes. Details on collection, storage, and disclosure shall be informed. Before releasing to outside of the province, equivalent protection shall be ensured in the recipient\'s policies/practices. (1,2,5)',
     'Policies/Practices on the management of personal information shall be implemented and made readily available. (1,2,3,5)',
     'Personal information shall be as accurate, complete, and up-to-date as necessary. Everyone shall be able to request the correction of their personal information. (1,2,3,5)',
-    'An inventory shall be kept with info pertaining the content and protection measures. (1)'
+    'An inventory shall be kept with info pertaining to the content and protection measures. (1)'
   ],
   security: [
     'Reasonable security measures to ensure the protection of personal information shall be implemented based on the sensitivity of the information, the purposes for which it is used, the quantity and distribution, and the medium on which it is stored. They shall be against theft, loss, damage, unauthorized access, disclosure, copying, modification or use. They can be physical, organizational or technological. (1,2,3,5)',
     'Technological measures can include: coding, de-identification, encryption, anonymization, firewalls; physical measures can include: locked filing cabinets and restricted access to offices; and administrative/organizational measures can include: security clearances and limited access on need-to-know basis. (1,2,3,5)',
     'Data security breaches shall be reported to the Commissioner if believed to create real risk of significant harm (bodily harm, humiliation, damage to reputation or relationship, loss of employment, business or professional opportunities, financial loss, identity theft, negative effects on credit, damage or loss of property) to an individual. (2,5)',
     'Organizations shall keep a record of every breach of data security. Have response mechanisms in case of data breach, including who to inform or report. Record keeping shall include: type of event, data/time, success/failure, origin, data/system/resources affected. (5)',
-    'Data Access committee to assess the data recipient/user and the intended use. Execute a data access contract that that determines the type of information being transferred or communicated, ID the purposes and scope of the transfer/communication, terms of confidentiality, and terms/measures of data protection. (1,5)',
+    'Data Access committee to assess the data recipient/user and the intended use. Execute a data access contract that determines the type of information being transferred or communicated, ID the purposes and scope of the transfer/communication, terms of confidentiality, and terms/measures of data protection. (1,5)',
     'Display clear terms of service stating the purpose, limitations and conditions associated with the use of the data, including for instance that coded or anonymized data shall not be re-identified. (1,5)',
-    'Organizations may be audited by a higher institutions to verify the practices/policies of management of personal information. (1,2,5)',
-    'Regularity and extent of audits has an impact on the grant/renewal of organizations\' acreditation. (3)'
+    'Organizations may be audited by a higher institution to verify the practices/policies of management of personal information. (1,2,5)',
+    'Regularity and extent of audits has an impact on the grant/renewal of organizations\' accreditation. (3)'
   ]
 };
 
 export const euroLawsText = {
   accountability: [
     'Controller or Processor: Designate a representative in the EU (See Art 27 for full details and exceptions and Rec. 80)',
-    'Controller and Processor: Designate a Data Protection Officer to inform, monitor, and advice on obligations that need to be fulfilled. (Arts. 37.1(c), 37.2, 38.1, 39, Rec. 97)',
-    'Every data subject has the right to lodge a complaint. Controller should inform data subject about this right. Supervisory authorities in collaboration with lead authorities, handle complaints lodged by data subjects. (Art. 13.2(d), 15.1(f), 57.1(f), 77, 79, Rec. 122, 125, 141)',
+    'Controller and Processor: Designate a Data Protection Officer to inform, monitor, and advise on obligations that need to be fulfilled. (Arts. 37.1(c), 37.2, 38.1, 39, Rec. 97)',
+    'Every data subject has the right to lodge a complaint. Controllers should inform data subjects about this right. Supervisory authorities in collaboration with lead authorities, handle complaints lodged by data subjects. (Art. 13.2(d), 15.1(f), 57.1(f), 77, 79, Rec. 122, 125, 141)',
     'Corporate rules should specify complaint procedures. (Art. 47.2(i))',
     'Data protection officer monitors that the controller or processor complies with their obligation to raise awareness and provide training to their staff involved in data processing. (Art 391.(b))',
     'Binding corporate rules should include details about the appropriate data protection training to personnel having permanent or regular access to personal data. (Art. 47.2(n))',
-    'When entrusting a processor with processing activities, controller should only use processors with guarantees of expert knowledge, reliability, and resources. Processors should demonstrate these guarantees. (Rec. 81, Art. 28.1)'
+    'When entrusting a processor with processing activities, controllers should only use processors with guarantees of expert knowledge, reliability, and resources. Processors should demonstrate these guarantees. (Rec. 81, Art. 28.1)'
 
   ],
   law: [
-    'Processing by a processor is governed by a contract that specifies their obligations with respect the data, processing and to the controller, the measures that need to be taken, and the obligations the controller undertakes. (Art. 28.3, 40.3, 42, Rec. 79, 81)',
-    'Contracts between the controller and the data subject contain details about the consent (e.g. contact details of the controller, purpose, recipients or categories of recipients, location of processing, contact of data protection officer, etc.) and obligations and necessities associated with the controller\'s performance that make processing of personal data lawful. All relevant information shall be transparent, concise and inteligible, easily accessible, using clear and plain language.',
+    'Processing by a processor is governed by a contract that specifies their obligations with respect to the data, processing and to the controller, the measures that need to be taken, and the obligations the controller undertakes. (Art. 28.3, 40.3, 42, Rec. 79, 81)',
+    'Contracts between the controller and the data subject contain details about the consent (e.g. contact details of the controller, purpose, recipients or categories of recipients, location of processing, contact of data protection officer, etc.) and obligations and necessities associated with the controller\'s performance that make processing of personal data lawful. All relevant information shall be transparent, concise and intelligible, easily accessible, using clear and plain language.',
     'Processor shall only grant access in accordance with the controller\'s instructions/authorization. This access and any other processing shall be governed by a contract. The contract shall state the details of the access and ensure the confidentiality and security of the data, and all the appropriate technical and organizational measures are implemented. (Art. 28, 29, 32.4, Rec. 80)',
     'Processors and controllers shall have contracts with other processors or recipients in third countries or international organizations to establish and ensure appropriate security measures when personal data is transferred to those countries or organizations. (Art. 40.3, 42, 46)',
-    'Personal data shall be processed lawfully, fairly, and in transparent manner in relation to the data subject. It should be collected for specified, explicit and legitimate purposes or as mandated by law. The processing shall be relevant and limited to what is necessary for the purposes expressed. This information shall be contained during the consent process. (Art. 5, 6 )',
+    'Personal data shall be processed lawfully, fairly, and in a transparent manner in relation to the data subject. It should be collected for specified, explicit and legitimate purposes or as mandated by law. The processing shall be relevant and limited to what is necessary for the purposes expressed. This information shall be contained during the consent process. (Art. 5, 6 )',
     'Further processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes is not incompatible with initial purposes. (art. 5,1(b), 89.1)',
     'Processors and controllers must ensure within their performances appropriate security and confidentiality, including preventing unauthorized access or use of data and equipment, unlawful processing, and/or accidental loss, destruction or damage. They should evaluate the relevant risks. This obligation includes making sure authorized personnel undertakes the same obligations. (Art. 5.1(f), 28.3(b), Rec. 39, 83)',
     'Data protection officers are bound by secrecy and confidentiality throughout their performance. (Art. 38.5) ',
@@ -155,21 +155,21 @@ export const euroLawsText = {
   security: [
     'Special category of personal data: personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership, genetic data, biometric data for the purpose of uniquely identifying a natural person, data concerning health or data concerning a natural person\'s sex life or sexual orientation. (Art. 9)',
     'The risks associated with sensitive personal data affect the rights and freedoms of natural persons, varying in likelihood and severity, leading to physical, material and non-material damage: e.g. rise of discrimination, identity theft or fraud, financial loss, damage to reputation, significant economic or social disadvantage, etc. (Rec. 75) ',
-    'Controller shall use appropriate mathematical or statistical procedures for the profiling, and implement technical and organizational measures to ensure inaccuracies are corrected, risks of error minimized, and discriminatory effects are prevented. (Rec. 71)',
-    'Processors shall not engage another processor without specific written authorization from controller. Appropriate security measures when personal data shall be established and ensured. (Art. 28.2)',
+    'Controllers shall use appropriate mathematical or statistical procedures for the profiling, and implement technical and organizational measures to ensure inaccuracies are corrected, risks of error minimized, and discriminatory effects are prevented. (Rec. 71)',
+    'Processors shall not engage another processor without specific written authorization from controllers. Appropriate security measures when personal data shall be established and ensured. (Art. 28.2)',
     'Controllers and processors shall implement appropriate technical and organizational  measures to ensure security, confidentiality, integrity, availability, and resilience and to restore availability in case of physical or technical incident. (Art. 32.1)',
     'Where the other processor does not fulfill the data protection obligations, the initial processor shall remain fully liable to the controller for the performance of the other processor\'s obligations. (Art. 28.4)',
     'Implementing codes of conduct and internal policies serve as a way to demonstrate that the appropriate security and privacy measures are taken. (Art. 28.5, Rec. 78)',
     'Appropriate levels of security shall account the risks presented by processing, accidental or unlawful destruction, loss, alteration, unauthorized disclosure of, or access to personal data transmitted, stored or otherwise processed. Encryption and pseudonymization are some of the measures taken to mitigate risks. (Art. 32, Rec. 83)',
-    'After completion of processing, processor shall return or destroy the data as stated by controller. (Rec. 81)',
+    'After completion of processing, processors shall return or destroy the data as stated by controllers. (Rec. 81)',
     'Processing for archiving purposes in the public interest, scientific or historical research purposes of statistical purposes shall be subject to appropriate safeguards. They shall ensure that technical and organizational measures are in place. These may include pseudonymization. (Art. 89)',
-    'Processor shall inform the controller of a data breach. Controller shall inform the data subject if the breach may result in a high risk to the data subject\'s rights and freedoms. Controller shall also notify the supervisory authority within the next 72hrs of the breach when possible. (Art. 33, 34)',
+    'Processor shall inform the controller of a data breach. The controller shall inform the data subject if the breach may result in a high risk to the data subject\'s rights and freedoms. Controller shall also notify the supervisory authority within the next 72hrs of the breach when possible. (Art. 33, 34)',
     'Notification shall include: nature of breach, categories and number of data subjects involved, name and contact of data protection officer, consequences, measures taken. (Art. 33)',
     'Access to do any type of processing (collection, recording, organization, structuring, storage, adaptation or alteration, retrieval, consultation, use, disclosure by transmission, dissemination, or otherwise making available, alignment or combination, restriction, erasure or destruction) shall be governed by a contract.  (Art. 4, 28) ',
     'The contract with the recipient/user (or terms of use) shall state the details of the access and ensure the confidentiality and security of the data, and that all the appropriate technical and organizational measures are implemented in accordance with the controller\'s instructions/authorization. (See Art. 28 for the full list of elements the contract shall contain, Art. 29)',
     'Controller and processor shall ensure that any natural person having access to the data processes it in accordance with the controller\'s instructions. (Art. 32.4)',
     'Processor makes available to the controller all information necessary to demonstrate compliance with obligations and allow for and contribute to audits and inspections. (Art. 28.3(h))',
-    'Each controller shall maintain records of the processing activities under its responsibility. Each processor shall maintain records of all the processing activities carried our on behalf of the controller. Both will be available to the supervisory authority. (Art. 30)',
+    'Each controller shall maintain records of the processing activities under its responsibility. Each processor shall maintain records of all the processing activities carried out on behalf of the controller. Both will be available to the supervisory authority. (Art. 30)',
     'These records shall contain name and contact information of the processor(s) and of each controller on behalf of which the processor is acting, categories of processing, transfer to a third country or international organization, and safeguards. (Art. 30.2)',
     'Supervisory authorities have the power to perform audits. (Art. 58)',
     'Corporate rules should include mechanisms regarding data protection audits. (Art. 42.2(j))'

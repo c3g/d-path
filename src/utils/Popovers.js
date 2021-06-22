@@ -190,3 +190,21 @@ export const healthInfo = (
         </Popover.Content>
       </Popover>
 );
+
+export const behaviour = (
+      <Popover id='popover-basic'>
+        <Popover.Title as='h3'> Monitored Behaviour </Popover.Title>
+        <Popover.Content>
+          An example would be when your study aims to investigate the lifestyle of individuals located in the EU or the genetic ancestry of EU descendants.
+        </Popover.Content>
+      </Popover>
+);
+
+export const goods = (
+      <Popover id='popover-basic'>
+        <Popover.Title as='h3'> Goods and Services </Popover.Title>
+        <Popover.Content>
+          An example would be offering any kind of genetic testing or genome sequencing where you are expected to return results to the individual located in the EU and you offered these services in an EU official language, charged in an EU currency or used an EU URL.
+        </Popover.Content>
+      </Popover>
+);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Jumbotron, Button, Card } from 'react-bootstrap';
+import { Container, Jumbotron, Button, Card, Alert } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import { PDFDownloadLink, Document, Page, Text, Font} from '@react-pdf/renderer'
 import Icon from 'react-fontawesome';
@@ -81,6 +81,7 @@ class Info extends Component {
             </h6>
 
             <hr />
+            { assessment.areServicesOffered && <> <Alert variant='warning'> The obligation or practice of Returning Results to individuals located in the EU is not widely accepted as a situation that will certainly attract the applicability of the GDPR, as this scenario is still under discussion. However, bear in mind that it may in fact do so. Please discuss your specific situation with the appropriate legal counsel to make sure you are complying with any obligation applicable to you. </Alert> </> }
             { assessment.isPersonalInfo &&
               <>
                 <h1 className='obligationTitle'>Laws and Policies</h1>
@@ -128,7 +129,7 @@ class Info extends Component {
           }}>
           <strong> Please note that this is NOT a legal assessment. </strong>
           <hr />
-          If your country's obligations are not listed in detail you can send us an email to fulanito@detal.com
+          If your country's obligations are not listed in detail you can send us an email to info@computationalgenomics.ca
           </Card>
         </Container>
     )

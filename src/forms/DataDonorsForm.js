@@ -6,7 +6,7 @@ import ReactCardFlip from 'react-card-flip';
 
 import {getSteps} from '../utils/Steps.js';
 import { LOCATION } from '../constants';
-import { select, ConditionalWrapper } from '../utils/Popovers';
+import { select, behaviour, ConditionalWrapper } from '../utils/Popovers';
 import { link  } from '../utils/Link';
 
 class DataDonorsForm extends Component{
@@ -54,7 +54,7 @@ class DataDonorsForm extends Component{
 
   getLinkTo = () => {
     if(!this.state.optionSelected) return "/assessment/donors"
-    else return "/assessment/info/description"
+    else return "/assessment/services"
   }
 
   render(){
@@ -80,7 +80,11 @@ class DataDonorsForm extends Component{
                 Location Information
               </h6>
               <hr />
-              <h3 style={{paddingBottom: '2%'}}>  Where were the data subjects/data donors located when their behaviour was being monitored OR when they were being offered goods and services?  </h3>
+              <h1 style={{paddingBottom: '2%'}}>  Where were the data subjects/data donors located when their {' '}
+                <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={behaviour}>
+                  <abbr> behaviour was being monitored  </abbr>
+                </OverlayTrigger> ?
+              </h1>
               <Row className='summaryInfo'>
                 <Col style={{marginLeft: '10rem'}} lg={4}>
                   <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
@@ -114,14 +118,14 @@ class DataDonorsForm extends Component{
                           opacity: 0.4,
                         }} > European Union </Card.Title>
                         <Card.Text>
-                          It refers to the country members of the European Union and the European Economic Area. The full list of countries belonging to the European Union can be found {link}
+                           It refers to the country members of the European Union and the European Economic Area. The full list of countries can be found {link}
                         </Card.Text>
                         <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
                       </Card.Body>
                     </Card>
                     </div>
                   </ReactCardFlip>
-                  <Button variant="primary" style={{margin: '1rem 5rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
+                  <Button variant="secondary" style={{margin: '1rem 5rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
                 </Col>
                 <Col  lg={4}>
                   <div className='cardOption'>
@@ -134,7 +138,7 @@ class DataDonorsForm extends Component{
                        textTransform: 'uppercase',
                        letterSpacing: 1,
                        opacity: 0.4,
-                     }}> Non-Europe </Card.Title>
+                     }}> Rest of the World </Card.Title>
                      <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/maps/4-map-200x200.png')} rounded />
                   <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.NON_EU)}> Select </Button>
                   </Card.Body>
@@ -144,7 +148,7 @@ class DataDonorsForm extends Component{
               </Row>
             </div>
             <div className='MainForm__buttons'>
-              <Link className='resetButton' to='/assessment/recipients'  onClick={this.props.prevStep}>
+              <Link className='resetButton' to='/assessment/organization'  onClick={this.props.prevStep}>
                 <Icon name='arrow-left' /> Previous
               </Link>
               <ConditionalWrapper
@@ -160,7 +164,7 @@ class DataDonorsForm extends Component{
                  )}
               >
                  <div>
-                   <Link style={{marginLeft: '23rem'}} className='resetButton' to={this.getLinkTo()} onClick={this.continue} disabled={!this.props.optionSelected}>
+                   <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} to={this.getLinkTo()} onClick={this.continue} disabled={!this.props.optionSelected}>
                      <Icon name='arrow-right' /> Next
                    </Link>
                  </div>

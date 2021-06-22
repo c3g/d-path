@@ -3,7 +3,7 @@ import { Container, Jumbotron, Card, Row, Col , Button, OverlayTrigger } from 'r
 import { Link } from 'react-router-dom';
 import Icon from 'react-fontawesome';
 import ReactCardFlip from 'react-card-flip';
-import {getSteps, addInfoPublicStep, addIdentifiableStep} from '../utils/Steps.js';
+import {getSteps, addProcessorStep, addIdentifiableStep} from '../utils/Steps.js';
 import { select, ConditionalWrapper } from '../utils/Popovers';
 import { directlyIdentifiable, indirectlyIdentifiable, anonymous, anonymized, coded } from '../utils/Definitions';
 
@@ -94,22 +94,46 @@ class InfoDescription extends Component{
 
     continue = () => {
       if(!this.state.optionSelected) this.props.history.push('/assessment/info/description');
-      else if(this.state.directlySelected || this.state.indirectlySelected) this.nextStepPublic(true);
+      else if(this.state.directlySelected || this.state.indirectlySelected) this.nextStepProcessor(true);
       else if (this.state.anonymousSelected || this.state.anonymizedSelected)  this.saveAndContinue(false, false);
       else this.nextStepIdentifiable();
     }
 
-    nextStepPublic = (identifiable) => {
-      addInfoPublicStep();
-      this.props.nextStep();
-      this.props.history.push('/assessment/info/public');
+    nextStepProcessor = (identifiable) => {
+      const { locations } = this.props;
+
       this.props.handleIdentifiableInfoChange(identifiable);
+      this.props.handlePersonalInfoChange(true);
+      this.props.nextStep();
+
+      if(locations.includes('Canada')){
+        addProcessorStep();
+        this.props.history.push('/assessment/info/processor');
+      }
+      else{
+        this.props.history.push('/assessment/success');
+      }
     }
 
     nextStepIdentifiable = () => {
-      addIdentifiableStep();
+      const { locations } = this.props;
+
       this.props.nextStep();
-      this.props.history.push('/assessment/info/identifiable');
+      if(locations.includes('Europe') && locations.includes('Canada')) {
+        addProcessorStep();
+        this.props.handleIdentifiableInfoChange(true);
+        this.props.handlePersonalInfoChange(true);
+        this.props.history.push('/assessment/info/processor');
+      }
+      else if(!locations.includes('Europe')){
+        addIdentifiableStep();
+        this.props.history.push('/assessment/info/identifiable');
+      }
+      else{
+        this.props.handlePersonalInfoChange(true);
+        this.props.handleIdentifiableInfoChange(true);
+        this.props.history.push('/assessment/success');
+      }
     }
 
     render(){
@@ -333,12 +357,12 @@ class InfoDescription extends Component{
                     </Card>
                     </div>
                    </ReactCardFlip>
-                   <Button variant="primary" style={{margin: '1rem -6rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
+                   <Button variant="secondary" style={{margin: '1rem -6rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
                   </Col>
                 </Row>
               </div>
               <div style={{marginTop: '2rem'}} className='MainForm__buttons'>
-                <Link className='resetButton' to='/assessment/donors'  onClick={this.props.prevStep}>
+                <Link className='resetButton' to='/assessment/services'  onClick={this.props.prevStep}>
                   <Icon name='arrow-left' /> Previous
                 </Link>
                 <ConditionalWrapper
@@ -354,7 +378,7 @@ class InfoDescription extends Component{
                    )}
                 >
                    <div>
-                     <Link style={{marginLeft: '23rem'}} className='resetButton' onClick={this.continue} disabled={!this.props.optionSelected}>
+                     <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.continue} disabled={!this.props.optionSelected}>
                        <Icon name='arrow-right' /> Next
                      </Link>
                    </div>

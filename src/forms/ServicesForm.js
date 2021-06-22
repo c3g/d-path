@@ -3,10 +3,9 @@ import { Container, Row, Col, Card, Jumbotron, Button, OverlayTrigger} from 'rea
 import { Link } from 'react-router-dom';
 import Icon from 'react-fontawesome';
 import {getSteps, removeLastStep} from '../utils/Steps.js';
-import { healthInfo, select, ConditionalWrapper } from '../utils/Popovers';
+import { select, goods,  ConditionalWrapper } from '../utils/Popovers';
 
-class InfoHealth extends Component{
-
+class ServicesForm extends Component{
 
     constructor() {
       super();
@@ -24,8 +23,8 @@ class InfoHealth extends Component{
       this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
     }
 
-    select = (crossesBorders) => {
-      if(crossesBorders) {
+    select = (beingOffered) => {
+      if(beingOffered) {
         this.setState({
           yesSelected: true,
           noSelected: false,
@@ -39,7 +38,7 @@ class InfoHealth extends Component{
           optionSelected: true
         });
       }
-      this.props.handleCrossesBordersChange(crossesBorders);
+      this.props.handleServicesOfferedChange(beingOffered);
     }
 
     prevStep = () => {
@@ -47,36 +46,17 @@ class InfoHealth extends Component{
       this.props.prevStep();
     }
 
-    saveIsHealthInformation = (isHealthInfo) => {
-      const { province } = this.props.assessment;
-
-      this.props.handleHealthInfoChange(isHealthInfo);
-
-      this.setProcessorLaws(isHealthInfo, province);
+    saveServicesOffered = (beingOffered) => {
+      if(beingOffered){
+        this.props.handleGDPRWarning(beingOffered);
+      }
+      this.props.handleServicesOfferedChange(beingOffered);
       this.props.nextStep();
-      this.props.history.push('/assessment/success');
     }
 
-    setProcessorLaws = (isHealthInfo, province) => {
-        if(isHealthInfo){
-          this.props.handleProcessorChange({
-            body: 'Private Organization & Commercial',
-            laws: province.healthLaw,
-            provincial: true
-          })
-        }
-        else{
-          this.props.handleProcessorChange({
-            body: 'Private Organization & Commercial',
-            laws: ['PIPEDA'], //**
-            provincial: true
-          })
-        }
-    }
-
-    continue = () => {
-      if(!this.state.optionSelected) return "/assessment/info/health"
-      else this.saveIsHealthInformation(this.state.yesSelected);
+    getLinkTo = () => {
+      if(!this.state.optionSelected) return "/assessment/services"
+      else return "/assessment/info/description"
     }
 
     prevStep = () => {
@@ -103,14 +83,15 @@ class InfoHealth extends Component{
                   opacity: 0.4,
                 }}
               >
-                Personal Information
+                Location Information
               </h6>
               <hr />
-              <h2 style={{paddingBottom: '2%'}}> Is the information processed {' '}
-                <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={healthInfo}>
-                  <abbr> Personal Health Information </abbr>
-                </OverlayTrigger> ?
-              </h2>
+              <h1 style={{paddingBottom: '2%'}}>  Were
+                <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={goods}>
+                  <abbr> goods and services </abbr>
+                </OverlayTrigger>
+                 being offered ?
+              </h1>
               <Row className='summaryInfo'>
                 <Col style={{marginLeft: '10rem'}} lg={4}>
                    <div className='cardOption'>
@@ -151,7 +132,7 @@ class InfoHealth extends Component{
                 </Col>
               </Row>
             <div style={{marginTop: '2rem'}} className='MainForm__buttons'>
-              <Link className='resetButton' to='/assessment/info/border' onClick={this.prevStep}>
+              <Link className='resetButton' to='/assessment/donors' onClick={this.prevStep}>
                 <Icon name='arrow-left' /> Previous
               </Link>
               <ConditionalWrapper
@@ -167,7 +148,7 @@ class InfoHealth extends Component{
                  )}
               >
                  <div>
-                   <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.continue} disabled={!this.props.optionSelected}>
+                   <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.props.nextStep} to={this.getLinkTo()} disabled={!this.props.optionSelected}>
                      <Icon name='arrow-right' /> Next
                    </Link>
                  </div>
@@ -184,4 +165,4 @@ class InfoHealth extends Component{
     }
   }
 
-export default InfoHealth;
+export default ServicesForm;

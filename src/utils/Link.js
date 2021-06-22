@@ -8,4 +8,4 @@ export const linkHover = (e) => {
   e.target.style.cursor = 'pointer';
 }
 
-export const link = <div style={{ textDecoration : 'underline'}} onMouseOver={linkHover} onClick={openEUList}> here. </div>;
+export const link = <div style={{ textDecoration : 'underline', display:'inline'}} onMouseOver={linkHover} onClick={openEUList}> here. </div>;

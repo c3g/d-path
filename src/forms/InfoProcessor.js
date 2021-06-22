@@ -6,7 +6,7 @@ import ReactCardFlip from 'react-card-flip';
 import { select, ConditionalWrapper} from '../utils/Popovers';
 import { federalGovernmentInstitution, privateCommercial, provincial, mush, fwub, healthcare, privateNonCommercial} from '../utils/Definitions';
 import {getSteps, addProvincialStep, removeLastStep} from '../utils/Steps.js';
-import { PROCESSOR } from '../constants';
+import { PROCESSOR, INFO_TYPE } from '../constants';
 
 class InfoProcessor extends Component{
 
@@ -138,6 +138,12 @@ class InfoProcessor extends Component{
         this.props.nextStep();
         this.props.history.push('/assessment/success');
       }
+    }
+
+    getLinkTo = () => {
+      console.log(this.props);
+      if(!this.props.locations.includes('Europe') && this.props.assessment.infoType === INFO_TYPE.CODED) return '/assessment/info/identifiable';
+      else return '/assessment/info/description';
     }
 
     prevStep = () => {
@@ -405,7 +411,7 @@ class InfoProcessor extends Component{
                     </Card>
                     </div>
                    </ReactCardFlip>
-                   <Button variant="primary" style={{margin: '1rem 3rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
+                   <Button variant="secondary" style={{margin: '1rem 3rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
                   </Col>
                   <Col style={{marginTop: '2rem'}} lg={3}>
                     <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
@@ -448,7 +454,7 @@ class InfoProcessor extends Component{
                 </Row>
               </div>
               <div style={{marginTop: '2rem'}} className='MainForm__buttons'>
-                <Link className='resetButton' to='/assessment/info/public'  onClick={this.props.prevStep}>
+                <Link className='resetButton' to={this.getLinkTo()}  onClick={this.prevStep}>
                   <Icon name='arrow-left' /> Previous
                 </Link>
                 <ConditionalWrapper
@@ -464,7 +470,7 @@ class InfoProcessor extends Component{
                    )}
                 >
                    <div>
-                     <Link style={{marginLeft: '23rem'}} className='resetButton' onClick={this.continue} disabled={!this.props.optionSelected}>
+                     <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.continue} disabled={!this.props.optionSelected}>
                        <Icon name='arrow-right' /> Next
                      </Link>
                    </div>

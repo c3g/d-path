@@ -196,7 +196,7 @@ class DataProcessingForm extends Component{
                       </Card>
                       </div>
                     </ReactCardFlip>
-                    <Button variant="primary" style={{margin: '1rem 5rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
+                    <Button variant="dark" style={{margin: '1rem 5rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
                     </Col>
                   </Row>
                 </div>

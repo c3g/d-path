@@ -9,11 +9,18 @@ class Success extends Component{
 
     render(){
         const { locations } = this.props;
-        const { answers, userType, isPersonalInfo, isPublic, infoType, processor, province, isHealthInfo, crossesBorders  } = this.props.assessment;
+        const { answers, userType, isPersonalInfo, isPublic, infoType, processor, province, isHealthInfo, crossesBorders, areServicesOffered  } = this.props.assessment;
         const user = (
           <div>
             <h4> Type of user: </h4>
             <p> { userType ? 'Processor' : userType } </p>
+          </div>
+        )
+
+        const servicesOffered = (
+          <div>
+            <h6> Were services offered? </h6>
+            <p>{ areServicesOffered ? 'Yes' : 'No' }</p>
           </div>
         )
 
@@ -53,17 +60,10 @@ class Success extends Component{
                           <p>{answers.organization}</p>
                       </div>
                       <div>
-                          <h6>Where is the data processed?</h6>
-                          <p>{answers.dataProcessed}</p>
-                      </div>
-                      <div>
-                          <h6>Where are the data users?</h6>
-                          <p>{answers.dataUsers}</p>
-                      </div>
-                      <div>
-                          <h6>Where are the data donors?</h6>
+                          <h6>Where is the monitored behaviour of the data donors?</h6>
                           <p>{answers.dataDonors}</p>
                       </div>
+                      { areServicesOffered !== undefined ? servicesOffered : null }
                       { isPersonalInfo ? user : null }
                       { crossesBorders !== undefined ? crossingBorders: null}
                     </Col>
@@ -72,11 +72,7 @@ class Success extends Component{
                       { isHealthInfo !== undefined ? healthInfo: null}
                       <div>
                         <h4> Information type </h4>
-                        <p> { infoType }</p>
-                      </div>
-                      <div>
-                        <h4> Is it public information? </h4>
-                        <p> { isPublic ? 'Yes' : 'No'}</p>
+                        <p> { infoType } </p>
                       </div>
                       <div>
                         <h4> Is it personal information? </h4>

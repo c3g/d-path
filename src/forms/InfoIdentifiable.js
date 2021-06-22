@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Card, Jumbotron, Button, OverlayTrigger } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import Icon from 'react-fontawesome';
-import {getSteps, addInfoPublicStep, removeLastStep} from '../utils/Steps.js';
+import {getSteps, addProcessorStep, removeLastStep} from '../utils/Steps.js';
 import { select, ConditionalWrapper, identifiable } from '../utils/Popovers';
 
 class InfoIdentifiable extends Component{
@@ -54,10 +54,18 @@ class InfoIdentifiable extends Component{
   }
 
   nextStep = (isIdentifiable) => {
-    addInfoPublicStep();
+    const { locations } = this.props;
     this.props.nextStep();
     this.props.handleIdentifiableInfoChange(isIdentifiable);
-    this.props.history.push('/assessment/info/public');
+    this.props.handlePersonalInfoChange(isIdentifiable);
+
+    if(locations.includes('Canada')){
+        addProcessorStep();
+        this.props.history.push('/assessment/info/processor');
+    }
+    else{
+      this.props.history.push('/assessment/success');
+    }
   }
 
 
@@ -157,7 +165,7 @@ class InfoIdentifiable extends Component{
                )}
             >
                <div>
-                 <Link style={{marginLeft: '23rem'}} className='resetButton' onClick={this.continue} disabled={!this.props.optionSelected}>
+                 <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.continue} disabled={!this.props.optionSelected}>
                    <Icon name='arrow-right' /> Next
                  </Link>
                </div>

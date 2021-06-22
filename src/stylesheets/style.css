@@ -136,9 +136,30 @@ abbr {
   color:black;
 }
 
+.resetButtonSelected {
+  display: flex;
+  flex-direction: row;
+  font-size: 50px;
+  background-color: #007bff;  /* Blue */
+  border: 1px  ;
+  border-radius: 5px;
+  padding: 10px 15px ;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  color:white;
+}
+
 .resetButton:hover {
-  background-color: #f2f2f2; /* Green */
+  background-color: #f2f2f2; /* White */
   color: black;
+  text-decoration: none;
+}
+
+.resetButtonSelected:hover {
+  background-color: #0064FF; /* Blue */
+  color: white;
   text-decoration: none;
 }
 

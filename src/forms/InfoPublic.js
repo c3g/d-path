@@ -157,7 +157,7 @@ class InfoPublic extends Component{
                )}
             >
                <div>
-                 <Link style={{marginLeft: '23rem'}} className='resetButton' onClick={this.continue} disabled={!this.props.optionSelected}>
+                 <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.continue} disabled={!this.props.optionSelected}>
                    <Icon name='arrow-right' /> Next
                  </Link>
                </div>

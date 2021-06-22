@@ -5,6 +5,7 @@ import OrganizationForm from './../forms/OrganizationForm';
 import DataProcessingForm from './../forms/DataProcessingForm';
 import DataUsersForm from './../forms/DataUsersForm';
 import DataDonorsForm from './../forms/DataDonorsForm';
+import ServicesForm from './../forms/ServicesForm';
 import Success from './../forms/Success';
 import InfoDescription from './../forms/InfoDescription';
 import InfoPublic from './../forms/InfoPublic';
@@ -19,9 +20,8 @@ import { USER_TYPE } from '../constants';
 export var STEPS = [
   UserInfo,
   OrganizationForm,
-  DataProcessingForm,
-  DataUsersForm,
   DataDonorsForm,
+  ServicesForm,
   InfoDescription,
   Success,
 ]
@@ -56,7 +56,14 @@ export const addHealthStep = () => {
 }
 
 export const resetSteps = () => {
-  STEPS = STEPS.slice(0, 7);
+  STEPS = [
+    UserInfo,
+    OrganizationForm,
+    DataDonorsForm,
+    ServicesForm,
+    InfoDescription,
+    Success,
+  ]
 }
 
 export const getSteps = (step, userType) => {

@@ -48,7 +48,7 @@ class OrganizationForm extends Component{
 
     getLinkTo = () => {
       if(!this.state.optionSelected) return "/assessment/organization"
-      else return "/assessment/processor"
+      else return "/assessment/donors"
     }
 
 
@@ -190,14 +190,14 @@ class OrganizationForm extends Component{
                               opacity: 0.4,
                             }} > European Union </Card.Title>
                             <Card.Text>
-                              It refers to the country members of the European Union and the European Economic Area. The full list of countries belonging to the European Union can be found {link}
+                               It refers to the country members of the European Union and the European Economic Area. The full list of countries can be found {link}
                             </Card.Text>
                             <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
                           </Card.Body>
                         </Card>
                         </div>
                       </ReactCardFlip>
-                      <Button variant="primary" style={{margin: '1rem 5rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
+                      <Button variant="secondary" style={{margin: '1rem 5rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
                     </Col>
                   </Row>
                 </div>
@@ -238,7 +238,7 @@ class OrganizationForm extends Component{
                    )}
                 >
                    <div>
-                     <Link style={{marginLeft: '23rem'}} className='resetButton' to={this.getLinkTo()} onClick={this.continue} disabled={!this.props.optionSelected}>
+                     <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} to={this.getLinkTo()} onClick={this.continue} disabled={!this.props.optionSelected}>
                        <Icon name='arrow-right' /> Next
                      </Link>
                    </div>

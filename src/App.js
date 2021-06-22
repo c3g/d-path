@@ -13,6 +13,7 @@ import DataDonorsForm from './forms/DataDonorsForm';
 import DataProcessingForm from './forms/DataProcessingForm';
 import DataUsersForm from './forms/DataUsersForm';
 import OrganizationForm from './forms/OrganizationForm';
+import ServicesForm from './forms/ServicesForm';
 import UserInfo from './forms/UserInfo';
 import Success from './forms/Success';
 import OtherUser from './forms/OtherUser';
@@ -36,6 +37,7 @@ const INITIAL_STATE = {
     infoType: undefined,
     isPublic: undefined,
     isIdentifiable: undefined,
+    areServicesOffered: undefined,
     answers: {
       organization: undefined,
       dataProcessed: undefined,
@@ -46,6 +48,7 @@ const INITIAL_STATE = {
     province: undefined,
     isHealthInformation: undefined,
     crossesBorders: undefined,
+    GDPRWarning: undefined,
   },
   step: 0,
 }
@@ -65,7 +68,6 @@ class App extends Component {
   }
 
   resetAssessment = () => {
-    console.log('resetting');
     resetSteps();
     this.setState({ ...INITIAL_STATE });
   }
@@ -180,6 +182,26 @@ class App extends Component {
     }));
   }
 
+  handleServicesOfferedChange  = (areServicesOffered) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         areServicesOffered: areServicesOffered
+      }
+    }));
+  }
+
+  handleGDPRWarning  = (hasGDPRWarning) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         GDPRWarning: hasGDPRWarning
+      }
+    }));
+  }
+
   onAssessmentChange = (locations, isPersonalInfo) => {
     this.setState({
       locations: locations,
@@ -206,6 +228,8 @@ class App extends Component {
         handleAssessmentChange:this.onAssessmentChange,
         handleHealthInfoChange:this.handleHealthInfoChange,
         handleCrossesBordersChange:this.handleCrossesBordersChange,
+        handleServicesOfferedChange:this.handleServicesOfferedChange,
+        handleGDPRWarning:this.handleGDPRWarning,
         resetAssessment:this.resetAssessment,
         locations:getLocations(assessment.answers)
     }
@@ -278,6 +302,14 @@ class App extends Component {
                 path='/assessment/donors'
                 render={(props) => (
                   <DataDonorsForm {...props}
+                    {...assessmentProps}
+                   />
+                )}
+              />
+              <Route
+                path='/assessment/services'
+                render={(props) => (
+                  <ServicesForm {...props}
                     {...assessmentProps}
                    />
                 )}

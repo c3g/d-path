@@ -2,8 +2,6 @@ import React from 'react';
 import cx from 'classnames';
 
 import OrganizationForm from './../forms/OrganizationForm';
-import DataProcessingForm from './../forms/DataProcessingForm';
-import DataUsersForm from './../forms/DataUsersForm';
 import DataDonorsForm from './../forms/DataDonorsForm';
 import ServicesForm from './../forms/ServicesForm';
 import Success from './../forms/Success';

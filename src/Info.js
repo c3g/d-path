@@ -81,7 +81,6 @@ class Info extends Component {
             </h6>
 
             <hr />
-            { assessment.areServicesOffered && <> <Alert variant='warning'> The obligation or practice of Returning Results to individuals located in the EU is not widely accepted as a situation that will certainly attract the applicability of the GDPR, as this scenario is still under discussion. However, bear in mind that it may in fact do so. Please discuss your specific situation with the appropriate legal counsel to make sure you are complying with any obligation applicable to you. </Alert> </> }
             { assessment.isPersonalInfo &&
               <>
                 <h1 className='obligationTitle'>Laws and Policies</h1>
@@ -99,6 +98,7 @@ class Info extends Component {
                 })}
               </>
             }
+            { assessment.areServicesOffered && !locations.includes('Europe') && <> <Alert variant='warning'> The obligation or practice of Returning Results to individuals located in the EU is not widely accepted as a situation that will certainly attract the applicability of the GDPR, as this scenario is still under discussion. However, bear in mind that it may in fact do so. Please discuss your specific situation with the appropriate legal counsel to make sure you are complying with any obligation applicable to you. </Alert> </> }
 
             <h1 className='obligationTitle'>Best Practices (Optional)</h1>
             { getBestPracticesCards({ activeBestPractices }) }

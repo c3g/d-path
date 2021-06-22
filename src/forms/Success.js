@@ -8,8 +8,7 @@ import {getSteps} from '../utils/Steps.js';
 class Success extends Component{
 
     render(){
-        const { locations } = this.props;
-        const { answers, userType, isPersonalInfo, isPublic, infoType, processor, province, isHealthInfo, crossesBorders, areServicesOffered  } = this.props.assessment;
+        const { answers, userType, isPersonalInfo, infoType, processor, province, isHealthInfo, crossesBorders, areServicesOffered  } = this.props.assessment;
         const user = (
           <div>
             <h4> Type of user: </h4>
@@ -38,10 +37,10 @@ class Success extends Component{
           </div>
         )
 
-        const getOtherCountries = () => {
+        /*const getOtherCountries = () => {
           const valuesToRemove = ["Canada", "Europe", "United States"];
           return Array.from(new Set(locations.filter((i) => !valuesToRemove.includes(i))));
-        }
+        }*/
 
         const {step, assessment} = this.props;
         const Steps = getSteps(step, assessment.userType);
@@ -56,7 +55,7 @@ class Success extends Component{
                     <Col lg={6}>
                       <h4> Locations selected :</h4>
                       <div>
-                          <h6>Where is the organization?</h6>
+                          <h6>Where is the organization/project?</h6>
                           <p>{answers.organization}</p>
                       </div>
                       <div>
@@ -86,6 +85,7 @@ class Success extends Component{
                         <h4> {province && ('In which province is the information processed?')} </h4>
                         <p> {province && (province.name) }</p>
                       </div>
+                      { /*
                       <div>
                         <h4> {processor && processor.body && ('Applicable Legislation(s)')} </h4>
                         {processor && processor.laws.map(law => {
@@ -96,6 +96,7 @@ class Success extends Component{
                          })
                         }
                       </div>
+                      */ }
                       <div style={{paddingTop: '3%'}}>
                         <Link className='displayButton' to='/obligations'>
                           Display Laws, Regulations and Best Practices

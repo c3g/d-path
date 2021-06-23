@@ -94,7 +94,7 @@ class InfoProcessor extends Component{
             optionSelected: true,
           });
         }
-        else if(processor === PROCESSOR.HEALTHCARE){
+        else if(processor === PROCESSOR.HEALTH){
           this.setState({
             federalSelected: false,
             commercialSelected: false,
@@ -129,6 +129,7 @@ class InfoProcessor extends Component{
 
     nextStep = (processor) => {
       this.props.handleProcessorChange(processor);
+      console.log(processor);
       if(processor.provincial) {
         addProvincialStep();
         this.props.nextStep();
@@ -387,7 +388,7 @@ class InfoProcessor extends Component{
                          opacity: 0.4,
                        }}> Healthcare Professionals </Card.Title>
                        <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/institutions/6-institution-200x200.png')} rounded />
-                    <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.HEALTHCARE)}> Select </Button>
+                    <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.HEALTH)}> Select </Button>
                     </Card.Body>
                     </Card>
                      </div>
@@ -406,7 +407,7 @@ class InfoProcessor extends Component{
                         <Card.Text style={{fontSize:'0.9rem'}}>
                           {healthcare}
                         </Card.Text>
-                        <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.HEALTHCARE)}> Select </Button>
+                        <Button variant="success" className="selectCardButtonProcessor" onClick={() => this.select(PROCESSOR.HEALTH)}> Select </Button>
                       </Card.Body>
                     </Card>
                     </div>

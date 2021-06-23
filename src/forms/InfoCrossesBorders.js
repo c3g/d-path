@@ -54,7 +54,7 @@ class InfoCrossesBorders extends Component{
 
     if(isCrossingBorders){
       this.props.handleProcessorChange({
-        body: 'Private Organization & Not Commercial',
+        body: 'Private Organization & Commercial',
         laws: ['PIPEDA'],
         provincial: true
       });

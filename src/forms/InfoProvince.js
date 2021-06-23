@@ -15,7 +15,7 @@ class InfoProvince extends Component{
           //just for these 2 we have to display all laws
           if((processor === PROCESSOR.MUSH || processor === PROCESSOR.PROV_GOV)){
             this.props.handleProcessorChange({
-              body: 'Private Organization & Not Commercial',
+              body: processor.body ,
               laws: province.laws,
               provincial: true
             });

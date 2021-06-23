@@ -21,19 +21,20 @@ export const getLawsPDF = (locations, assessment) => {
   }
 
   return(<>
-    <Text style={styles.title}>Laws and Policies </Text>
-     { (locations.includes('Canada')) && assessment.province==='Quebec' && getQuebecLawsPDF() }
-     { (locations.includes('Canada')) && assessment.province!=='Quebec' && assessment.processor !== PROCESSOR.NON_COMM &&
+    <Text style={styles.title}> Laws and Policies </Text>
+     { (locations.includes('Canada')) && assessment.province.name ==='Quebec' && getQuebecLawsPDF() }
+     { (locations.includes('Canada')) && assessment.province.name !=='Quebec' && assessment.processor !== PROCESSOR.NON_COMM &&
         assessment.processor.laws.map(law => {
           return createTextPDF(`• Please refer to the
             ${law} Legislation of
             ${(province) ? province.name : 'Canada'}`)
         })
      }
-     { (locations.includes('Canada')) &&assessment.processor === PROCESSOR.NON_COMM &&
+     { (locations.includes('Canada')) && assessment.processor === PROCESSOR.NON_COMM &&
        createTextPDF(`• Privacy laws do NOT apply. `)
      }
      { (locations.includes('Europe')) &&  getEuropeanLawsPDF() }
+     { assessment.areServicesOffered && !locations.includes('Europe') && getGDPRWarning() }
      { (locations.includes('United States')) && createTextPDF('• Please refer to the US Legislation (HIPAA)') }
      {getOtherCountries().map(country => {
        return createTextPDF(`• Please refer to the Privacy Legislation of ${country}`)
@@ -42,8 +43,8 @@ export const getLawsPDF = (locations, assessment) => {
   </>);
 }
 
-export const getSummaryPDF = (assesment) => {
-  const { userType, isPersonalInfo, infoType, isPublic, answers, processor, province, isHealthInformation, crossesBorders} = assesment;
+export const getSummaryPDF = (assessment) => {
+  const { userType, isPersonalInfo, infoType, isPublic, answers, processor, province, isHealthInformation, crossesBorders, areServicesOffered} = assessment;
 
   const healthInfoText = (
     <>
@@ -84,16 +85,13 @@ export const getSummaryPDF = (assesment) => {
       Locations Selected
     </Text>
     <Text style={styles.textSummary}>
-      Where is the organization? {answers.organization}
+      Where is the organization/project? {answers.organization}
     </Text>
     <Text style={styles.textSummary}>
-      Where is the data processed? {answers.dataProcessed}
+      Where is the monitored behaviour of the data donors? {answers.dataDonors}
     </Text>
     <Text style={styles.textSummary}>
-      Where are the data users? {answers.dataUsers}
-    </Text>
-    <Text style={styles.textSummary}>
-      Where are the data donors? {answers.dataDonors}
+      Were services offered? {areServicesOffered ? 'Yes' : 'No'}
     </Text>
     <Text style={styles.sectionSummary}>
       Type of User
@@ -128,13 +126,15 @@ export const getSummaryPDF = (assesment) => {
       {processor && processor.body}
     </Text>
     { province && provinceText }
-    <Text style={styles.sectionSummary}>
+    { /* <Text style={styles.sectionSummary}>
       Applicable Legislation(s)
     </Text>
       {processor && processor.laws.map(law => {
         return <Text style={styles.textSummary}> {law}  </Text>
       })}
+    */}
     </>);
+
 }
 
 export const getBestPracticesPDF = (isPersonalInfo) => {
@@ -253,5 +253,17 @@ export const getEuropeanLawsPDF = () => {
           </Text>
         );
       })}
+  </>);
+}
+
+export const getGDPRWarning = () => {
+  return(
+  <>
+    <Text style={styles.subtitle}>
+      • Warning
+    </Text>
+    <Text style={styles.text}>
+      The obligation or practice of Returning Results to individuals located in the EU is not widely accepted as a situation that will certainly attract the applicability of the GDPR, as this scenario is still under discussion. However, bear in mind that it may in fact do so. Please discuss your specific situation with the appropriate legal counsel to make sure you are complying with any obligation applicable to you.
+    </Text>
   </>);
 }

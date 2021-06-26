@@ -44,7 +44,7 @@ export const getLawsPDF = (locations, assessment) => {
 }
 
 export const getSummaryPDF = (assessment) => {
-  const { userType, isPersonalInfo, infoType, isPublic, answers, processor, province, isHealthInformation, crossesBorders, areServicesOffered} = assessment;
+  const { userType, isPersonalInfo, infoType, answers, processor, province, isHealthInformation, crossesBorders, areServicesOffered} = assessment;
 
   const healthInfoText = (
     <>
@@ -104,12 +104,6 @@ export const getSummaryPDF = (assessment) => {
     </Text>
     <Text style={styles.textSummary}>
       {infoType}
-    </Text>
-    <Text style={styles.sectionSummary}>
-      Is it public information?
-    </Text>
-    <Text style={styles.textSummary}>
-      {isPublic ? 'Yes' : 'No'}
     </Text>
     <Text style={styles.sectionSummary}>
       Is it personal information?

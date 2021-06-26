@@ -7,7 +7,7 @@ export const LOCATION = {
   CAN: 'Canada',
   USA: 'United States',
   EU: 'Europe',
-  NON_EU: 'Non-Europe',
+  NON_EU: 'Rest of the World',
 }
 
 export const USER_TYPE = {

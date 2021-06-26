@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Col, Row, Card, Button, Container, Jumbotron, OverlayTrigger } from 'react-bootstrap';
 import Icon from 'react-fontawesome';
 import {getSteps} from '../utils/Steps.js';
-import { link  } from '../utils/Link';
+import { linkEU  } from '../utils/Link';
 import { ConditionalWrapper, select } from '../utils/Popovers'
 import { LOCATION } from '../constants';
 import ReactCardFlip from 'react-card-flip';
@@ -121,7 +121,7 @@ class DataUsersForm extends Component{
                           opacity: 0.4,
                         }} > European Union </Card.Title>
                         <Card.Text>
-                          It refers to the country members of the European Union and the European Economic Area. The full list of countries belonging to the European Union can be found {link}
+                          It refers to the country members of the European Union and the European Economic Area. The full list of countries belonging to the European Union can be found {linkEU}
                         </Card.Text>
                         <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
                       </Card.Body>

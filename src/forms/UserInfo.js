@@ -94,7 +94,7 @@ class UserInfo extends Component{
                          textTransform: 'uppercase',
                          letterSpacing: 1,
                          opacity: 0.4,
-                       }}> Data Processor </Card.Title>
+                       }}> Data Steward/User </Card.Title>
 
                        <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/datapeople/data2-200x200.png')} rounded />
                     <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.PROCESSOR)}> Select </Button>
@@ -112,7 +112,7 @@ class UserInfo extends Component{
                           textTransform: 'uppercase',
                           letterSpacing: 1,
                           opacity: 0.4,
-                        }} >Data Processor</Card.Title>
+                        }} >Data Steward/User</Card.Title>
                         <Card.Text>
                           { dataProcessor }
                         </Card.Text>

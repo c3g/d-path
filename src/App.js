@@ -40,9 +40,7 @@ const INITIAL_STATE = {
     areServicesOffered: undefined,
     answers: {
       organization: undefined,
-      dataProcessed: undefined,
-      dataUsers: undefined,
-      dataDonors: undefined,
+      dataDonors: undefined
     },
     processor: undefined,
     province: undefined,
@@ -56,7 +54,8 @@ const INITIAL_STATE = {
 function getLocations(answers) {
   return Object.values(answers)
     .filter(Boolean)
-    .filter(l => l !== LOCATION.NON_EU);
+    .filter(l => l !== LOCATION.NON_EU)
+    .filter(l => l !== 'No');
 }
 
 class App extends Component {

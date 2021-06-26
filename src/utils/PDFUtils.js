@@ -2,7 +2,7 @@ import React from 'react';
 import {styles} from './PDFStyles';
 import {bestPracticesText, quebecLawsText, euroLawsText } from './TextLawsUtils';
 import { Text} from '@react-pdf/renderer'
-import { PROCESSOR } from '../constants';
+import { PROCESSOR, PROVINCES, LOCATION } from '../constants';
 
 export const createTextPDF = (text) => {
   return (
@@ -22,8 +22,8 @@ export const getLawsPDF = (locations, assessment) => {
 
   return(<>
     <Text style={styles.title}> Laws and Policies </Text>
-     { (locations.includes('Canada')) && assessment.province.name ==='Quebec' && getQuebecLawsPDF() }
-     { (locations.includes('Canada')) && assessment.province.name !=='Quebec' && assessment.processor !== PROCESSOR.NON_COMM &&
+     { (locations.includes('Canada')) && assessment.province === PROVINCES.QC && getQuebecLawsPDF() }
+     { (locations.includes('Canada')) && assessment.province !== PROVINCES.QC && assessment.processor !== PROCESSOR.NON_COMM &&
         assessment.processor.laws.map(law => {
           return createTextPDF(`• Please refer to the
             ${law} Legislation of
@@ -34,7 +34,7 @@ export const getLawsPDF = (locations, assessment) => {
        createTextPDF(`• Privacy laws do NOT apply. `)
      }
      { (locations.includes('Europe')) &&  getEuropeanLawsPDF() }
-     { assessment.areServicesOffered && !locations.includes('Europe') && getGDPRWarning() }
+     { assessment.areServicesOffered === LOCATION.EU && !locations.includes('Europe') && getGDPRWarning() }
      { (locations.includes('United States')) && createTextPDF('• Please refer to the US Legislation (HIPAA)') }
      {getOtherCountries().map(country => {
        return createTextPDF(`• Please refer to the Privacy Legislation of ${country}`)

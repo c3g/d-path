@@ -6,7 +6,7 @@ import Icon from 'react-fontawesome';
 import {styles} from './utils/PDFStyles';
 import {getSummaryPDF, getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
 import {getLaws, getBestPractices, getLawCards, getBestPracticesCards} from './utils/ObligationsUtils';
-import { PROVINCES } from './constants';
+import { PROVINCES, LOCATION } from './constants';
 
 function InfoDocument({locations, assessment}) {
   // Create styles
@@ -27,6 +27,9 @@ function InfoDocument({locations, assessment}) {
       <Text style={styles.title}>SUMMARY</Text>
         { getSummaryPDF(assessment) }
       <Text break style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
+        <Text style={styles.header}>
+          The obligations listed here are key ones that you have with respect to data. Your collaborators may have different obligations than you.
+        </Text>
         { (assessment.isPersonalInfo) && getLawsPDF(locations, assessment) }
         { getBestPracticesPDF(assessment.isPersonalInfo) }
       <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
@@ -81,6 +84,9 @@ class Info extends Component {
             </h6>
 
             <hr />
+            <Card body style={{ textAlign: 'center', marginBottom: '1rem'}}>
+              <strong style={{fontSize: '0.95rem'}}> The obligations listed here are key ones that you have with respect to data. Your collaborators may have different obligations than you.” </strong>
+            </Card>
             { assessment.isPersonalInfo &&
               <>
                 <h1 className='obligationTitle'>Laws and Policies</h1>
@@ -98,7 +104,7 @@ class Info extends Component {
                 })}
               </>
             }
-            { assessment.areServicesOffered && !locations.includes('Europe') && <> <Alert variant='warning'> The obligation or practice of Returning Results to individuals located in the EU is not widely accepted as a situation that will certainly attract the applicability of the GDPR, as this scenario is still under discussion. However, bear in mind that it may in fact do so. Please discuss your specific situation with the appropriate legal counsel to make sure you are complying with any obligation applicable to you. </Alert> </> }
+            { assessment.areServicesOffered === LOCATION.EU && !locations.includes('Europe') && <> <Alert variant='warning'> Returning individual research results to participants in the EU may make the GDPR apply with respect to the personal data of individuals located in the EU. Please seek out further advice. </Alert> </> }
 
             <h1 className='obligationTitle'>Best Practices (Optional)</h1>
             { getBestPracticesCards({ activeBestPractices }) }

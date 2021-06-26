@@ -26,7 +26,7 @@ export const terminologyObjects = [
   },
   {
     id: 6,
-    term: "Data processor (also known as data user)",
+    term: "Data steward/user",
     definition: "Refers to an individual, entity or organization that either personally or through a project collects, records, organizes, structures, stores, adapts or alters, retrieves, consults, uses, discloses, transmits, disseminates or otherwise makes available, aligns, combines, restricts, erases or destroys data."
   },
   {
@@ -42,7 +42,7 @@ export const terminologyObjects = [
   {
     id: 9,
     term: "Data producer",
-    definition: "Refers to a type of data processor that collects, records, organizes, structures, stores, disseminates or otherwise makes data available. This data processor owns and/or manages the data."
+    definition: "efers to a researcher, clinician or institution who collected the data."
   },
   {
     id: 10,

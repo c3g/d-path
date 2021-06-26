@@ -5,7 +5,7 @@ import Select from 'react-select';
 import Icon from 'react-fontawesome';
 import {getSteps} from '../utils/Steps.js';
 import countryList from 'react-select-country-list';
-import { link  } from '../utils/Link';
+import { linkEU  } from '../utils/Link';
 import ReactCardFlip from 'react-card-flip';
 import { ConditionalWrapper, select } from '../utils/Popovers';
 
@@ -48,6 +48,7 @@ class OrganizationForm extends Component{
 
     getLinkTo = () => {
       if(!this.state.optionSelected) return "/assessment/organization"
+      else if(this.state.EUSelected) return "/assessment/info/description"
       else return "/assessment/donors"
     }
 
@@ -190,7 +191,7 @@ class OrganizationForm extends Component{
                               opacity: 0.4,
                             }} > European Union </Card.Title>
                             <Card.Text>
-                               It refers to the country members of the European Union and the European Economic Area. The full list of countries can be found {link}
+                               It refers to the country members of the European Union and the European Economic Area. The full list of countries can be found {linkEU}
                             </Card.Text>
                             <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
                           </Card.Body>

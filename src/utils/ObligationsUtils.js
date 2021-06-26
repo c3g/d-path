@@ -1,8 +1,9 @@
 import React from 'react';
-import {Card, ListGroup, Tabs, Tab, Col, Row, Accordion, Button} from 'react-bootstrap';
+import {Card, ListGroup, Tabs, Tab, Col, Row, Accordion, Button, Alert} from 'react-bootstrap';
 import cx from 'classnames';
 import {newBestPracticesText, bestPracticesCardsText, quebecLawsText, quebecLawCardsText, euroLawsText} from './TextLawsUtils';
 import { PROCESSOR, PROVINCES } from '../constants';
+import { linkGDPR  } from './Link';
 
 const bestPracticeTabs = [
   {
@@ -245,8 +246,8 @@ export const getEuropeanLaws = (accordion) => {
           </div>
           )}
          </Card>
+         <Alert variant='warning'> We also invite you to {linkGDPR} which analyzes the General Data Protection Regulation (GDPR) for the genomics community. </Alert>
      </Accordion>
-
   </>);
 };
 

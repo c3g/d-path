@@ -1,6 +1,6 @@
 export const dataProcessor = "Individual, entity or organization that, either personally or through a project, collects, records, organizes, structures, stores, adapts or alters, retrieves, consults, uses, discloses, transmits, disseminates or otherwise makes available, aligns, combines, restricts, erases or destroys data."
 export const dataRecipient = "Person to whom the data is disclosed in accordance with a data access agreement either open, controlled or registered. These are usually researchers, research centres or companies who will use the data for further research."
-export const dataDonor = "Refers to the individual whom the data is about."
+export const dataDonor = "Refers to the individual whom the data is about. Examples of data producer include a researcher, clinician or institution who collected your data. "
 export const europe = "It refers to the country members of the European Union and the European Economic Area. The full list of countried belonging to the European Union can be found at: https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:European_Economic_Area_(EEA)"
 export const directlyIdentifiable = "Information that identifies a specific individual using direct identifiers (name, social insurance number or personal health number."
 export const indirectlyIdentifiable = "Information that, in combination with indirect identifiers (date of birth or place of residence), can be reasonable expected to identify a specific individual."

@@ -7,7 +7,7 @@ import ReactCardFlip from 'react-card-flip';
 import {getSteps} from '../utils/Steps.js';
 import { LOCATION } from '../constants';
 import { select, behaviour, ConditionalWrapper } from '../utils/Popovers';
-import { link  } from '../utils/Link';
+import { linkEU  } from '../utils/Link';
 
 class DataDonorsForm extends Component{
 
@@ -17,6 +17,7 @@ class DataDonorsForm extends Component{
       isFlipped: false,
       EUSelected: false,
       nonEUSelected: false,
+      noSelected:false,
       optionSelected: false,
     };
     this.handleClick = this.handleClick.bind(this);
@@ -33,13 +34,23 @@ class DataDonorsForm extends Component{
           this.setState({
             EUSelected: true,
             nonEUSelected: false,
+            noSelected: false,
+            optionSelected: true
+           });
+      }
+      else if(location === LOCATION.NON_EU){
+          this.setState({
+            EUSelected: false,
+            nonEUSelected: true,
+            noSelected: false,
             optionSelected: true
            });
       }
       else{
           this.setState({
             EUSelected: false,
-            nonEUSelected: true,
+            nonEUSelected: false,
+            noSelected: true,
             optionSelected: true
            });
       }
@@ -80,13 +91,13 @@ class DataDonorsForm extends Component{
                 Location Information
               </h6>
               <hr />
-              <h1 style={{paddingBottom: '2%'}}>  Where were the data subjects/data donors located when their {' '}
-                <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={behaviour}>
-                  <abbr> behaviour was being monitored  </abbr>
+              <h1 style={{paddingBottom: '2%'}}>  If your study monitors the behaviour of individuals, where are they located when their {' '}
+                <OverlayTrigger trigger={['hover', 'focus']} placement='top' overlay={behaviour}>
+                  <abbr> behaviour is being monitored  </abbr>
                 </OverlayTrigger> ?
               </h1>
               <Row className='summaryInfo'>
-                <Col style={{marginLeft: '10rem'}} lg={4}>
+                <Col lg={4}>
                   <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
                      <div className='cardOption'>
                        <Card  border={this.state.EUSelected ? 'primary' : ''} className={this.state.EUSelected ? ' selectedCard' : ''}>
@@ -118,7 +129,7 @@ class DataDonorsForm extends Component{
                           opacity: 0.4,
                         }} > European Union </Card.Title>
                         <Card.Text>
-                           It refers to the country members of the European Union and the European Economic Area. The full list of countries can be found {link}
+                           It refers to the country members of the European Union and the European Economic Area. The full list of countries can be found {linkEU}
                         </Card.Text>
                         <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
                       </Card.Body>
@@ -141,6 +152,24 @@ class DataDonorsForm extends Component{
                      }}> Rest of the World </Card.Title>
                      <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/maps/4-map-200x200.png')} rounded />
                   <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.NON_EU)}> Select </Button>
+                  </Card.Body>
+                  </Card>
+                  </div>
+                </Col>
+                <Col lg={4}>
+                  <div className='cardOption'>
+                  <Card border={this.state.noSelected ? 'primary' : ''} className={this.state.noSelected ? 'selectedCard' : ''}>
+                  <Card.Body>
+                  <Card.Title style={{
+                    margingLeft: '3rem',
+                    fontSize: '1rem',
+                    fontWeight: 'normal',
+                    textTransform: 'uppercase',
+                    letterSpacing: 1,
+                    opacity: 0.4,
+                  }}> No, it does not </Card.Title>
+                  <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/yes-no/no-200x200.png')} rounded />
+                  <Button variant="success" className="selectCardButton" onClick={() => this.select("No")}> Select </Button>
                   </Card.Body>
                   </Card>
                   </div>

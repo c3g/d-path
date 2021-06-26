@@ -65,7 +65,9 @@ class AboutUs extends Component {
                   • Palmira Granados Moreno <br/>
                   • Sebastian Ballesteros Ramirez <br/>
                   • Hanshi Liu <br/>
+                  • Michael Beauvais <br/>
                   • Hortense Gallois <br/>
+                  • Elena Olvera <br/>
                   • David Bujold <br/>
                   • Ksenia Zaytseva <br/>
                 </Card.Text>

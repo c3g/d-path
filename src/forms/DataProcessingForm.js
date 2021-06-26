@@ -5,7 +5,7 @@ import Select from 'react-select';
 import Icon from 'react-fontawesome';
 import {getSteps} from '../utils/Steps.js';
 import countryList from 'react-select-country-list';
-import { link  } from '../utils/Link';
+import { linkEU  } from '../utils/Link';
 import { ConditionalWrapper, select } from '../utils/Popovers';
 import ReactCardFlip from 'react-card-flip';
 
@@ -189,7 +189,7 @@ class DataProcessingForm extends Component{
                             opacity: 0.4,
                           }} > European Union </Card.Title>
                           <Card.Text>
-                            It refers to the country members of the European Union and the European Economic Area. The full list of countries belonging to the European Union can be found {link}
+                            It refers to the country members of the European Union and the European Economic Area. The full list of countries belonging to the European Union can be found {linkEU}
                           </Card.Text>
                           <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
                         </Card.Body>

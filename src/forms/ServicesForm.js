@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import { Container, Row, Col, Card, Jumbotron, Button, OverlayTrigger} from 'react-bootstrap'
 import { Link } from 'react-router-dom';
 import Icon from 'react-fontawesome';
+import ReactCardFlip from 'react-card-flip';
+import { linkEU  } from '../utils/Link';
 import {getSteps, removeLastStep} from '../utils/Steps.js';
-import { select, goods,  ConditionalWrapper } from '../utils/Popovers';
+import { LOCATION } from '../constants';
+import { select,  ConditionalWrapper } from '../utils/Popovers';
 
 class ServicesForm extends Component{
 
@@ -11,7 +14,8 @@ class ServicesForm extends Component{
       super();
         this.state = {
         isFlipped: false,
-        yesSelected: false,
+        EUSelected: false,
+        nonEUSelected:false,
         noSelected: false,
         optionSelected: false,
       };
@@ -23,34 +27,44 @@ class ServicesForm extends Component{
       this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
     }
 
-    select = (beingOffered) => {
-      if(beingOffered) {
-        this.setState({
-          yesSelected: true,
-          noSelected: false,
-          optionSelected: true
-        });
+    select = (location) => {
+        if(location === LOCATION.EU) {
+            this.setState({
+              EUSelected: true,
+              nonEUSelected: false,
+              noSelected: false,
+              optionSelected: true
+             });
+        }
+        else if(location === LOCATION.NON_EU){
+            this.setState({
+              EUSelected: false,
+              nonEUSelected: true,
+              noSelected: false,
+              optionSelected: true
+             });
+        }
+        else{
+            this.setState({
+              EUSelected: false,
+              nonEUSelected: false,
+              noSelected: true,
+              optionSelected: true
+             });
+        }
       }
-      else{
-        this.setState({
-          yesSelected: false,
-          noSelected: true,
-          optionSelected: true
-        });
-      }
-      this.props.handleServicesOfferedChange(beingOffered);
-    }
 
-    prevStep = () => {
-      removeLastStep();
-      this.props.prevStep();
-    }
+    saveServicesOffered = () => {
+      //trigger warning if answer is europe
+      if(this.state.EUSelected) this.props.handleGDPRWarning(true);
+      else this.props.handleGDPRWarning(false);
 
-    saveServicesOffered = (beingOffered) => {
-      if(beingOffered){
-        this.props.handleGDPRWarning(beingOffered);
-      }
-      this.props.handleServicesOfferedChange(beingOffered);
+      //save answer
+      if(this.state.noSelected) this.props.handleServicesOfferedChange('No');
+      else if(this.state.EUSelected) this.props.handleServicesOfferedChange(LOCATION.EU);
+      else  this.props.handleServicesOfferedChange(LOCATION.NON_EU);
+
+      console.log(this.props.assessment);
       this.props.nextStep();
     }
 
@@ -86,35 +100,52 @@ class ServicesForm extends Component{
                 Location Information
               </h6>
               <hr />
-              <h1 style={{paddingBottom: '2%'}}>  Were
-                <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={goods}>
-                  <abbr> goods and services </abbr>
-                </OverlayTrigger>
-                 being offered ?
-              </h1>
+              <h1 style={{paddingBottom: '2%'}}>  If your study returns individual results, where are the individuals located whose results you return? </h1>
               <Row className='summaryInfo'>
-                <Col style={{marginLeft: '10rem'}} lg={4}>
-                   <div className='cardOption'>
-                     <Card  border={this.state.yesSelected ? 'primary' : ''} className={this.state.yesSelected ? ' selectedCard' : ''}>
-                     <Card.Body>
-                       <Card.Title style={{
-                         margingLeft: '3rem',
-                         fontSize: '1rem',
-                         fontWeight: 'normal',
-                         textTransform: 'uppercase',
-                         letterSpacing: 1,
-                         opacity: 0.4,
-                       }}> Yes </Card.Title>
+                <Col lg={4}>
+                  <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
+                     <div className='cardOption'>
+                       <Card  border={this.state.EUSelected ? 'primary' : ''} className={this.state.EUSelected ? ' selectedCard' : ''}>
+                       <Card.Body>
+                         <Card.Title style={{
+                           margingLeft: '3rem',
+                           fontSize: '1rem',
+                           fontWeight: 'normal',
+                           textTransform: 'uppercase',
+                           letterSpacing: 1,
+                           opacity: 0.4,
+                         }}> European Union </Card.Title>
 
-                       <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/yes-no/yes-200x200.png')} rounded />
-                    <Button variant="success" style={{marginLeft: '5rem'}} onClick={() => this.select(true)}> Select </Button>
-                    </Card.Body>
+                         <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/maps/2-map-200x200.png')} rounded />
+                      <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
+                      </Card.Body>
+                      </Card>
+                    </div>
+                    <div className="cardOption">
+                     <Card border={this.state.EUSelected ? 'primary' : ''} className={this.state.EUSelected ? 'selectedCard' : ''}>
+                      <Card.Body>
+                        <Card.Title style={{
+                          marginBottom: '1rem',
+                          marginTop: '1rem',
+                          fontSize: '1em',
+                          fontWeight: 'normal',
+                          textTransform: 'uppercase',
+                          letterSpacing: 1,
+                          opacity: 0.4,
+                        }} > European Union </Card.Title>
+                        <Card.Text>
+                           It refers to the country members of the European Union and the European Economic Area. The full list of countries can be found {linkEU}
+                        </Card.Text>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.EU)}> Select </Button>
+                      </Card.Body>
                     </Card>
-                  </div>
+                    </div>
+                  </ReactCardFlip>
+                  <Button variant="secondary" style={{margin: '1rem 5rem', width: '10rem'}} onClick={this.handleClick}> {this.state.isFlipped ? 'Back' : 'More information'} </Button>
                 </Col>
                 <Col  lg={4}>
                   <div className='cardOption'>
-                   <Card  border={this.state.noSelected ? 'primary ' : ''}  className={this.state.noSelected ? 'selectedCard ' : ''}>
+                   <Card  border={this.state.nonEUSelected ? 'primary ' : ''}  className={this.state.nonEUSelected ? 'selectedCard ' : ''}>
                    <Card.Body>
                      <Card.Title style={{
                        margingLeft: '3rem',
@@ -123,12 +154,30 @@ class ServicesForm extends Component{
                        textTransform: 'uppercase',
                        letterSpacing: 1,
                        opacity: 0.4,
-                     }}> No </Card.Title>
-                     <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/yes-no/no-200x200.png')} rounded />
-                  <Button variant="success" style={{marginLeft: '5rem'}} onClick={() => this.select(false)}> Select </Button>
+                     }}> Rest of the World </Card.Title>
+                     <Card.Img style={{marginBottom: '1rem'}} src={require('./../media/maps/4-map-200x200.png')} rounded />
+                  <Button variant="success" className="selectCardButton" onClick={() => this.select(LOCATION.NON_EU)}> Select </Button>
                   </Card.Body>
                   </Card>
-                 </div>
+                  </div>
+                </Col>
+                <Col lg={4}>
+                  <div className='cardOption'>
+                  <Card border={this.state.noSelected ? 'primary' : ''} className={this.state.noSelected ? 'selectedCard' : ''}>
+                  <Card.Body>
+                  <Card.Title style={{
+                    margingLeft: '3rem',
+                    fontSize: '1rem',
+                    fontWeight: 'normal',
+                    textTransform: 'uppercase',
+                    letterSpacing: 1,
+                    opacity: 0.4,
+                  }}> No, it does not </Card.Title>
+                  <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/yes-no/no-200x200.png')} rounded />
+                  <Button variant="success" className="selectCardButton" onClick={() => this.select("No")}> Select </Button>
+                  </Card.Body>
+                  </Card>
+                  </div>
                 </Col>
               </Row>
             <div style={{marginTop: '2rem'}} className='MainForm__buttons'>
@@ -148,7 +197,7 @@ class ServicesForm extends Component{
                  )}
               >
                  <div>
-                   <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.props.nextStep} to={this.getLinkTo()} disabled={!this.props.optionSelected}>
+                   <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.saveServicesOffered} to={this.getLinkTo()} disabled={!this.props.optionSelected}>
                      <Icon name='arrow-right' /> Next
                    </Link>
                  </div>

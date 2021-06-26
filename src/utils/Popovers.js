@@ -195,7 +195,7 @@ export const behaviour = (
       <Popover id='popover-basic'>
         <Popover.Title as='h3'> Monitored Behaviour </Popover.Title>
         <Popover.Content>
-          An example would be when your study aims to investigate the lifestyle of individuals located in the EU or the genetic ancestry of EU descendants.
+          An example would be when your study aims to investigate the lifestyle of individuals. 
         </Popover.Content>
       </Popover>
 );

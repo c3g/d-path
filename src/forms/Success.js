@@ -18,8 +18,8 @@ class Success extends Component{
 
         const servicesOffered = (
           <div>
-            <h6> Were services offered? </h6>
-            <p>{ areServicesOffered ? 'Yes' : 'No' }</p>
+            <h6> If your study returns individual results, where are the individuals located whose results you return? </h6>
+            <p> { areServicesOffered  }</p>
           </div>
         )
 
@@ -34,6 +34,13 @@ class Success extends Component{
           <div>
             <h4> Is the information health information?: </h4>
             <p> { isHealthInfo ? 'Yes' : 'No' } </p>
+          </div>
+        )
+
+        const behaviour = (
+          <div>
+              <h6>If your study monitors the behaviour of individuals, where are they located when their behaviour is being monitored?</h6>
+              <p>{answers.dataDonors}</p>
           </div>
         )
 
@@ -58,10 +65,7 @@ class Success extends Component{
                           <h6>Where is the organization/project?</h6>
                           <p>{answers.organization}</p>
                       </div>
-                      <div>
-                          <h6>Where is the monitored behaviour of the data donors?</h6>
-                          <p>{answers.dataDonors}</p>
-                      </div>
+                      { answers.dataDonors !== undefined ? behaviour : null}
                       { areServicesOffered !== undefined ? servicesOffered : null }
                       { isPersonalInfo ? user : null }
                       { crossesBorders !== undefined ? crossingBorders: null}

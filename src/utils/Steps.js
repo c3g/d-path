@@ -65,7 +65,7 @@ export const resetSteps = () => {
 }
 
 export const getSteps = (step, userType) => {
-  if (userType && userType !== USER_TYPE.PROCESSOR){
+  if (userType && userType !== USER_TYPE.STEWARD){
     return (
       <div className='MainForm__steps'>
         {STEPS.slice(0,2).map((_, i) =>

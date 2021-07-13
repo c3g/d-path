@@ -47,6 +47,7 @@ const INITIAL_STATE = {
     isHealthInformation: undefined,
     crossesBorders: undefined,
     GDPRWarning: undefined,
+    doubleLegislationWarning: undefined
   },
   step: 0,
 }
@@ -201,6 +202,16 @@ class App extends Component {
     }));
   }
 
+  handleDoubleLegislationWarning  = (hasDoubleLegislationWarning) => {
+    this.setState(prevState => ({
+      ...prevState,
+      assessment: {
+         ...prevState.assessment,
+         doubleLegislationWarning: hasDoubleLegislationWarning
+      }
+    }));
+  }
+
   onAssessmentChange = (locations, isPersonalInfo) => {
     this.setState({
       locations: locations,
@@ -229,6 +240,7 @@ class App extends Component {
         handleCrossesBordersChange:this.handleCrossesBordersChange,
         handleServicesOfferedChange:this.handleServicesOfferedChange,
         handleGDPRWarning:this.handleGDPRWarning,
+        handleDoubleLegislationWarning: this.handleDoubleLegislationWarning,
         resetAssessment:this.resetAssessment,
         locations:getLocations(assessment.answers)
     }

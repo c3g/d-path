@@ -5,8 +5,8 @@ import { PDFDownloadLink, Document, Page, Text, Font} from '@react-pdf/renderer'
 import Icon from 'react-fontawesome';
 import {styles} from './utils/PDFStyles';
 import {getSummaryPDF, getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
-import {getLaws, getBestPractices, getLawCards, getBestPracticesCards} from './utils/ObligationsUtils';
-import { PROVINCES, LOCATION } from './constants';
+import {getLaws, getBestPractices} from './utils/ObligationsUtils';
+import { LOCATION } from './constants';
 
 function InfoDocument({locations, assessment}) {
   // Create styles
@@ -27,9 +27,6 @@ function InfoDocument({locations, assessment}) {
       <Text style={styles.title}>SUMMARY</Text>
         { getSummaryPDF(assessment) }
       <Text break style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
-        <Text style={styles.header}>
-          The obligations listed here are key ones that you have with respect to data. Your collaborators may have different obligations than you.
-        </Text>
         { (assessment.isPersonalInfo) && getLawsPDF(locations, assessment) }
         { getBestPracticesPDF(assessment.isPersonalInfo) }
       <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
@@ -66,6 +63,7 @@ class Info extends Component {
   render(){
     const { activeLaws, activeBestPractices } = this.state;
     const { locations, assessment } = this.props;
+    const justDPRApplies = assessment.answers.organization === LOCATION.EU || assessment.answers.dataDonors === LOCATION.EU;
 
     return(
         <Container>
@@ -84,21 +82,16 @@ class Info extends Component {
             </h6>
 
             <hr />
-            <Card body style={{ textAlign: 'center', marginBottom: '1rem'}}>
-              <strong style={{fontSize: '0.95rem'}}> The obligations listed here are key ones that you have with respect to data. Your collaborators may have different obligations than you.” </strong>
+            <Card body style={{ textAlign: 'center', marginBottom: '1rem', backgroundColor: '#fff3cd'}}>
+              <strong style={{fontSize: '1rem'}}> The list below includes the key obligations that you have with respect to data. Those of your collaborators may differ. </strong>
             </Card>
-            { assessment.isPersonalInfo &&
+            { (assessment.isPersonalInfo || justDPRApplies) &&
               <>
                 <h1 className='obligationTitle'>Laws and Policies</h1>
-                {locations.includes('Canada') && assessment.province===PROVINCES.QC &&
-                  getLawCards({
-                    locations,
-                    assessment,
-                    activeLaws,
-                })}
                 {getLaws({
                   locations,
                   assessment,
+                  activeLaws,
                   onMouseEnter: this.onMouseEnterLaw,
                   onMouseLeave: this.onMouseLeaveLaw,
                 })}
@@ -107,11 +100,11 @@ class Info extends Component {
             { assessment.areServicesOffered === LOCATION.EU && !locations.includes('Europe') && <> <Alert variant='warning'> Returning individual research results to participants in the EU may make the GDPR apply with respect to the personal data of individuals located in the EU. Please seek out further advice. </Alert> </> }
 
             <h1 className='obligationTitle'>Best Practices (Optional)</h1>
-            { getBestPracticesCards({ activeBestPractices }) }
             { getBestPractices({
+              activeBestPractices,
               onMouseEnter: this.onMouseEnterBestPractice,
               onMouseLeave: this.onMouseLeaveBestPractice,
-            }) }
+            })}
 
             <hr />
 

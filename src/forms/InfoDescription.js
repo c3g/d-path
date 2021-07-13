@@ -96,7 +96,7 @@ class InfoDescription extends Component{
       if(!this.state.optionSelected) this.props.history.push('/assessment/info/description');
       else if(this.state.directlySelected || this.state.indirectlySelected) this.nextStepProcessor(true);
       else if (this.state.anonymousSelected || this.state.anonymizedSelected)  this.saveAndContinue(false, false);
-      else this.nextStepIdentifiable();
+      else this.nextStepIdentifiable(); //coded
     }
 
     nextStepProcessor = (identifiable) => {
@@ -119,13 +119,8 @@ class InfoDescription extends Component{
       const { locations } = this.props;
 
       this.props.nextStep();
-      if(locations.includes('Europe') && locations.includes('Canada')) {
-        addProcessorStep();
-        this.props.handleIdentifiableInfoChange(true);
-        this.props.handlePersonalInfoChange(true);
-        this.props.history.push('/assessment/info/processor');
-      }
-      else if(!locations.includes('Europe')){
+
+      if(locations.includes('Canada') || locations.includes('United States')){
         addIdentifiableStep();
         this.props.history.push('/assessment/info/identifiable');
       }

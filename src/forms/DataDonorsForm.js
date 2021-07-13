@@ -6,7 +6,7 @@ import ReactCardFlip from 'react-card-flip';
 
 import {getSteps} from '../utils/Steps.js';
 import { LOCATION } from '../constants';
-import { select, behaviour, ConditionalWrapper } from '../utils/Popovers';
+import { select, behaviour, located, ConditionalWrapper } from '../utils/Popovers';
 import { linkEU  } from '../utils/Link';
 
 class DataDonorsForm extends Component{
@@ -91,7 +91,10 @@ class DataDonorsForm extends Component{
                 Location Information
               </h6>
               <hr />
-              <h1 style={{paddingBottom: '2%'}}>  If your study monitors the behaviour of individuals, where are they located when their {' '}
+              <h1 style={{paddingBottom: '2%'}}>  If your study monitors the behaviour of individuals, where are they
+                <OverlayTrigger trigger={['hover', 'focus']} placement='top' overlay={located}>
+                  <abbr> located  </abbr>
+                </OverlayTrigger> when their {' '}
                 <OverlayTrigger trigger={['hover', 'focus']} placement='top' overlay={behaviour}>
                   <abbr> behaviour is being monitored  </abbr>
                 </OverlayTrigger> ?

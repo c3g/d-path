@@ -5,7 +5,7 @@ import Icon from 'react-fontawesome';
 import ReactCardFlip from 'react-card-flip';
 
 import {getSteps} from '../utils/Steps.js';
-import { select, ConditionalWrapper } from '../utils/Popovers';
+import { select, ConditionalWrapper, dataProducer } from '../utils/Popovers';
 import { dataProcessor, dataDonor} from '../utils/Definitions';
 import { USER_TYPE } from '../constants';
 
@@ -15,7 +15,7 @@ class UserInfo extends Component{
       super();
         this.state = {
         isFlipped: false,
-        processorSelected: false,
+        stewardSelected: false,
         donorSelected: false,
         optionSelected: false,
       };
@@ -29,16 +29,16 @@ class UserInfo extends Component{
 
 
     select = (userType) => {
-        if(userType === USER_TYPE.PROCESSOR ) {
+        if(userType === USER_TYPE.STEWARD ) {
             this.setState({
-              processorSelected: true,
+              stewardSelected: true,
               donorSelected: false,
               optionSelected: true,
              });
         }
         else if(userType === USER_TYPE.DONOR){
             this.setState({
-              processorSelected: false,
+              stewardSelected: false,
               donorSelected: true,
               optionSelected: true,
              });
@@ -52,7 +52,7 @@ class UserInfo extends Component{
     }
 
     getLinkTo = () => {
-      if(this.state.processorSelected) return "organization"
+      if(this.state.stewardSelected) return "organization"
       if(!this.state.optionSelected) return "/assessment/user"
       else return "other-user"
     }
@@ -85,7 +85,7 @@ class UserInfo extends Component{
                   <Col lg={6}>
                     <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >
                      <div className='cardOption' style={{marginLeft:'10rem'}}>
-                     <Card  border={this.state.processorSelected ? 'primary' : ''} className={this.state.processorSelected ? ' selectedCard' : ''}>
+                     <Card  border={this.state.stewardSelected ? 'primary' : ''} className={this.state.stewardSelected ? ' selectedCard' : ''}>
                      <Card.Body>
                        <Card.Title style={{
                          margingLeft: '3rem',
@@ -97,12 +97,12 @@ class UserInfo extends Component{
                        }}> Data Steward/User </Card.Title>
 
                        <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/datapeople/data2-200x200.png')} rounded />
-                    <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.PROCESSOR)}> Select </Button>
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.STEWARD)}> Select </Button>
                     </Card.Body>
                     </Card>
                      </div>
                      <div className='cardOption' style={{marginLeft:'10rem'}}>
-                     <Card border={this.state.processorSelected ? 'primary' : ''}  className={this.state.processorSelected ? 'selectedCard ' : ''}>
+                     <Card border={this.state.stewardSelected ? 'primary' : ''}  className={this.state.stewardSelected ? 'selectedCard ' : ''}>
                       <Card.Body>
                         <Card.Title style={{
                           marginBottom: '1rem',
@@ -116,7 +116,7 @@ class UserInfo extends Component{
                         <Card.Text>
                           { dataProcessor }
                         </Card.Text>
-                        <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.PROCESSOR)}> Select </Button>
+                        <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.STEWARD)}> Select </Button>
                       </Card.Body>
                     </Card>
                     </div>
@@ -154,6 +154,9 @@ class UserInfo extends Component{
                         }} > Data Donor </Card.Title>
                         <Card.Text>
                           {dataDonor}
+                          <OverlayTrigger trigger={['hover', 'focus']} placement='right' overlay={dataProducer}>
+                            <abbr> Data producer   </abbr>
+                          </OverlayTrigger>
                         </Card.Text>
                         <Button variant="success" className="selectCardButton" onClick={() => this.select(USER_TYPE.DONOR)}> Select </Button>
                       </Card.Body>

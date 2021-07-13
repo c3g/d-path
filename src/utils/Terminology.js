@@ -1,3 +1,17 @@
+import React from 'react';
+import {linkPrivacyAct, linkPIPEDA, linkGDPR2, linkIHEC, linkGA4GH, linkTCPS2} from './Link.js'
+
+const getLinks = () => {
+  return <>
+    {linkPrivacyAct} <br/>
+    {linkPIPEDA} <br/>
+    {linkGDPR2} <br/>
+    {linkIHEC} <br/>
+    {linkGA4GH} <br/>
+    {linkTCPS2}
+  </>;
+}
+
 export const terminologyObjects = [
   {
     id: 1,
@@ -36,13 +50,13 @@ export const terminologyObjects = [
   },
   {
     id: 8,
-    term: "Data Donor (also known as data subject or data contributor)",
+    term: "Data donor (also known as data subject or data contributor)",
     definition: "Refers to the individual whom the data is about."
   },
   {
     id: 9,
     term: "Data producer",
-    definition: "efers to a researcher, clinician or institution who collected the data."
+    definition: "Refers to a researcher, clinician or institution who collected the data."
   },
   {
     id: 10,
@@ -148,5 +162,10 @@ export const terminologyObjects = [
     id: 30,
     term: "Terms of Service (also known as Terms of Use or Terms and Conditions)",
     definition: "Refers to the legal agreement between the data processor and the data recipient that contains the different rights, obligations, and conditions associated with the access that the data processor grants the data recipient usually for purposes of research, analysis, use, and study."
+  },
+  {
+    id: 31,
+    term: "Links",
+    definition: getLinks()
   }
 ]

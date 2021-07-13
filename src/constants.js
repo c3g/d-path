@@ -11,8 +11,7 @@ export const LOCATION = {
 }
 
 export const USER_TYPE = {
-  PROCESSOR: 'processor',
-  RECIPIENT: 'recipient',
+  STEWARD: 'steward/user',
   DONOR: 'donor',
 }
 
@@ -31,7 +30,7 @@ export const INFO_TYPE = {
 export const PROCESSOR = {
   FED: {
     body: 'Federal Government',
-    laws: ['Privacy Act'], //***
+    laws: ['Privacy Act', 'Treasury Board of Canada Secretariat’s policies and guidance'], //***
     provincial: false
   },
   PRIV_COMM: {

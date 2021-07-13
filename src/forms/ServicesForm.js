@@ -100,7 +100,7 @@ class ServicesForm extends Component{
                 Location Information
               </h6>
               <hr />
-              <h1 style={{paddingBottom: '2%'}}>  If your study returns individual results, where are the individuals located whose results you return? </h1>
+              <h1 style={{paddingBottom: '2%'}}>  If your study returns individual results, where are the individuals whose results you return located? </h1>
               <Row className='summaryInfo'>
                 <Col lg={4}>
                   <ReactCardFlip onClick={this.handleOnClick} isFlipped={this.state.isFlipped} >

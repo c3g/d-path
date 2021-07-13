@@ -12,7 +12,7 @@ class Success extends Component{
         const user = (
           <div>
             <h4> Type of user: </h4>
-            <p> { userType ? 'Processor' : userType } </p>
+            <p> { userType ? 'Steward/User' : userType } </p>
           </div>
         )
 

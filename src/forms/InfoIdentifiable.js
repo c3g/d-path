@@ -59,6 +59,11 @@ class InfoIdentifiable extends Component{
     this.props.handleIdentifiableInfoChange(isIdentifiable);
     this.props.handlePersonalInfoChange(isIdentifiable);
 
+    //double legislation
+    if(isIdentifiable && (locations.includes('Europe') && (locations.includes('Canada') || locations.includes('United States')))){
+      this.props.handleDoubleLegislationWarning(true);
+    }
+
     if(locations.includes('Canada')){
         addProcessorStep();
         this.props.history.push('/assessment/info/processor');

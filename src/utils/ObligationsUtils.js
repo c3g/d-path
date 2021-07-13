@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, ListGroup, Tabs, Tab, Col, Row, Accordion, Button, Alert} from 'react-bootstrap';
 import cx from 'classnames';
 import {newBestPracticesText, bestPracticesCardsText, quebecLawsText, quebecLawCardsText, euroLawsText} from './TextLawsUtils';
-import { PROCESSOR, PROVINCES } from '../constants';
+import { PROCESSOR, PROVINCES, LOCATION } from '../constants';
 import { linkGDPR  } from './Link';
 
 const bestPracticeTabs = [
@@ -45,7 +45,7 @@ const lawTabs = (lawText) =>[
 export const getLaws = (props) => {
   const { locations, assessment } = props;
   const includesCanada = locations.includes('Canada');
-  const includesEU = locations.includes('Europe');
+  const includesEU = (assessment.answers.dataDonors === LOCATION.EU || assessment.answers.organization === LOCATION.EU) ? true : false;
   const includesUS = locations.includes('United States');
 
 
@@ -65,9 +65,8 @@ export const getLaws = (props) => {
 
   return(
     <>
-        {console.log(assessment)}
-        {includesCanada && assessment.province===PROVINCES.QC && getQuebecLaws(props, accordion) }
-        {includesCanada && assessment.province!==PROVINCES.QC && assessment.processor.laws.includes('PIPEDA') &&
+        {assessment.isPersonalInfo && includesCanada && assessment.province===PROVINCES.QC && getQuebecLaws(props, accordion) }
+        {assessment.isPersonalInfo && includesCanada && assessment.province!==PROVINCES.QC && assessment.processor.laws.includes('PIPEDA') &&
           <Accordion defaultActiveKey="0">
           <Card>
             <Card.Header>
@@ -81,7 +80,7 @@ export const getLaws = (props) => {
             </Card>
             </Accordion>
         }
-        {includesCanada && assessment.province!==PROVINCES.QC && assessment.processor !== PROCESSOR.NON_COMM && !assessment.processor.laws.includes('PIPEDA') &&
+        {assessment.isPersonalInfo && includesCanada && assessment.province!==PROVINCES.QC && assessment.processor !== PROCESSOR.NON_COMM && !assessment.processor.laws.includes('PIPEDA') &&
           <Accordion defaultActiveKey="0">
           <Card>
             <Card.Header>
@@ -91,13 +90,13 @@ export const getLaws = (props) => {
             </Card.Header>
               {assessment.processor.laws.map(law => {
                 return accordion(`• Please refer to the
-                  ${law} Legislation of
+                  ${law} of
                   ${(assessment.province) ? assessment.province.name : 'Canada'}`)
               })}
             </Card>
             </Accordion>
         }
-        {includesCanada && assessment.processor === PROCESSOR.NON_COMM &&
+        {assessment.isPersonalInfo &&  includesCanada && assessment.processor === PROCESSOR.NON_COMM &&
           <Accordion defaultActiveKey="0">
           <Card>
             <Card.Header>
@@ -109,8 +108,9 @@ export const getLaws = (props) => {
             </Card>
             </Accordion>
         }
-        {includesEU && getEuropeanLaws(accordion) }
-        {includesUS &&
+        { includesEU && getEuropeanLaws(accordion, assessment.doubleLegislationWarning) }
+        { assessment.answers.organization !== LOCATION.EU && assessment.answers.dataDonors === LOCATION.EU && <> <Alert variant='warning'> As a project without an establishment in the EU, the EU’s GDPR may only apply with respect to your processing of the personal data of individuals located in the EU. </Alert> </> }
+        { assessment.isPersonalInfo && includesUS &&
           <Accordion defaultActiveKey="0">
           <Card>
             <Card.Header>
@@ -147,7 +147,9 @@ const getOtherCountriesLaws = (countries, accordion) => {
 
 }
 
-export const getQuebecLaws = ({ onMouseEnter, onMouseLeave}, accordion) => {
+export const getQuebecLaws = (props, accordion) => {
+
+  const { locations, assessment, activeLaws, onMouseEnter, onMouseLeave } = props;
 
   const textToItem = text =>
     <ListGroup.Item
@@ -174,6 +176,12 @@ export const getQuebecLaws = ({ onMouseEnter, onMouseLeave}, accordion) => {
        </Card.Header>
        {accordion(
         <div>
+          {locations.includes('Canada') && assessment.province===PROVINCES.QC &&
+            getLawCards({
+              locations,
+              assessment,
+              activeLaws,
+          })}
           <Card>
             <Card.Body>
               <Tabs defaultActiveKey='accountability'>
@@ -217,7 +225,8 @@ export const getLawCards = ({ activeLaws }) => {
   )
 };
 
-export const getEuropeanLaws = (accordion) => {
+export const getEuropeanLaws = (accordion, hasDoubleLegislationWarning) => {
+
   const renderTab = tab =>
     <Tab key={tab.key} eventKey={tab.key} title={tab.title}>
       <Card.Text>
@@ -243,10 +252,12 @@ export const getEuropeanLaws = (accordion) => {
                </Tabs>
              </Card.Body>
            </Card>
-          </div>
-          )}
-         </Card>
-         <Alert variant='warning'> We also invite you to {linkGDPR} which analyzes the General Data Protection Regulation (GDPR) for the genomics community. </Alert>
+         { hasDoubleLegislationWarning && <Alert variant='warning' style={{marginTop: '0rem'}}> These obligations apply to the data protected by the specific legislation with which the data is associated. </Alert> }
+         <Alert variant='warning' style={{marginTop: '0rem'}}> Please be aware that local national privacy laws may concurrently be applicable. Please seek out further advice. </Alert>
+         <Alert variant='warning' style={{marginTop: '0rem'}}> We also invite you to {linkGDPR} which analyzes the General Data Protection Regulation (GDPR) for the genomics community. </Alert>
+        </div>
+        )}
+        </Card>
      </Accordion>
   </>);
 };
@@ -279,7 +290,10 @@ export const getBestPracticesCards = ({ activeBestPractices }) => {
   )
 }
 
-export const getBestPractices = ({ onMouseEnter, onMouseLeave }) => {
+export const getBestPractices = (props) => {
+
+  const { activeBestPractices, onMouseEnter, onMouseLeave } = props;
+
   const textToItem = text =>
     <ListGroup.Item
       onMouseEnter={enterHandler(text, onMouseEnter)}
@@ -298,6 +312,7 @@ export const getBestPractices = ({ onMouseEnter, onMouseLeave }) => {
   return (
     <Card className='ObligationPanel'>
       <Card.Body>
+        {getBestPracticesCards({activeBestPractices})}
         <Tabs style={{'color': 'black'}} defaultActiveKey='accountability'>
           {bestPracticeTabs.map(renderTab)}
         </Tabs>

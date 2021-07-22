@@ -454,33 +454,31 @@ class InfoProcessor extends Component{
                   </Col>
                 </Row>
               </div>
-              <div style={{marginTop: '2rem'}} className='MainForm__buttons'>
-                <Link className='resetButton' to={this.getLinkTo()}  onClick={this.prevStep}>
-                  <Icon name='arrow-left' /> Previous
-                </Link>
-                <ConditionalWrapper
-                   condition={!this.state.optionSelected}
-                   wrapper={children => (
-                     <OverlayTrigger
-                     placement="right"
-                     delay={{ show: 250, hide: 400 }}
-                     overlay={select}
-                     >
-                      {children}
-                     </OverlayTrigger>
-                   )}
-                >
-                   <div>
-                     <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.continue} disabled={!this.props.optionSelected}>
-                       <Icon name='arrow-right' /> Next
-                     </Link>
-                   </div>
-                </ConditionalWrapper>
-                <div className='fill' />
-                <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
-                  <Icon name='refresh' /> Reset
-                </Link>
               </div>
+              <div className='MainForm__buttons'>
+                  <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
+                    <Icon name='refresh' /> Reset
+                  </Link>
+                  <div className='fill' />
+                    <Link className='resetButton' to={this.getLinkTo()}  onClick={this.prevStep}>
+                      <Icon name='arrow-left' /> Previous
+                    </Link>
+                  <ConditionalWrapper
+                     condition={!this.state.optionSelected}
+                     wrapper={children => (
+                       <OverlayTrigger
+                       placement="right"
+                       delay={{ show: 250, hide: 400 }}
+                       overlay={select}
+                       >
+                        {children}
+                       </OverlayTrigger>
+                     )}
+                  >
+                    <Link style={{marginLeft: '1rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.continue} disabled={!this.props.optionSelected}>
+                      <Icon name='arrow-right' /> Next
+                    </Link>
+                  </ConditionalWrapper>
             </div>
           </Jumbotron>
         </Container>

@@ -180,7 +180,11 @@ class DataDonorsForm extends Component{
               </Row>
             </div>
             <div className='MainForm__buttons'>
-              <Link className='resetButton' to='/assessment/organization'  onClick={this.props.prevStep}>
+              <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
+                <Icon name='refresh' /> Reset
+              </Link>
+              <div className='fill' />
+              <Link className='resetButton' to='/assessment/organization' onClick={this.props.prevStep}>
                 <Icon name='arrow-left' /> Previous
               </Link>
               <ConditionalWrapper
@@ -195,16 +199,10 @@ class DataDonorsForm extends Component{
                    </OverlayTrigger>
                  )}
               >
-                 <div>
-                   <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} to={this.getLinkTo()} onClick={this.continue} disabled={!this.props.optionSelected}>
-                     <Icon name='arrow-right' /> Next
-                   </Link>
-                 </div>
+                <Link style={{marginLeft: '1rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} to={this.getLinkTo()} onClick={this.continue} disabled={!this.props.optionSelected}>
+                  <Icon name='arrow-right' /> Next
+                </Link>
               </ConditionalWrapper>
-              <div className='fill' />
-              <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
-                <Icon name='refresh' /> Reset
-              </Link>
             </div>
           </Jumbotron>
         </Container>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Jumbotron, Button, Card, Alert } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
-import { PDFDownloadLink, Document, Page, Text, Font} from '@react-pdf/renderer'
+import { PDFDownloadLink, Document, Page, Text, Font, Image} from '@react-pdf/renderer'
 import Icon from 'react-fontawesome';
 import {styles} from './utils/PDFStyles';
 import {getSummaryPDF, getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
@@ -18,20 +18,27 @@ function InfoDocument({locations, assessment}) {
   return (
     <Document>
     <Page style={styles.body}>
-      <Text style={styles.tool} fixed>
-        ~ D-PATH ~
-      </Text>
+    <Image
+      style={styles.image}
+      src={require('./media/logoD-Path.png')}
+    />
       <Text style={styles.header} fixed>
         Please note that this is NOT a legal assessment.
       </Text>
       <Text style={styles.title}>SUMMARY</Text>
         { getSummaryPDF(assessment) }
       <Text break style={styles.title}>OBLIGATIONS AND REQUIREMENTS</Text>
+      <Text style={styles.headerWarning}> • The list below includes the key obligations that you have with respect to data. Those of your collaborators may differ. • </Text>
         { (assessment.isPersonalInfo) && getLawsPDF(locations, assessment) }
         { getBestPracticesPDF(assessment.isPersonalInfo) }
       <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => (
         `${pageNumber} / ${totalPages}`
       )} fixed />
+      <Image
+        style={styles.imageBottom}
+        src={require('./media/logoD-Path.png')}
+        fixed
+      />
     </Page>
     </Document>)
 }

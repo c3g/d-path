@@ -85,7 +85,7 @@ class ServicesForm extends Component{
           <Container className='MainForm'>
             <Jumbotron className='MainForm__content'>
               {Steps}
-              <div style={{marginBottom: '1rem'}}>
+              <div className='MainForm__component'>
               <h6
                 style={{
                   marginBottom: '1rem',
@@ -163,51 +163,49 @@ class ServicesForm extends Component{
                 </Col>
                 <Col lg={4}>
                   <div className='cardOption'>
-                  <Card border={this.state.noSelected ? 'primary' : ''} className={this.state.noSelected ? 'selectedCard' : ''}>
-                  <Card.Body>
-                  <Card.Title style={{
-                    margingLeft: '3rem',
-                    fontSize: '1rem',
-                    fontWeight: 'normal',
-                    textTransform: 'uppercase',
-                    letterSpacing: 1,
-                    opacity: 0.4,
-                  }}> No, it does not </Card.Title>
-                  <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/yes-no/no-200x200.png')} rounded />
-                  <Button variant="success" className="selectCardButton" onClick={() => this.select("No")}> Select </Button>
-                  </Card.Body>
-                  </Card>
+                    <Card border={this.state.noSelected ? 'primary' : ''} className={this.state.noSelected ? 'selectedCard' : ''}>
+                    <Card.Body>
+                    <Card.Title style={{
+                      margingLeft: '3rem',
+                      fontSize: '1rem',
+                      fontWeight: 'normal',
+                      textTransform: 'uppercase',
+                      letterSpacing: 1,
+                      opacity: 0.4,
+                    }}> No, it does not </Card.Title>
+                    <Card.Img style={{marginBottom: '1rem'}}  src={require('./../media/yes-no/no-200x200.png')} rounded />
+                    <Button variant="success" className="selectCardButton" onClick={() => this.select("No")}> Select </Button>
+                    </Card.Body>
+                    </Card>
                   </div>
                 </Col>
               </Row>
-            <div style={{marginTop: '2rem'}} className='MainForm__buttons'>
-              <Link className='resetButton' to='/assessment/donors' onClick={this.prevStep}>
-                <Icon name='arrow-left' /> Previous
-              </Link>
-              <ConditionalWrapper
-                 condition={!this.state.optionSelected}
-                 wrapper={children => (
-                   <OverlayTrigger
-                   placement="right"
-                   delay={{ show: 250, hide: 400 }}
-                   overlay={select}
-                   >
-                    {children}
-                   </OverlayTrigger>
-                 )}
-              >
-                 <div>
-                   <Link style={{marginLeft: '23rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.saveServicesOffered} to={this.getLinkTo()} disabled={!this.props.optionSelected}>
-                     <Icon name='arrow-right' /> Next
-                   </Link>
-                 </div>
-              </ConditionalWrapper>
-              <div className='fill' />
+            </div>
+            <div className='MainForm__buttons'>
                 <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
                   <Icon name='refresh' /> Reset
                 </Link>
+                <div className='fill' />
+                  <Link className='resetButton' to='/assessment/donors' onClick={this.prevStep}>
+                    <Icon name='arrow-left' /> Previous
+                  </Link>
+                <ConditionalWrapper
+                   condition={!this.state.optionSelected}
+                   wrapper={children => (
+                     <OverlayTrigger
+                     placement="right"
+                     delay={{ show: 250, hide: 400 }}
+                     overlay={select}
+                     >
+                      {children}
+                     </OverlayTrigger>
+                   )}
+                >
+                  <Link style={{marginLeft: '1rem'}} className={this.state.optionSelected ? 'resetButtonSelected' :'resetButton'} onClick={this.saveServicesOffered} to={this.getLinkTo()} disabled={!this.props.optionSelected}>
+                    <Icon name='arrow-right' /> Next
+                  </Link>
+                </ConditionalWrapper>
               </div>
-            </div>
           </Jumbotron>
         </Container>
       )

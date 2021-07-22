@@ -25,12 +25,12 @@ class Success extends Component{
               </div>
               <Image src={require('../media/yes-no/contract-200x200.png')} width='200' height='200' style={{ marginLeft: '40%'}} />
               <div className='MainForm__buttons'>
-                <Link className='resetButton' to='/assessment/user' onClick={this.props.prevStep}>
-                  <Icon name='arrow-left' /> Previous
-                </Link>
-                <div className='fill' />
                 <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
                   <Icon name='refresh' /> Reset
+                </Link>
+                <div className='fill' />
+                <Link className='resetButton' to='/assessment/user' onClick={this.props.prevStep}>
+                  <Icon name='arrow-left' /> Previous
                 </Link>
               </div>
             </Jumbotron>

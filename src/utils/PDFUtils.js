@@ -1,7 +1,7 @@
 import React from 'react';
 import {styles} from './PDFStyles';
 import {bestPracticesText, quebecLawsText, euroLawsText } from './TextLawsUtils';
-import { Text} from '@react-pdf/renderer'
+import { Text, Link} from '@react-pdf/renderer'
 import { PROCESSOR, PROVINCES, LOCATION } from '../constants';
 
 export const createTextPDF = (text) => {
@@ -13,7 +13,6 @@ export const createTextPDF = (text) => {
 }
 
 export const getLawsPDF = (locations, assessment) => {
-  const province = assessment.province;
 
   const getOtherCountries = () => {
     const valuesToRemove = ["Canada", "Europe", "United States"];
@@ -25,16 +24,15 @@ export const getLawsPDF = (locations, assessment) => {
      { (locations.includes('Canada')) && assessment.province === PROVINCES.QC && getQuebecLawsPDF() }
      { (locations.includes('Canada')) && assessment.province !== PROVINCES.QC && assessment.processor !== PROCESSOR.NON_COMM &&
         assessment.processor.laws.map(law => {
-          return createTextPDF(`• Please refer to the
-            ${law} Legislation of
-            ${(province) ? province.name : 'Canada'}`)
+          return createTextPDF(`• Please refer to the ${law} of Canada`)
         })
      }
      { (locations.includes('Canada')) && assessment.processor === PROCESSOR.NON_COMM &&
        createTextPDF(`• Privacy laws do NOT apply. `)
      }
-     { (locations.includes('Europe')) &&  getEuropeanLawsPDF() }
-     { assessment.areServicesOffered === LOCATION.EU && !locations.includes('Europe') && getGDPRWarning() }
+     { (locations.includes('Europe')) &&  getEuropeanLawsPDF(assessment.hasDoubleLegislationWarning) }
+     { assessment.answers.organization !== LOCATION.EU && assessment.answers.dataDonors === LOCATION.EU && getGDPRWarningProject() }
+     { assessment.areServicesOffered === LOCATION.EU && !locations.includes('Europe') && getGDPRWarningParticipants() }
      { (locations.includes('United States')) && createTextPDF('• Please refer to the US Legislation (HIPAA)') }
      {getOtherCountries().map(country => {
        return createTextPDF(`• Please refer to the Privacy Legislation of ${country}`)
@@ -211,7 +209,7 @@ export const getQuebecLawsPDF = () => {
   </>);
 }
 
-export const getEuropeanLawsPDF = () => {
+export const getEuropeanLawsPDF = (hasDoubleLegislationWarning) => {
   return(
   <>
     <Text style={styles.subtitle}>
@@ -247,17 +245,68 @@ export const getEuropeanLawsPDF = () => {
           </Text>
         );
       })}
+      { hasDoubleLegislationWarning && getGDPRWarningDoubleLegislation() }
+      { getGDPRWarningConcurrently() }
+      { getGDPRWarningInvitation() }
   </>);
 }
 
-export const getGDPRWarning = () => {
+export const getGDPRWarningParticipants = () => {
   return(
   <>
-    <Text style={styles.subtitle}>
+    <Text style={styles.warning}>
       • Warning
     </Text>
     <Text style={styles.text}>
-      The obligation or practice of Returning Results to individuals located in the EU is not widely accepted as a situation that will certainly attract the applicability of the GDPR, as this scenario is still under discussion. However, bear in mind that it may in fact do so. Please discuss your specific situation with the appropriate legal counsel to make sure you are complying with any obligation applicable to you.
+      Returning individual research results to participants in the EU may make the GDPR apply with respect to the personal data of individuals located in the EU. Please seek out further advice.
+    </Text>
+  </>);
+}
+
+export const getGDPRWarningDoubleLegislation = () => {
+  return(
+  <>
+    <Text style={styles.warning}>
+      • Warning
+    </Text>
+    <Text style={styles.text}>
+      These obligations apply to the data protected by the specific legislation with which the data is associated.
+    </Text>
+  </>);
+}
+
+export const getGDPRWarningConcurrently = () => {
+  return(
+  <>
+    <Text style={styles.warning}>
+      • Warning
+    </Text>
+    <Text style={styles.text}>
+      Please be aware that local national privacy laws may concurrently be applicable. Please seek out further advice.
+    </Text>
+  </>);
+}
+
+export const getGDPRWarningProject = () => {
+  return(
+  <>
+    <Text style={styles.warning}>
+      • Warning
+    </Text>
+    <Text style={styles.text}>
+      As a project without an establishment in the EU, the EU’s GDPR may only apply with respect to your processing of the personal data of individuals located in the EU.
+    </Text>
+  </>);
+}
+
+export const getGDPRWarningInvitation = () => {
+  return(
+  <>
+    <Text style={styles.warning}>
+      • Warning
+    </Text>
+    <Text style={styles.text}>
+      We also invite you to <Link src="https://www.ga4gh.org/genomic-data-toolkit/regulatory-ethics-toolkit/gdpr-forum/"> read the "briefs" from GA4GH's GDPR and International Health Data Sharing Forum </Link>, which analyzes the General Data Protection Regulation (GDPR) for the genomics community.
     </Text>
   </>);
 }

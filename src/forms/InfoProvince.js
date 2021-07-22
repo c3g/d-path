@@ -79,12 +79,12 @@ class InfoProvince extends Component{
               </div>
             </div>
             <div className='MainForm__buttons'>
-              <Link className='resetButton' to='/assessment/info/public' onClick={this.prevStep}>
-                <Icon name='arrow-left' /> Previous
-              </Link>
-              <div className='fill' />
               <Link className='resetButton' to='/' onClick={this.props.resetAssessment}>
                 <Icon name='refresh' /> Reset
+              </Link>
+              <div className='fill' />
+              <Link className='resetButton' to='/assessment/info/processor' onClick={this.prevStep}>
+                <Icon name='arrow-left' /> Previous
               </Link>
             </div>
           </Jumbotron>

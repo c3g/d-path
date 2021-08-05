@@ -2,7 +2,7 @@ import React from 'react';
 import {Card, ListGroup, Tabs, Tab, Col, Row, Accordion, Button, Alert} from 'react-bootstrap';
 import cx from 'classnames';
 import {newBestPracticesText, bestPracticesCardsText, quebecLawsText, quebecLawCardsText, euroLawsText} from './TextLawsUtils';
-import { PROCESSOR, PROVINCES, LOCATION } from '../constants';
+import { PROCESSOR, PROVINCES, LOCATION, INFO_TYPE } from '../constants';
 import { linkGDPR  } from './Link';
 
 const bestPracticeTabs = [
@@ -45,7 +45,7 @@ const lawTabs = (lawText) =>[
 export const getLaws = (props) => {
   const { locations, assessment } = props;
   const includesCanada = locations.includes('Canada');
-  const includesEU = (assessment.answers.dataDonors === LOCATION.EU || assessment.answers.organization === LOCATION.EU) ? true : false;
+  const includesEU = (assessment.answers.dataDonors === LOCATION.EU || assessment.answers.organization === LOCATION.EU) && (assessment.infoType !== INFO_TYPE.ANONYMOUS && assessment.infoType !== INFO_TYPE.ANONYMIZED)? true : false;
   const includesUS = locations.includes('United States');
 
 

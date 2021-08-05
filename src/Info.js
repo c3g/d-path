@@ -6,7 +6,7 @@ import Icon from 'react-fontawesome';
 import {styles} from './utils/PDFStyles';
 import {getSummaryPDF, getLawsPDF, getBestPracticesPDF } from './utils/PDFUtils';
 import {getLaws, getBestPractices} from './utils/ObligationsUtils';
-import { LOCATION } from './constants';
+import { LOCATION, INFO_TYPE } from './constants';
 
 function InfoDocument({locations, assessment}) {
   // Create styles
@@ -70,7 +70,7 @@ class Info extends Component {
   render(){
     const { activeLaws, activeBestPractices } = this.state;
     const { locations, assessment } = this.props;
-    const justDPRApplies = assessment.answers.organization === LOCATION.EU || assessment.answers.dataDonors === LOCATION.EU;
+    const justDPRApplies = (assessment.answers.dataDonors === LOCATION.EU || assessment.answers.organization === LOCATION.EU) && (assessment.infoType !== INFO_TYPE.ANONYMOUS && assessment.infoType !== INFO_TYPE.ANONYMIZED)? true : false;
 
     return(
         <Container>

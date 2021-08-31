@@ -89,14 +89,15 @@ class AboutUs extends Component {
                   src={require('./media/genome-canada-logo.png')}
                   style={{
                     height: 200,
-                    marginLeft: 80,
+                    marginLeft: 100,
                   }}
                 />
                 <img
                   alt='genome-quebec'
                   src={require('./media/genome-quebec-logo.png')}
                   style={{
-                    height: 220,
+                    height: 260,
+                    marginLeft: 60,
                   }}
                 />
                 <img

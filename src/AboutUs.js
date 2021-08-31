@@ -81,6 +81,34 @@ class AboutUs extends Component {
                 </Card.Text>
               </Card.Body>
             </Card>
+            <Card>
+              <Card.Header as="h5"> Partners and Sponsors </Card.Header>
+              <Card.Body>
+                <img
+                  alt='genome-canada'
+                  src={require('./media/genome-canada-logo.png')}
+                  style={{
+                    height: 200,
+                    marginLeft: 80,
+                  }}
+                />
+                <img
+                  alt='genome-quebec'
+                  src={require('./media/genome-quebec-logo.png')}
+                  style={{
+                    height: 220,
+                  }}
+                />
+                <img
+                  alt='cihr'
+                  src={require('./media/cihr-logo.jpeg')}
+                  style={{
+                    height: 250,
+                    marginLeft:280
+                  }}
+                />
+              </Card.Body>
+            </Card>
             <div className='text-center' style={{marginTop: '1rem'}}>
               <Link to='/' className='btn btn-primary btn-lg'>
               <Icon name="home"/>    Back

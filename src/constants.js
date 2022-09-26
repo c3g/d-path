@@ -2,8 +2,7 @@
  * constants.js
  */
 
-export const BASE_URL = (!process.env.NODE_ENV || process.env.NODE_ENV === 'development')
-                        ? '/tools/d-path' : 'http://computationalgenomics.ca/tools/d-path'
+export const BASE_URL = '/tools/d-path'
 
 export const LOCATION = {
   CAN: 'Canada',

@@ -112,15 +112,19 @@ export const quebecLawsText = {
     'Execute a contract that determines the type of information being transferred or communicated, ID the purposes and scope of the use and transfer/communication, terms of confidentiality, and terms/measures of data protection. (1,5)',
     'Display clear terms of service stating the purpose, limitations and conditions associated with the use of the data, including for instance that coded or anonymized data shall not be re-identified. (1,5)',
     'Data shall be collected, used, and disclosed by fair and lawful means and limited to the identified purposes. Details on collection, storage, and disclosure shall be informed. Before releasing to outside of the province, equivalent protection shall be ensured in the recipient\'s policies/practices. (1,2,5)',
+    'When seeking to use information for research purposes, submit written request of research, technologies to be used, explanation of how privacy impact assessment are met, and, if applicable, the research ethics committee decision. (1)',
+    'When disclosing information for research purposes, obtain a privacy impact assessment and enter into an agreement with the recipient. (1)',
     'Policies/Practices on the management of personal information shall be implemented and made readily available. (1,2,3,5)',
     'Personal information shall be as accurate, complete, and up-to-date as necessary. Everyone shall be able to request the correction of their personal information. (1,2,3,5)',
-    'An inventory shall be kept with info pertaining to the content and protection measures. (1)'
+    'An inventory shall be kept with info pertaining to the content and protection measures. (1)',
+    'Destroy information when purposes of collection are fulfilled. (1)'
   ],
   security: [
     'Reasonable security measures to ensure the protection of personal information shall be implemented based on the sensitivity of the information, the purposes for which it is used, the quantity and distribution, and the medium on which it is stored. They shall be against theft, loss, damage, unauthorized access, disclosure, copying, modification or use. They can be physical, organizational or technological. (1,2,3,5)',
     'Technological measures can include: coding, de-identification, encryption, anonymization, firewalls; physical measures can include: locked filing cabinets and restricted access to offices; and administrative/organizational measures can include: security clearances and limited access on need-to-know basis. (1,2,3,5)',
     'Data security breaches shall be reported to the Commissioner if believed to create real risk of significant harm (bodily harm, humiliation, damage to reputation or relationship, loss of employment, business or professional opportunities, financial loss, identity theft, negative effects on credit, damage or loss of property) to an individual. (2,5)',
     'Organizations shall keep a record of every breach of data security. Have response mechanisms in case of data breach, including who to inform or report. Record keeping shall include: type of event, data/time, success/failure, origin, data/system/resources affected. (5)',
+    'Take reasonable steps to reduce the risk of injury and prevent similar incidents. Keep a register of confidentiality incidents. (1)',
     'Data Access committee to assess the data recipient/user and the intended use. Execute a data access contract that determines the type of information being transferred or communicated, ID the purposes and scope of the transfer/communication, terms of confidentiality, and terms/measures of data protection. (1,5)',
     'Display clear terms of service stating the purpose, limitations and conditions associated with the use of the data, including for instance that coded or anonymized data shall not be re-identified. (1,5)',
     'Organizations may be audited by a higher institution to verify the practices/policies of management of personal information. (1,2,5)',

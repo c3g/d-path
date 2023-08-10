@@ -92,6 +92,15 @@ class Info extends Component {
             <Card body style={{ textAlign: 'center', marginBottom: '1rem', backgroundColor: '#fff3cd'}}>
               <strong style={{fontSize: '1rem'}}> The list below includes the key obligations that you have with respect to data. Those of your collaborators may differ. </strong>
             </Card>
+            {
+              (assessment.isPersonalInfo) &&
+              <>
+              <Card body style={{ textAlign: 'center', marginBottom: '1rem', backgroundColor: '#fff3cd'}}>
+                <strong style={{fontSize: '1rem'}}> Please note that many legal jurisdictions, such as those in Canada, make a distinction between information that is deemed “public information” and information that is “publicly accessible.” In general, information that is truly public has been formally designated as such and can be used with very little or no restrictions.
+                However, information that is publicly accessible may still invoke various requirements or restrictions, when it is used. </strong>
+              </Card>
+              </>
+            }
             { (assessment.isPersonalInfo || justDPRApplies) &&
               <>
                 <h1 className='obligationTitle'>Laws and Policies</h1>
